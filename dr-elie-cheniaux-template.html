@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elie Cheniaux - Psiquiatria, professor e escritor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Libre+Franklin:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-sage: #A8B5A0;
+            --color-teal: #4A9B9B;
+            --color-rust: #B65D4F;
+            --color-mustard: #D4A059;
+            --color-burgundy: #8B4A5F;
+            --color-slate: #5A7A8A;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Libre Franklin', sans-serif;
+            color: #2C2C2C;
+            overflow-x: hidden;
+        }
+        
+        .serif-font {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        /* Geometric background pattern */
+        .geometric-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            grid-template-rows: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 8px;
+            opacity: 0.9;
+            z-index: 0;
+        }
+        
+        .geo-shape {
+            position: relative;
+            animation: fadeInShape 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .geo-shape:nth-child(1) { animation-delay: 0.1s; }
+        .geo-shape:nth-child(2) { animation-delay: 0.15s; }
+        .geo-shape:nth-child(3) { animation-delay: 0.2s; }
+        .geo-shape:nth-child(4) { animation-delay: 0.25s; }
+        .geo-shape:nth-child(5) { animation-delay: 0.3s; }
+        .geo-shape:nth-child(6) { animation-delay: 0.35s; }
+        .geo-shape:nth-child(7) { animation-delay: 0.4s; }
+        .geo-shape:nth-child(8) { animation-delay: 0.45s; }
+        .geo-shape:nth-child(9) { animation-delay: 0.5s; }
+        .geo-shape:nth-child(10) { animation-delay: 0.55s; }
+        .geo-shape:nth-child(11) { animation-delay: 0.6s; }
+        .geo-shape:nth-child(12) { animation-delay: 0.65s; }
+        
+        @keyframes fadeInShape {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-content {
+            animation: slideInLeft 1s ease-out;
+        }
+        
+        .hero-image {
+            animation: slideInRight 1.2s ease-out;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-sage);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .nav-link:hover {
+            color: var(--color-sage);
+        }
+        
+        .btn-primary {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+        
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(168, 181, 160, 0.3);
+        }
+        
+        /* Mobile menu */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .mobile-menu.active {
+            max-height: 500px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .geometric-bg {
+                width: 50%;
+                grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+                grid-template-rows: repeat(auto-fit, minmax(60px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .geometric-bg {
+                width: 100%;
+                opacity: 0.4;
+                grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+                grid-template-rows: repeat(auto-fit, minmax(50px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4 lg:py-6">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 lg:w-16 lg:h-16 border-2 border-gray-800 flex items-center justify-center">
+                        <!-- <svg width="40" height="40" viewBox="0 0 40 40" class="hidden lg:block">
+                            <circle cx="20" cy="20" r="18" stroke="#2C2C2C" stroke-width="1.5" fill="none"/>
+                            <line x1="8" y1="8" x2="32" y2="32" stroke="#2C2C2C" stroke-width="1"/>
+                            <line x1="32" y1="8" x2="8" y2="32" stroke="#2C2C2C" stroke-width="1"/>
+                        </svg>
+                        <svg width="30" height="30" viewBox="0 0 40 40" class="lg:hidden">
+                            <circle cx="20" cy="20" r="18" stroke="#2C2C2C" stroke-width="1.5" fill="none"/>
+                            <line x1="8" y1="8" x2="32" y2="32" stroke="#2C2C2C" stroke-width="1"/>
+                            <line x1="32" y1="8" x2="8" y2="32" stroke="#2C2C2C" stroke-width="1"/>
+                        </svg> -->
+                        <img src="DrElieLogo.avif" alt="Dr. Elie Cheniaux Logo" class="object-contain w-full h-full">
+                    </div>
+                    <div>
+                        <h1 class="text-lg lg:text-xl font-light tracking-wide text-gray-800">
+                            Elie <br class="hidden sm:block"/>
+                            <span class="font-normal">Cheniaux</span>
+                        </h1>
+                        <p class="text-xs text-gray-600 uppercase tracking-wider hidden sm:block">Psiquiatria, professor e escritor</p>
+                        <p class="text-xs text-gray-500">CRM.: 5251197-0</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-gray-900 font-light">Home</a>
+                    <a href="#sobre" class="nav-link text-gray-700 hover:text-gray-900 font-light">Sobre</a>
+                    <a href="#especialidades" class="nav-link text-gray-700 hover:text-gray-900 font-light">Especialidades</a>
+                    <a href="#artigos" class="nav-link text-gray-700 hover:text-gray-900 font-light">Artigos</a>
+                     <a href="#livrospublicados" class="nav-link text-gray-700 hover:text-gray-900 font-light">Livros Publicados</a>               
+                    <a href="#faq" class="nav-link text-gray-700 hover:text-gray-900 font-light">FAQ</a>
+                    <a href="#contato" class="nav-link text-gray-700 hover:text-gray-900 font-light">Contato</a>
+                    <a href="#instagram" class="text-gray-600 hover:text-gray-800">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                </div>
+                
+                <!-- Desktop CTA Button -->
+                <button class="hidden lg:block btn-primary px-6 py-3 border-2 border-gray-800 text-gray-800 font-light tracking-wide hover:bg-gray-800 hover:text-white transition-all duration-300">
+                    Agendar Consulta
+                </button>
+                
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" class="lg:hidden p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="mobile-menu lg:hidden border-t border-gray-200">
+                <div class="py-4 space-y-3">
+                    <a href="#home" class="block py-2 text-gray-700 hover:text-gray-900">Home</a>
+                    <a href="#sobre" class="block py-2 text-gray-700 hover:text-gray-900">Sobre</a>
+                    <a href="#especialidades" class="block py-2 text-gray-700 hover:text-gray-900">Especialidades</a>
+                    <a href="#artigos" class="block py-2 text-gray-700 hover:text-gray-900">Artigos</a>
+                    <a href="#livrospublicados" class="block py-2 text-gray-700 hover:text-gray-900">Livros Publicados</a>
+                    <a href="#faq" class="block py-2 text-gray-700 hover:text-gray-900">FAQ</a>
+                    <a href="#contato" class="block py-2 text-gray-700 hover:text-gray-900">Contato</a>
+                    <button class="w-full mt-4 px-6 py-3 border-2 border-gray-800 text-gray-800 font-light tracking-wide hover:bg-gray-800 hover:text-white transition-all duration-300">
+                        Agendar Consulta
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative bg-gradient-to-br from-gray-100 via-gray-50 to-white overflow-hidden">
+        <!-- Geometric Background -->
+        <div class="geometric-bg">
+            <div class="geo-shape" style="background: var(--color-teal);"></div>
+            <div class="geo-shape" style="background: var(--color-sage); clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></div>
+            <div class="geo-shape" style="background: var(--color-mustard);"></div>
+            <div class="geo-shape" style="background: var(--color-rust); border-radius: 50%;"></div>
+            <div class="geo-shape" style="background: var(--color-burgundy);"></div>
+            <div class="geo-shape" style="background: var(--color-slate); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);"></div>
+            <div class="geo-shape" style="background: var(--color-teal); opacity: 0.7;"></div>
+            <div class="geo-shape" style="background: var(--color-sage);"></div>
+            <div class="geo-shape" style="background: var(--color-mustard); clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></div>
+            <div class="geo-shape" style="background: var(--color-burgundy); opacity: 0.8;"></div>
+            <div class="geo-shape" style="background: var(--color-rust);"></div>
+            <div class="geo-shape" style="background: var(--color-slate); border-radius: 50%;"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-24">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <!-- Content -->
+                <div class="hero-content relative z-10 order-2 lg:order-1">
+                    <h2 class="serif-font text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-light leading-tight mb-6 lg:mb-8" style="color: #8B4A5F;">
+                        Recupere a saúde e o bem-estar emocional com a orientação e o apoio especializado do Dr. Elie Cheniaux
+                    </h2>
+                    <button class="btn-primary mt-6 lg:mt-8 px-8 py-4 text-white font-light tracking-wide transition-all duration-300" style="background: var(--color-sage);">
+                        Agendar Consulta
+                    </button>
+                </div>
+                
+                <!-- Image Placeholder -->
+                <div class="hero-image relative z-10 order-1 lg:order-2">
+                    <div class="relative">
+                        <!-- Photo container with geometric background integration -->
+                        <div class="relative bg-white rounded-lg shadow-2xl overflow-hidden" style="aspect-ratio: 3/4;">
+                            <div class="absolute inset-0 bg-gradient-to-br from-transparent to-gray-900 opacity-10"></div>
+                            <!-- Replace with actual image -->
+                            <div class="w-full h-full bg-gray-300 flex items-center justify-center">
+                                <!-- <svg class="w-24 h-24 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                                </svg> -->
+                                <img src="DrElie.jpg" alt="Dr. Elie Cheniaux" class="object-cover w-full h-full">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="sobre" class="py-16 lg:py-24 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="serif-font text-3xl sm:text-4xl lg:text-5xl font-light mb-6 lg:mb-8" style="color: #2C2C2C;">
+                    Sobre o Dr. Elie Cheniaux
+                </h2>
+                <p class="text-base sm:text-lg text-gray-700 leading-relaxed mb-6">
+                    Com mais de X anos de experiência em psiquiatria e psicoeducação, Dr. Elie Cheniaux dedica-se ao cuidado integral da saúde mental, oferecendo tratamentos personalizados e baseados em evidências científicas.
+                </p>
+                <p class="text-base sm:text-lg text-gray-700 leading-relaxed">
+                    Sua abordagem combina conhecimento técnico aprofundado com empatia e respeito pela singularidade de cada paciente, promovendo não apenas o tratamento de sintomas, mas o desenvolvimento de recursos para uma vida mais plena e equilibrada.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialties Section -->
+    <section id="especialidades" class="py-16 lg:py-24" style="background: linear-gradient(135deg, #F9FAFB 0%, #F3F4F6 100%);">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="serif-font text-3xl sm:text-4xl lg:text-5xl font-light text-center mb-12 lg:mb-16" style="color: #2C2C2C;">
+                Especialidades
+            </h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                <!-- Specialty Card 1 -->
+                <div class="bg-white p-6 lg:p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-12 h-12 mb-4 rounded-full flex items-center justify-center" style="background: var(--color-teal);">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 3.5a1.5 1.5 0 013 0V4a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-.5a1.5 1.5 0 000 3h.5a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-.5a1.5 1.5 0 00-3 0v.5a1 1 0 01-1 1H6a1 1 0 01-1-1v-3a1 1 0 00-1-1h-.5a1.5 1.5 0 010-3H4a1 1 0 001-1V6a1 1 0 011-1h3a1 1 0 001-1v-.5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3" style="color: #2C2C2C;">Transtornos de Ansiedade</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Tratamento especializado para diferentes formas de ansiedade, incluindo transtorno de ansiedade generalizada, pânico e fobias.
+                    </p>
+                </div>
+                
+                <!-- Specialty Card 2 -->
+                <div class="bg-white p-6 lg:p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-12 h-12 mb-4 rounded-full flex items-center justify-center" style="background: var(--color-sage);">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3" style="color: #2C2C2C;">Depressão</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Abordagem integral para o tratamento da depressão, combinando psicoterapia e, quando necessário, farmacoterapia.
+                    </p>
+                </div>
+                
+                <!-- Specialty Card 3 -->
+                <div class="bg-white p-6 lg:p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-12 h-12 mb-4 rounded-full flex items-center justify-center" style="background: var(--color-mustard);">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                            <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3" style="color: #2C2C2C;">TDAH</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Diagnóstico e tratamento do Transtorno de Déficit de Atenção e Hiperatividade em crianças, adolescentes e adultos.
+                    </p>
+                </div>
+                
+                <!-- Specialty Card 4 -->
+                <div class="bg-white p-6 lg:p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-12 h-12 mb-4 rounded-full flex items-center justify-center" style="background: var(--color-rust);">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3" style="color: #2C2C2C;">Transtorno Bipolar</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Acompanhamento especializado e estabilização de quadros de transtorno bipolar tipo I e II.
+                    </p>
+                </div>
+                
+                <!-- Specialty Card 5 -->
+                <div class="bg-white p-6 lg:p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-12 h-12 mb-4 rounded-full flex items-center justify-center" style="background: var(--color-burgundy);">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3" style="color: #2C2C2C;">TOC</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Tratamento do Transtorno Obsessivo-Compulsivo com abordagens terapêuticas específicas e comprovadas.
+                    </p>
+                </div>
+                
+                <!-- Specialty Card 6 -->
+                <div class="bg-white p-6 lg:p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="w-12 h-12 mb-4 rounded-full flex items-center justify-center" style="background: var(--color-slate);">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3" style="color: #2C2C2C;">Psicoeducação</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Educação sobre saúde mental, desenvolvendo autoconhecimento e estratégias de enfrentamento.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 lg:py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="serif-font text-3xl sm:text-4xl lg:text-5xl font-light mb-6" style="color: #8B4A5F;">
+                Pronto para cuidar da sua saúde mental?
+            </h2>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+                Agende uma consulta e inicie sua jornada rumo ao bem-estar emocional
+            </p>
+            <button class="btn-primary px-10 py-4 text-white text-lg font-light tracking-wide transition-all duration-300" style="background: var(--color-sage);">
+                Agendar Consulta Agora
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 lg:py-16">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contato</h3>
+                    <p class="text-gray-400 mb-2">Email: contato@eliecheniaux.com</p>
+                    <p class="text-gray-400 mb-2">Telefone: (XX) XXXXX-XXXX</p>
+                    <p class="text-gray-400">WhatsApp: (XX) XXXXX-XXXX</p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Links Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#sobre" class="text-gray-400 hover:text-white transition-colors">Sobre</a></li>
+                        <li><a href="#especialidades" class="text-gray-400 hover:text-white transition-colors">Especialidades</a></li>
+                        <li><a href="#artigos" class="text-gray-400 hover:text-white transition-colors">Artigos</a></li>
+                        <li><a href="#livrospublicados" class="text-gray-400 hover:text-white transition-colors">Livros Publicados</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Social Media -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Redes Sociais</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400 text-sm">
+                    © 2024 Dr. Elie Cheniaux. Todos os direitos reservados. | CRM.: 5271102-0
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    mobileMenu.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
