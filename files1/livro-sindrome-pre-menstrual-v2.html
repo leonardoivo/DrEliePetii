@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="shortcut icon" href="DrElieLogo.ico"/>
+  <title>Síndrome Pré-Menstrual | Elie Cheniaux</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--gold:#c9a84c;--gold-light:#e8d5a0;--navy:#1a4427;--accent:#7c3aed;}
+    body{font-family:'Lato',sans-serif;}
+    h1,h2,h3,.font-display{font-family:'Playfair Display',serif;}
+
+    /* ── NAV ── */
+    #main-nav{background:white;border-bottom:2px solid var(--gold);}
+    .nav-logo{font-family:'Playfair Display',serif;color:var(--navy);}
+    .nav-item{position:relative;}
+    .nav-link{display:flex;align-items:center;gap:4px;padding:18px 14px;font-size:.88rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);transition:color .2s;white-space:nowrap;}
+    .nav-link:hover,.nav-link.active{color:var(--gold);}
+    .nav-link svg{width:12px;height:12px;transition:transform .2s;}
+    .nav-item:hover>.nav-link svg{transform:rotate(180deg);}
+    .dropdown{display:none;position:absolute;top:100%;left:0;background:white;min-width:220px;border-top:3px solid var(--gold);box-shadow:0 8px 32px rgba(0,0,0,.10);z-index:100;}
+    .nav-item:hover>.dropdown{display:block;}
+    .dropdown a{display:block;padding:11px 20px;font-size:.84rem;color:var(--navy);border-bottom:1px solid #f3f0e8;transition:background .15s,color .15s;}
+    .dropdown a:last-child{border-bottom:none;}
+    .dropdown a:hover,.dropdown a.active{background:#fdf8ee;color:var(--gold);font-weight:700;}
+    .dropdown-sep{height:1px;background:#f0ebe0;margin:4px 0;}
+    .dropdown .book-link{font-size:.78rem;padding:8px 20px 8px 28px;color:#6b7280;}
+    .dropdown .book-link:hover{color:var(--gold);background:#fdf8ee;}
+    #hamburger{cursor:pointer;}
+    #mobile-menu{display:none;position:fixed;inset:0;z-index:200;background:white;overflow-y:auto;padding:80px 0 40px;}
+    #mobile-menu.open{display:block;}
+    .mob-link{display:block;padding:13px 28px;font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);border-bottom:1px solid #f0ebe0;cursor:pointer;}
+    .mob-sub{display:none;background:#fdf8ee;}
+    .mob-sub.open{display:block;}
+    .mob-sub a{display:block;padding:10px 44px;font-size:.85rem;color:#4a5568;border-bottom:1px solid #ece8df;}
+    .mob-sub a.active{color:var(--gold);font-weight:700;}
+
+    /* ── HERO ── */
+    .book-hero{
+      background:linear-gradient(135deg,#f5f3ff 0%,#fff 55%,#ede9fe 100%);
+      min-height:90vh;
+      display:flex;align-items:center;
+      position:relative;overflow:hidden;
+    }
+    .book-hero::before{
+      content:'';position:absolute;inset:0;
+      background-image:
+        radial-gradient(circle at 85% 15%,rgba(124,58,237,.07) 0%,transparent 50%),
+        radial-gradient(circle at 10% 85%,rgba(201,168,76,.06) 0%,transparent 45%);
+    }
+    .book-cover-wrap{position:relative;z-index:2;}
+    .book-cover-wrap img{
+      max-height:480px;width:auto;
+      border-radius:2px 8px 8px 2px;
+      filter:drop-shadow(0 25px 50px rgba(0,0,0,0.40)) drop-shadow(0 8px 16px rgba(0,0,0,0.25));
+      transform:perspective(900px) rotateY(-8deg);
+      transition:transform .4s ease,filter .4s ease;
+    }
+    .book-cover-wrap:hover img{
+      transform:perspective(900px) rotateY(0deg) translateY(-8px);
+      filter:drop-shadow(0 35px 60px rgba(0,0,0,0.45)) drop-shadow(0 12px 20px rgba(0,0,0,0.3));
+    }
+
+    /* ── HERO BADGE ── */
+    .hero-badge{
+      display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.18em;
+      text-transform:uppercase;color:var(--accent);border:1.5px solid var(--accent);
+      padding:5px 16px;border-radius:20px;margin-bottom:20px;
+    }
+    .hero-title{font-family:'Playfair Display',serif;color:var(--navy);line-height:1.12;}
+    .hero-divider{width:60px;height:3px;background:var(--accent);margin:20px 0;}
+
+    /* ── BUTTONS ── */
+    .btn-primary{
+      background:var(--accent);color:white;padding:14px 32px;
+      font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.82rem;
+      border-radius:2px;transition:background .2s,transform .15s;display:inline-block;
+    }
+    .btn-primary:hover{background:#5b21b6;transform:translateY(-2px);}
+    .btn-outline{
+      border:2px solid var(--navy);color:var(--navy);padding:12px 28px;
+      font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.82rem;
+      border-radius:2px;transition:all .2s;display:inline-block;
+    }
+    .btn-outline:hover{border-color:var(--accent);color:var(--accent);}
+
+    /* ── STATS BAR ── */
+    .stats-bar{background:white;border-bottom:1px solid #f0ebe0;padding:18px 0;}
+    .stat-pill{
+      background:#f5f3ff;border:1px solid #ddd6fe;
+      border-radius:999px;padding:6px 20px;
+      font-size:.78rem;font-weight:700;color:var(--accent);
+      letter-spacing:.06em;white-space:nowrap;
+    }
+
+    /* ── INNER TABS ── */
+    .inner-tab{
+      padding:12px 22px;font-size:.82rem;font-weight:700;
+      letter-spacing:.07em;text-transform:uppercase;
+      border-bottom:3px solid transparent;
+      color:#9ca3af;transition:color .2s,border-color .2s;white-space:nowrap;
+    }
+    .inner-tab:hover{color:var(--navy);}
+    .inner-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+
+    /* ── SECTIONS ── */
+    .section-heading{font-family:'Playfair Display',serif;color:var(--navy);}
+    .section-line{width:50px;height:3px;background:var(--gold);}
+    .content-card{background:white;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.07);overflow:hidden;}
+    .ficha-card{border-left:4px solid var(--accent);}
+
+    /* ── PULL QUOTE ── */
+    .pull-quote-bg{background:linear-gradient(135deg,#f5f3ff 0%,#ede9fe 100%);}
+    .big-quote{font-family:'Playfair Display',serif;font-size:6rem;line-height:.6;color:#ddd6fe;user-select:none;}
+
+    /* ── PREFACE ── */
+    .open-quote{font-family:'Playfair Display',serif;font-size:5rem;line-height:.7;color:var(--gold-light);float:left;margin-right:8px;margin-top:10px;}
+    .excerpt-text{font-family:'Playfair Display',serif;font-style:italic;color:#374151;line-height:1.8;font-size:.97rem;}
+    .prefacist-avatar{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
+
+    /* ── STORE CARDS ── */
+    .store-card{
+      background:white;border-radius:8px;
+      box-shadow:0 3px 14px rgba(0,0,0,.07);
+      padding:28px 20px;display:flex;flex-direction:column;align-items:center;
+      text-align:center;gap:12px;transition:transform .2s,box-shadow .2s;
+      text-decoration:none;
+    }
+    .store-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(124,58,237,.15);}
+    .store-icon{font-size:2.5rem;line-height:1;}
+    .store-btn{
+      margin-top:auto;font-size:.75rem;font-weight:700;letter-spacing:.07em;
+      text-transform:uppercase;padding:8px 20px;border-radius:2px;display:inline-block;
+    }
+
+    /* ── OTHER BOOKS ── */
+    .other-book-card{background:white;border-radius:6px;box-shadow:0 3px 14px rgba(0,0,0,.07);overflow:hidden;transition:transform .2s,box-shadow .2s;}
+    .other-book-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,.12);}
+
+    /* ── FOOTER ── */
+    footer{background:var(--navy);color:#c8d1e0;}
+
+    /* ── REVEAL ── */
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .5s,transform .5s;}
+    .reveal.visible{opacity:1;transform:none;}
+
+    /* ── MOBILE COVER ── */
+    @media(max-width:1023px){
+      .book-cover-wrap img{max-height:60vw;width:auto;}
+      .hero-mobile-order-cover{order:-1;}
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+<!-- ══════════════════════════ NAV ══════════════════════════ -->
+<nav id="main-nav" class="sticky top-0 z-50 shadow-sm">
+  <div class="max-w-screen-xl mx-auto px-4 flex items-center justify-between">
+     <img src="DrElieLogo.avif" alt="Logo" class="w-10 h-10 border-2 border-var(--gold)"/>
+    <a href="index.html" class="nav-logo text-xl py-4 font-bold">Elie Cheniaux</a>
+    <div class="hidden lg:flex items-center">
+      <div class="nav-item">
+        <a href="quem-sou-eu-biografia.html" class="nav-link">Quem sou eu<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        <div class="dropdown">
+          <a href="quem-sou-eu-biografia.html">Biografia</a>
+          <a href="BiPoLaB.html">Bipolab</a>
+          <a href="quem-sou-eu-curriculo.html">Currículo Lattes</a>
+          <a href="quem-sou-eu-discurso.html">Discurso de posse na AMRJ</a>
+          <a href="quem-sou-eu-memorial.html">Memorial</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="#" class="nav-link active">Livros<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        <div class="dropdown">
+          <a href="livro-antifacebook-v2.html">O Anti Facebook</a>
+          <a href="livro-cinema-loucura-v2.html">Cinema e Loucura</a>
+          <a href="livro-fogo-cinzas-v2.html">Fogo e Cinzas</a>
+          <a href="livro-manual-psicopatia-v2.html">Manual da Psicopatia</a>
+          <a href="livro-sindrome-pre-menstrual-v2.html">Síndrome Pré Mestrual</a>
+          <a href="livro-manual-psicopatologia-v2.html">Manual da Psicopatologia</a>
+          <a href="livro-woody-allen-v2.html">Woody Allen</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="index.html#artigos" class="nav-link">Artigos científicos</a></div>
+      <div class="nav-item">
+        <a href="entrevistas-jornais.html" class="nav-link">Entrevistas<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        <div class="dropdown">
+          <a href="entrevistas-jornais.html">Jornais</a>
+          <a href="entrevistas-tv.html">TV</a>
+          <a href="entrevistas-podcast.html">Podcast</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="palestras.html" class="nav-link">Palestras</a></div>
+      <div class="nav-item"><a href="index.html#contato" class="nav-link">Contato</a></div>
+    </div>
+    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2">
+      <span class="block w-6 h-0.5 bg-gray-700"></span>
+      <span class="block w-6 h-0.5 bg-gray-700"></span>
+      <span class="block w-6 h-0.5 bg-gray-700"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════ MOBILE MENU ══════════════════════════ -->
+<div id="mobile-menu">
+  <button id="close-menu" class="absolute top-5 right-6 text-3xl text-gray-600">&times;</button>
+  <div>
+    <div class="mob-link" onclick="toggleMob('mob-quem')">Quem sou eu ▾</div>
+    <div id="mob-quem" class="mob-sub">
+      <a href="quem-sou-eu-biografia.html">Biografia</a>
+      <a href="BiPoLaB.html">Bipolab</a>
+      <a href="quem-sou-eu-curriculo.html">Currículo Lattes</a>
+      <a href="quem-sou-eu-discurso.html">Discurso AMRJ</a>
+      <a href="quem-sou-eu-memorial.html">Memorial</a>
+    </div>
+  </div>
+  <div>
+    <div class="mob-link" onclick="toggleMob('mob-livros')">Livros ▾</div>
+    <div id="mob-livros" class="mob-sub open">
+      <a href="livros-capas.html">Fotos das capas</a>
+      <a href="livros-comprar.html">Links para comprar</a>
+      <a href="livros-sinopses.html">Sinopses</a>
+      <a href="livros-prefacios.html">Prefácios</a>
+      <a href="livro-cinema-loucura.html">Cinema e Loucura</a>
+      <a href="livro-fogo-cinzas.html">Fogo e Cinzas</a>
+      <a href="livro-manual-psicopatologia.html">Manual de Psicopatologia</a>
+      <a href="livro-antifacebook.html">O Antifacebook</a>
+      <a href="livro-sindrome-pre-menstrual.html" class="active">Síndrome Pré-Menstrual</a>
+      <a href="livro-woody-allen.html">Woody Allen</a>
+    </div>
+  </div>
+  <div><a class="mob-link" href="index.html#artigos">Artigos científicos</a></div>
+  <div>
+    <div class="mob-link" onclick="toggleMob('mob-entrevistas')">Entrevistas ▾</div>
+    <div id="mob-entrevistas" class="mob-sub">
+      <a href="entrevistas-jornais.html">Jornais</a>
+      <a href="entrevistas-tv.html">TV</a>
+      <a href="entrevistas-podcast.html">Podcast</a>
+    </div>
+  </div>
+  <div><a class="mob-link" href="palestras.html">Palestras</a></div>
+  <div><a class="mob-link" href="index.html#contato">Contato</a></div>
+</div>
+
+<!-- ══════════════════════════ HERO ══════════════════════════ -->
+<section class="book-hero">
+  <div class="max-w-screen-xl mx-auto px-6 py-16 relative z-10 w-full">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Cover: above text on mobile, right column on desktop -->
+      <div class="flex justify-center lg:justify-end hero-mobile-order-cover">
+        <div class="book-cover-wrap">
+          <img src="Livro SÍNDROME PRÉ-MENSTRUAL.jpg" alt="Capa do livro Síndrome Pré-Menstrual"/>
+        </div>
+      </div>
+      <!-- Text -->
+      <div class="lg:order-first">
+        <span class="hero-badge">Medicina / Saúde da Mulher</span>
+        <h1 class="hero-title text-4xl lg:text-6xl font-bold mb-2">Síndrome<br>Pré-Menstrual</h1>
+        <p class="text-lg font-light mb-1" style="color:var(--gold);font-family:'Playfair Display',serif;font-style:italic">Elie Cheniaux</p>
+        <div class="hero-divider"></div>
+        <p class="text-gray-500 leading-relaxed mb-8 text-base">
+          Um guia científico e humano sobre uma condição que afeta milhões de mulheres — e que ainda merece muito mais atenção da medicina e da sociedade. Do diagnóstico preciso ao tratamento eficaz, uma obra que transforma compreensão em cuidado.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#comprar" class="btn-primary">Comprar agora</a>
+          <a href="#sinopse" class="btn-outline">Ver sinopse</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ STATS BAR ══════════════════════════ -->
+<div class="stats-bar border-t border-purple-100">
+  <div class="max-w-screen-lg mx-auto px-6 flex flex-wrap gap-3 justify-center">
+    <span class="stat-pill">Medicina / Saúde da Mulher</span>
+    <span class="stat-pill">Ano: 2012</span>
+    <span class="stat-pill">~220 páginas</span>
+    <span class="stat-pill">Editora Médica</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════ INNER TAB NAV ══════════════════════════ -->
+<div class="bg-white border-b border-gray-100 sticky top-[62px] z-40 shadow-sm">
+  <div class="max-w-screen-lg mx-auto px-6 flex overflow-x-auto">
+    <a href="#sinopse" class="inner-tab">Sinopse</a>
+    <a href="#prefacio" class="inner-tab">Prefácio</a>
+    <a href="#comprar" class="inner-tab">Onde Comprar</a>
+    <a href="#outros-livros" class="inner-tab">Outros Livros</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════ SINOPSE ══════════════════════════ -->
+<section id="sinopse" class="py-20 bg-white">
+  <div class="max-w-screen-lg mx-auto px-6">
+    <div class="mb-12 reveal">
+      <p class="text-xs font-bold uppercase tracking-widest mb-2" style="color:var(--gold)">Sobre o livro</p>
+      <h2 class="section-heading text-4xl font-bold mb-4">Sinopse</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="grid lg:grid-cols-3 gap-10 reveal">
+      <!-- Long text -->
+      <div class="lg:col-span-2 space-y-5 text-gray-600 leading-relaxed">
+        <p>
+          A Síndrome Pré-Menstrual (SPM) afeta milhões de mulheres no Brasil e no mundo, mas permanece
+          sub-diagnosticada e frequentemente mal compreendida — tanto pelos pacientes quanto pelos profissionais
+          de saúde. Sintomas físicos e emocionais cíclicos são muitas vezes minimizados, atribuídos a
+          "frescura" ou confundidos com outros transtornos, privando as mulheres de tratamento adequado e
+          de qualidade de vida.
+        </p>
+        <p>
+          Nesta obra, o Dr. Elie Cheniaux sistematiza o conhecimento científico atual sobre a SPM, abordando
+          desde seus mecanismos neurobiológicos — incluindo o papel dos hormônios ovarianos sobre os
+          neurotransmissores, em especial a serotonina e o GABA — até as estratégias terapêuticas mais
+          eficazes disponíveis na clínica contemporânea. O livro examina com rigor a fronteira entre a SPM
+          leve a moderada e o Transtorno Disfórico Pré-Menstrual (TDPM), apresentando critérios diagnósticos
+          claros baseados nos sistemas de classificação internacionais.
+        </p>
+        <p>
+          Cada capítulo percorre um aspecto distinto da condição: epidemiologia, fisiopatologia, critérios
+          diagnósticos, diagnóstico diferencial com depressão e transtornos de ansiedade, e as opções de
+          tratamento — farmacológico (antidepressivos, contraceptivos orais, agonistas do GnRH) e
+          não-farmacológico (intervenções dietéticas, exercício físico, suplementação de cálcio e magnésio,
+          psicoterapia cognitivo-comportamental).
+        </p>
+        <p>
+          Escrito com rigor científico e linguagem acessível, o livro é indicado tanto para médicos,
+          psiquiatras e ginecologistas em formação e em prática, quanto para psicólogos, enfermeiros e
+          demais profissionais de saúde da mulher. E também para mulheres que buscam compreender melhor
+          seu próprio corpo, seu ciclo hormonal e as variações de humor e de energia que os acompanham.
+          Uma contribuição valiosa para desmistificar e dignificar um sofrimento real demais para ser ignorado.
+        </p>
+      </div>
+      <!-- Ficha técnica -->
+      <div>
+        <div class="content-card ficha-card p-6 space-y-4">
+          <h3 class="font-bold text-base" style="color:var(--navy)">Ficha técnica</h3>
+          <div class="space-y-3 text-sm text-gray-500">
+            <div class="flex justify-between border-b border-gray-100 pb-2">
+              <span class="font-bold text-gray-700">Autor</span>
+              <span>Elie Cheniaux</span>
+            </div>
+            <div class="flex justify-between border-b border-gray-100 pb-2">
+              <span class="font-bold text-gray-700">Editora</span>
+              <span>Editora Médica</span>
+            </div>
+            <div class="flex justify-between border-b border-gray-100 pb-2">
+              <span class="font-bold text-gray-700">Ano</span>
+              <span>2012</span>
+            </div>
+            <div class="flex justify-between border-b border-gray-100 pb-2">
+              <span class="font-bold text-gray-700">Páginas</span>
+              <span>~220</span>
+            </div>
+            <div class="flex justify-between border-b border-gray-100 pb-2">
+              <span class="font-bold text-gray-700">Gênero</span>
+              <span>Medicina / Saúde da Mulher</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="font-bold text-gray-700">Idioma</span>
+              <span>Português</span>
+            </div>
+          </div>
+          <a href="#comprar" class="btn-primary w-full text-center block mt-4">Comprar agora</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ PULL QUOTE ══════════════════════════ -->
+<div class="pull-quote-bg py-16">
+  <div class="max-w-screen-md mx-auto px-6 text-center reveal">
+    <div class="big-quote leading-none mb-2">"</div>
+    <p class="text-xl lg:text-2xl font-display italic text-gray-700 leading-relaxed mb-4" style="font-family:'Playfair Display',serif">
+      A SPM não é fraqueza, não é exagero e não é inevitável.<br>
+      É uma condição médica real, com base neurobiológica sólida e tratamento eficaz — que toda mulher merece conhecer.
+    </p>
+    <p class="text-sm font-bold uppercase tracking-widest" style="color:var(--accent)">Elie Cheniaux</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════ PREFÁCIO ══════════════════════════ -->
+<section id="prefacio" class="py-20 bg-white">
+  <div class="max-w-screen-lg mx-auto px-6">
+    <div class="mb-12 reveal">
+      <p class="text-xs font-bold uppercase tracking-widest mb-2" style="color:var(--gold)">Apresentação</p>
+      <h2 class="section-heading text-4xl font-bold mb-4">Prefácio</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="content-card reveal" style="border-radius:8px;overflow:hidden;">
+      <div class="flex flex-col md:flex-row">
+        <!-- Accent stripe -->
+        <div class="md:w-2 w-full h-2 md:h-auto flex-shrink-0" style="background:linear-gradient(180deg,var(--accent),#a78bfa)"></div>
+        <div class="flex-1 p-8 lg:p-10">
+          <!-- Author row -->
+          <div class="flex items-center gap-4 mb-8 pb-6 border-b border-gray-100">
+            <div class="prefacist-avatar" style="background:linear-gradient(135deg,#ede9fe,#c4b5fd)">
+              <span style="font-size:1.6rem">&#9923;</span>
+            </div>
+            <div>
+              <div class="font-bold text-lg" style="color:var(--navy)">Especialista em Ginecologia e Saúde Mental</div>
+              <div class="text-sm text-gray-400">Professora associada de Ginecologia — Universidade Federal do Rio de Janeiro</div>
+            </div>
+          </div>
+          <!-- Quote -->
+          <div class="mb-8">
+            <span class="open-quote" style="color:var(--gold-light)">"</span>
+            <p class="excerpt-text">
+              Este livro preenche uma lacuna importante na literatura médica brasileira. Cheniaux aborda
+              a SPM com a seriedade que ela merece, oferecendo ao clínico as ferramentas para uma abordagem
+              verdadeiramente eficaz. Pela primeira vez em língua portuguesa, temos um texto que une o rigor
+              da psiquiatria ao cotidiano da ginecologia, olhando para a mulher em sua integralidade — e não
+              apenas para seus sintomas isolados. Uma obra que deveria estar na mesa de todo profissional
+              que cuida de saúde feminina.
+            </p>
+          </div>
+          <p class="text-sm text-gray-400 italic mt-4">
+            — Trecho do prefácio escrito por especialista em ginecologia e saúde mental para esta obra.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ ONDE COMPRAR ══════════════════════════ -->
+<section id="comprar" style="background:linear-gradient(135deg,#f5f3ff 0%,#fff 60%,#ede9fe 100%);" class="py-20">
+  <div class="max-w-screen-lg mx-auto px-6">
+    <div class="mb-12 reveal">
+      <p class="text-xs font-bold uppercase tracking-widest mb-2" style="color:var(--gold)">Adquira o livro</p>
+      <h2 class="section-heading text-4xl font-bold mb-4">Onde Comprar</h2>
+      <div class="section-line"></div>
+      <p class="text-gray-500 mt-4 text-sm">Disponível em formato físico e digital nas principais livrarias do Brasil.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+
+      <!-- Amazon -->
+      <a href="https://www.amazon.com.br/s?k=Síndrome+Pré-Menstrual+Cheniaux" target="_blank" class="store-card">
+        <div class="store-icon">&#128722;</div>
+        <div>
+          <div class="font-bold text-base mb-1" style="color:var(--navy)">Amazon</div>
+          <div class="text-xs text-gray-400">Entrega rápida · frete grátis Prime</div>
+        </div>
+        <span class="store-btn" style="background:var(--accent);color:white">Comprar →</span>
+      </a>
+
+      <!-- Livraria Médica -->
+      <a href="https://www.livrariamedicabrasileira.com.br" target="_blank" class="store-card">
+        <div class="store-icon">&#128218;</div>
+        <div>
+          <div class="font-bold text-base mb-1" style="color:var(--navy)">Livraria Médica</div>
+          <div class="text-xs text-gray-400">Especializada em saúde e medicina</div>
+        </div>
+        <span class="store-btn" style="background:var(--navy);color:white">Ver opção →</span>
+      </a>
+
+      <!-- Saraiva -->
+      <a href="https://www.saraiva.com.br" target="_blank" class="store-card">
+        <div class="store-icon">&#127968;</div>
+        <div>
+          <div class="font-bold text-base mb-1" style="color:var(--navy)">Saraiva</div>
+          <div class="text-xs text-gray-400">Livraria com tradição no Brasil</div>
+        </div>
+        <span class="store-btn" style="border:2px solid var(--navy);color:var(--navy)">Ver opção →</span>
+      </a>
+
+      <!-- Livraria Cultura -->
+      <a href="https://www.livrariacultura.com.br" target="_blank" class="store-card">
+        <div class="store-icon">&#127981;</div>
+        <div>
+          <div class="font-bold text-base mb-1" style="color:var(--navy)">Livraria Cultura</div>
+          <div class="text-xs text-gray-400">Amplo catálogo de obras médicas</div>
+        </div>
+        <span class="store-btn" style="border:2px solid var(--navy);color:var(--navy)">Ver opção →</span>
+      </a>
+
+      <!-- eBook -->
+      <a href="https://www.amazon.com.br/s?k=Síndrome+Pré-Menstrual+Cheniaux+ebook" target="_blank" class="store-card">
+        <div class="store-icon">&#128241;</div>
+        <div>
+          <div class="font-bold text-base mb-1" style="color:var(--navy)">eBook / Kindle</div>
+          <div class="text-xs text-gray-400">Leitura imediata em qualquer dispositivo</div>
+        </div>
+        <span class="store-btn" style="background:var(--gold);color:white">Baixar →</span>
+      </a>
+
+      <!-- Estante Virtual -->
+      <a href="https://www.estantevirtual.com.br" target="_blank" class="store-card">
+        <div class="store-icon">&#128210;</div>
+        <div>
+          <div class="font-bold text-base mb-1" style="color:var(--navy)">Estante Virtual</div>
+          <div class="text-xs text-gray-400">Novos e usados · sebos confiáveis</div>
+        </div>
+        <span class="store-btn" style="border:2px solid var(--accent);color:var(--accent)">Ver opção →</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ OUTROS LIVROS ══════════════════════════ -->
+<section id="outros-livros" style="background:linear-gradient(135deg,#f5f5f0 0%,#fff 100%);" class="py-20">
+  <div class="max-w-screen-lg mx-auto px-6">
+    <div class="text-center mb-12 reveal">
+      <p class="text-xs font-bold uppercase tracking-widest mb-2" style="color:var(--gold)">Explore a obra completa</p>
+      <h2 class="section-heading text-3xl font-bold mb-3">Outros Livros</h2>
+      <div class="section-line mx-auto"></div>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 reveal">
+      <a href="livro-cinema-loucura.html" class="other-book-card">
+        <img src="Livro CINEMA E LOUCURA.jpg" alt="Cinema e Loucura" class="w-full h-auto">
+        <div class="p-3"><p class="font-bold text-xs leading-snug" style="color:var(--navy)">Cinema e Loucura</p></div>
+      </a>
+      <a href="livro-fogo-cinzas.html" class="other-book-card">
+        <img src="Livro Fogo e Cinzas -1.jpg" alt="Fogo e Cinzas" class="w-full h-auto">
+        <div class="p-3"><p class="font-bold text-xs leading-snug" style="color:var(--navy)">Fogo e Cinzas</p></div>
+      </a>
+      <a href="livro-manual-psicopatologia.html" class="other-book-card">
+        <img src="LivroMANUAL.jpg" alt="Manual de Psicopatologia" class="w-full h-auto">
+        <div class="p-3"><p class="font-bold text-xs leading-snug" style="color:var(--navy)">Manual de Psicopatologia</p></div>
+      </a>
+      <a href="livro-antifacebook.html" class="other-book-card">
+        <img src="Livro O ANTIFACEBOOK.jpg" alt="O Antifacebook" class="w-full h-auto">
+        <div class="p-3"><p class="font-bold text-xs leading-snug" style="color:var(--navy)">O Antifacebook</p></div>
+      </a>
+      <a href="livro-woody-allen.html" class="other-book-card">
+        <img src="Livro WOODY ALLEN.jpg" alt="Woody Allen" class="w-full h-auto">
+        <div class="p-3"><p class="font-bold text-xs leading-snug" style="color:var(--navy)">Woody Allen</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ FOOTER ══════════════════════════ -->
+<footer class="py-10">
+  <div class="max-w-screen-lg mx-auto px-6 text-center">
+    <p class="font-bold text-xl mb-1" style="font-family:'Playfair Display',serif;color:var(--gold-light)">Elie Cheniaux</p>
+    <p class="text-sm mb-5" style="color:#a8d5b5">Psiquiatra · Professor universitário · Escritor</p>
+    <div class="flex justify-center gap-6 text-sm mb-5 flex-wrap" style="color:#c8e6c9">
+      <a href="index.html" class="hover:text-white transition-colors">Início</a>
+      <a href="livros-capas.html" class="hover:text-white transition-colors">Livros</a>
+      <a href="index.html#artigos" class="hover:text-white transition-colors">Artigos</a>
+      <a href="index.html#contato" class="hover:text-white transition-colors">Contato</a>
+    </div>
+    <p class="text-xs" style="color:#6da87d">© 2026 Elie Cheniaux. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  document.getElementById('hamburger').addEventListener('click', () =>
+    document.getElementById('mobile-menu').classList.toggle('open'));
+  document.getElementById('close-menu').addEventListener('click', () =>
+    document.getElementById('mobile-menu').classList.remove('open'));
+  function toggleMob(id) { document.getElementById(id).classList.toggle('open'); }
+
+  // Scroll-reveal
+  const obs = new IntersectionObserver(e =>
+    e.forEach(x => { if (x.isIntersecting) x.target.classList.add('visible'); }),
+    { threshold: .1 });
+  document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+
+  // Active inner tabs on scroll
+  const sections = ['sinopse', 'prefacio', 'comprar', 'outros-livros'];
+  const tabs = document.querySelectorAll('.inner-tab');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= 120) cur = id;
+    });
+    tabs.forEach(t => {
+      t.classList.toggle('active', t.getAttribute('href') === '#' + cur);
+    });
+  });
+</script>
+</body>
+</html>

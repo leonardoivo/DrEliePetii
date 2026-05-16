@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="shortcut icon" href="DrElieLogo.ico"/>
+  <title>O Antifacebook | Elie Cheniaux</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --gold:#c9a84c;
+      --gold-light:#e8d5a0;
+      --navy:#1a4427;
+      --accent:#1d4ed8;
+      --accent-light:#dbeafe;
+      --accent-dark:#1e3a8a;
+    }
+    *{box-sizing:border-box;}
+    body{font-family:'Lato',sans-serif;background:#f9fafb;}
+    h1,h2,h3,.font-display{font-family:'Playfair Display',serif;}
+
+    /* ── NAV ── */
+    #main-nav{background:white;border-bottom:2px solid var(--gold);position:sticky;top:0;z-index:50;}
+    .nav-logo{font-family:'Playfair Display',serif;color:var(--navy);}
+    .nav-item{position:relative;}
+    .nav-link{display:flex;align-items:center;gap:4px;padding:18px 14px;font-size:.88rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);transition:color .2s;white-space:nowrap;text-decoration:none;}
+    .nav-link:hover,.nav-link.active{color:var(--gold);}
+    .nav-link svg{width:12px;height:12px;transition:transform .2s;}
+    .nav-item:hover>.nav-link svg{transform:rotate(180deg);}
+    .dropdown{display:none;position:absolute;top:100%;left:0;background:white;min-width:220px;border-top:3px solid var(--gold);box-shadow:0 8px 32px rgba(0,0,0,.10);z-index:100;}
+    .nav-item:hover>.dropdown{display:block;}
+    .dropdown a{display:block;padding:11px 20px;font-size:.84rem;color:var(--navy);border-bottom:1px solid #f3f0e8;transition:background .15s,color .15s;text-decoration:none;}
+    .dropdown a:last-child{border-bottom:none;}
+    .dropdown a:hover,.dropdown a.active{background:#fdf8ee;color:var(--gold);font-weight:700;}
+    .dropdown-sep{height:1px;background:#f0ebe0;margin:4px 0;}
+    .dropdown .book-link{font-size:.78rem;padding:8px 20px 8px 28px;color:#6b7280;}
+    .dropdown .book-link:hover{color:var(--gold);background:#fdf8ee;}
+    #hamburger{cursor:pointer;background:none;border:none;}
+    #mobile-menu{display:none;position:fixed;inset:0;z-index:200;background:white;overflow-y:auto;padding:80px 0 40px;}
+    #mobile-menu.open{display:block;}
+    .mob-link{display:block;padding:13px 28px;font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);border-bottom:1px solid #f0ebe0;cursor:pointer;user-select:none;}
+    .mob-sub{display:none;background:#fdf8ee;}
+    .mob-sub.open{display:block;}
+    .mob-sub a{display:block;padding:10px 44px;font-size:.85rem;color:#4a5568;border-bottom:1px solid #ece8df;text-decoration:none;}
+    .mob-sub a.active{color:var(--gold);font-weight:700;}
+
+    /* ── HERO ── */
+    .book-hero{
+      background:linear-gradient(135deg,#eff6ff 0%,#fff 55%,#dbeafe 100%);
+      min-height:90vh;
+      display:flex;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .book-hero::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background-image:
+        radial-gradient(circle at 80% 10%, rgba(29,78,216,.09) 0%, transparent 50%),
+        radial-gradient(circle at 8% 90%, rgba(201,168,76,.07) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(29,78,216,.04) 0%, transparent 60%);
+      pointer-events:none;
+    }
+    /* Floating geometric shapes */
+    .hero-deco{position:absolute;border-radius:50%;pointer-events:none;opacity:.06;}
+    .hero-deco-1{width:420px;height:420px;background:var(--accent);top:-120px;right:-80px;}
+    .hero-deco-2{width:200px;height:200px;background:var(--gold);bottom:-60px;left:5%;}
+    .hero-deco-3{width:80px;height:80px;background:var(--accent);top:30%;left:3%;border-radius:12px;transform:rotate(25deg);opacity:.08;}
+
+    .book-cover-wrap{position:relative;z-index:2;display:inline-block;}
+    .book-cover-wrap img{
+      max-height:520px;
+      width:auto;
+      border-radius:3px 10px 10px 3px;
+      filter:drop-shadow(0 30px 60px rgba(29,78,216,0.28)) drop-shadow(0 8px 20px rgba(0,0,0,0.30));
+      transform:perspective(1000px) rotateY(-8deg) rotateX(1deg);
+      transition:transform .5s cubic-bezier(.25,.46,.45,.94),filter .5s ease;
+      display:block;
+    }
+    .book-cover-wrap:hover img{
+      transform:perspective(1000px) rotateY(0deg) rotateX(0deg) translateY(-10px);
+      filter:drop-shadow(0 40px 70px rgba(29,78,216,0.35)) drop-shadow(0 12px 25px rgba(0,0,0,0.35));
+    }
+    /* Spine effect */
+    .book-cover-wrap::before{
+      content:'';
+      position:absolute;
+      top:3px;bottom:3px;left:-12px;width:12px;
+      background:linear-gradient(90deg,rgba(0,0,0,0.18),rgba(0,0,0,0.06));
+      border-radius:3px 0 0 3px;
+      transform:perspective(1000px) rotateY(20deg);
+      transform-origin:right;
+      transition:transform .5s;
+    }
+
+    .hero-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      font-size:.72rem;
+      font-weight:700;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--accent);
+      border:1.5px solid var(--accent);
+      padding:5px 16px;
+      border-radius:20px;
+      margin-bottom:24px;
+      background:rgba(29,78,216,.06);
+    }
+    .hero-title{font-family:'Playfair Display',serif;color:var(--navy);line-height:1.08;}
+    .hero-author{color:var(--gold);font-family:'Playfair Display',serif;font-style:italic;font-size:1.2rem;}
+    .hero-divider{width:64px;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold));margin:22px 0;border-radius:2px;}
+    .hero-tagline{color:#374151;font-size:1.05rem;line-height:1.75;font-weight:300;max-width:480px;}
+
+    .btn-primary{
+      background:var(--accent);
+      color:white;
+      padding:15px 34px;
+      font-weight:700;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      font-size:.82rem;
+      border-radius:3px;
+      transition:background .2s,transform .15s,box-shadow .2s;
+      display:inline-block;
+      text-decoration:none;
+      box-shadow:0 4px 14px rgba(29,78,216,.35);
+    }
+    .btn-primary:hover{background:var(--accent-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(29,78,216,.45);}
+    .btn-outline{
+      border:2px solid var(--navy);
+      color:var(--navy);
+      padding:13px 30px;
+      font-weight:700;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      font-size:.82rem;
+      border-radius:3px;
+      transition:all .2s;
+      display:inline-block;
+      text-decoration:none;
+    }
+    .btn-outline:hover{border-color:var(--accent);color:var(--accent);background:rgba(29,78,216,.04);}
+
+    /* ── STATS BAR ── */
+    .stats-bar{background:white;border-bottom:1px solid #e5e7eb;box-shadow:0 1px 6px rgba(0,0,0,.06);}
+    .stat-pill{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:14px 24px;
+      border-right:1px solid #f0ebe0;
+      font-size:.8rem;
+    }
+    .stat-pill:last-child{border-right:none;}
+    .stat-icon{font-size:1.1rem;}
+    .stat-label{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;display:block;}
+    .stat-value{font-weight:700;color:var(--navy);display:block;font-size:.9rem;}
+
+    /* ── INNER TAB NAV ── */
+    .inner-tab-bar{background:white;border-bottom:1px solid #e5e7eb;position:sticky;top:62px;z-index:40;box-shadow:0 2px 8px rgba(0,0,0,.05);}
+    .inner-tab{
+      padding:14px 24px;
+      font-size:.78rem;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      border-bottom:3px solid transparent;
+      color:#9ca3af;
+      transition:color .2s,border-color .2s;
+      white-space:nowrap;
+      text-decoration:none;
+      display:inline-block;
+    }
+    .inner-tab:hover{color:var(--navy);}
+    .inner-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+
+    /* ── SECTIONS ── */
+    .section-label{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px;}
+    .section-heading{font-family:'Playfair Display',serif;color:var(--navy);}
+    .section-line{width:50px;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:2px;}
+
+    /* ── SINOPSE ── */
+    .ficha-card{
+      background:white;
+      border-radius:10px;
+      box-shadow:0 4px 24px rgba(0,0,0,.08);
+      overflow:hidden;
+      border-top:4px solid var(--accent);
+    }
+    .ficha-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f3f4f6;font-size:.875rem;}
+    .ficha-row:last-child{border-bottom:none;}
+
+    /* ── PULL QUOTE ── */
+    .pull-quote-section{
+      background:linear-gradient(135deg,var(--accent-dark) 0%,var(--accent) 100%);
+      position:relative;
+      overflow:hidden;
+    }
+    .pull-quote-section::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .pull-quote-mark{
+      font-family:'Playfair Display',serif;
+      font-size:8rem;
+      line-height:.6;
+      color:rgba(255,255,255,.15);
+      display:block;
+      margin-bottom:-20px;
+    }
+    .pull-quote-text{
+      font-family:'Playfair Display',serif;
+      font-style:italic;
+      color:white;
+      font-size:1.5rem;
+      line-height:1.65;
+      max-width:780px;
+    }
+    .pull-quote-attr{color:rgba(255,255,255,.65);font-size:.85rem;letter-spacing:.06em;}
+
+    /* ── PREFÁCIO ── */
+    .prefacio-card{
+      background:white;
+      border-radius:10px;
+      box-shadow:0 4px 24px rgba(0,0,0,.08);
+      overflow:hidden;
+    }
+    .prefacio-stripe{width:6px;flex-shrink:0;background:linear-gradient(180deg,var(--navy),#2d6a4f);}
+    .prefacist-avatar{
+      width:60px;height:60px;
+      border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.6rem;flex-shrink:0;
+      background:linear-gradient(135deg,#bfdbfe,#93c5fd);
+      border:3px solid white;
+      box-shadow:0 4px 12px rgba(29,78,216,.2);
+    }
+    .open-quote{
+      font-family:'Playfair Display',serif;
+      font-size:6rem;
+      line-height:.6;
+      color:var(--accent-light);
+      float:left;
+      margin-right:10px;
+      margin-top:16px;
+    }
+    .excerpt-text{font-family:'Playfair Display',serif;font-style:italic;color:#374151;line-height:1.85;font-size:1rem;}
+
+    /* ── COMPRAR ── */
+    .buy-card{
+      background:white;
+      border-radius:10px;
+      box-shadow:0 4px 20px rgba(0,0,0,.07);
+      overflow:hidden;
+      transition:transform .25s,box-shadow .25s;
+      text-decoration:none;
+      display:flex;
+      flex-direction:column;
+    }
+    .buy-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.12);}
+    .buy-card-header{padding:28px 24px 20px;text-align:center;}
+    .buy-card-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.7rem;}
+    .buy-card-footer{padding:16px 24px;border-top:1px solid #f3f4f6;margin-top:auto;}
+    .buy-tag{
+      display:inline-block;
+      font-size:.72rem;
+      font-weight:700;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      padding:4px 12px;
+      border-radius:20px;
+      margin-bottom:8px;
+    }
+
+    /* ── OUTROS LIVROS ── */
+    .books-scroll{display:grid;grid-template-columns:repeat(6,minmax(140px,1fr));gap:20px;overflow-x:auto;padding-bottom:8px;}
+    @media(max-width:900px){.books-scroll{grid-template-columns:repeat(3,minmax(130px,1fr));}}
+    @media(max-width:560px){.books-scroll{grid-template-columns:repeat(2,minmax(130px,1fr));}}
+    .book-thumb{
+      background:white;
+      border-radius:8px;
+      box-shadow:0 3px 14px rgba(0,0,0,.07);
+      overflow:hidden;
+      transition:transform .2s,box-shadow .2s;
+      text-decoration:none;
+      display:block;
+    }
+    .book-thumb:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(0,0,0,.13);}
+    .book-thumb img{width:100%;height:auto;display:block;}
+    .book-thumb-title{padding:10px 12px;font-size:.75rem;font-weight:700;color:var(--navy);line-height:1.3;}
+
+    /* ── FOOTER ── */
+    footer{background:var(--navy);color:#c8d1e0;}
+    .footer-divider{width:50px;height:2px;background:var(--gold);margin:12px auto;}
+
+    /* ── REVEAL ── */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .6s cubic-bezier(.25,.46,.45,.94),transform .6s cubic-bezier(.25,.46,.45,.94);}
+    .reveal.visible{opacity:1;transform:none;}
+    .reveal-delay-1{transition-delay:.1s;}
+    .reveal-delay-2{transition-delay:.2s;}
+    .reveal-delay-3{transition-delay:.3s;}
+
+    /* ── RESPONSIVE HERO ── */
+    @media(max-width:1023px){
+      .book-hero{min-height:auto;padding-top:60px;padding-bottom:60px;}
+      .book-cover-wrap img{max-height:360px;}
+    }
+    @media(max-width:639px){
+      .book-cover-wrap img{max-height:300px;}
+      .pull-quote-text{font-size:1.15rem;}
+      .stat-pill{padding:12px 16px;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══════════════════════════════════════════════════════ -->
+<nav id="main-nav" class="shadow-sm">
+  <div class="max-w-screen-xl mx-auto px-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+     <img src="DrElieLogo.avif" alt="Logo" class="w-10 h-10 border-2 border-var(--gold)"/>
+      <a href="index.html" class="nav-logo text-xl py-4 font-bold">Elie Cheniaux</a>
+    </div>
+    <div class="hidden lg:flex items-center">
+      <div class="nav-item">
+        <a href="quem-sou-eu-biografia.html" class="nav-link">Quem sou eu<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        <div class="dropdown">
+          <a href="quem-sou-eu-biografia.html">Biografia</a>
+          <a href="BiPoLaB.html">Bipolab</a>
+          <a href="quem-sou-eu-curriculo.html">Currículo Lattes</a>
+          <a href="quem-sou-eu-discurso.html">Discurso de posse na AMRJ</a>
+          <a href="quem-sou-eu-memorial.html">Memorial</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="#" class="nav-link active">Livros<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        <div class="dropdown">
+          <a href="livro-antifacebook-v2.html">O Anti Facebook</a>
+          <a href="livro-cinema-loucura-v2.html">Cinema e Loucura</a>
+          <a href="livro-fogo-cinzas-v2.html">Fogo e Cinzas</a>
+          <a href="livro-manual-psicopatia-v2.html">Manual da Psicopatia</a>
+          <a href="livro-sindrome-pre-menstrual-v2.html">Síndrome Pré Mestrual</a>
+          <a href="livro-manual-psicopatologia-v2.html">Manual da Psicopatologia</a>
+          <a href="livro-woody-allen-v2.html">Woody Allen</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="index.html#artigos" class="nav-link">Artigos científicos</a></div>
+      <div class="nav-item">
+        <a href="entrevistas-jornais.html" class="nav-link">Entrevistas<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        <div class="dropdown">
+          <a href="entrevistas-jornais.html">Jornais</a>
+          <a href="entrevistas-tv.html">TV</a>
+          <a href="entrevistas-podcast.html">Podcast</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="palestras.html" class="nav-link">Palestras</a></div>
+      <div class="nav-item"><a href="index.html#contato" class="nav-link">Contato</a></div>
+    </div>
+    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Abrir menu">
+      <span class="block w-6 h-0.5 bg-gray-700"></span>
+      <span class="block w-6 h-0.5 bg-gray-700"></span>
+      <span class="block w-6 h-0.5 bg-gray-700"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══ MOBILE MENU ═══════════════════════════════════════════════ -->
+<div id="mobile-menu">
+  <button id="close-menu" class="absolute top-5 right-6 text-3xl text-gray-600" aria-label="Fechar menu">&times;</button>
+  <div>
+    <div class="mob-link" onclick="toggleMob('mob-quem')">Quem sou eu ▾</div>
+    <div id="mob-quem" class="mob-sub">
+      <a href="quem-sou-eu-biografia.html">Biografia</a>
+      <a href="BiPoLaB.html">Bipolab</a>
+      <a href="quem-sou-eu-curriculo.html">Currículo Lattes</a>
+      <a href="quem-sou-eu-discurso.html">Discurso AMRJ</a>
+      <a href="quem-sou-eu-memorial.html">Memorial</a>
+    </div>
+  </div>
+  <div>
+    <div class="mob-link" onclick="toggleMob('mob-livros')">Livros ▾</div>
+    <div id="mob-livros" class="mob-sub open">
+      <a href="livros-capas.html">Fotos das capas</a>
+      <a href="livros-comprar.html">Links para comprar</a>
+      <a href="livros-sinopses.html">Sinopses</a>
+      <a href="livros-prefacios.html">Prefácios</a>
+      <a href="livro-cinema-loucura.html">Cinema e Loucura</a>
+      <a href="livro-fogo-cinzas.html">Fogo e Cinzas</a>
+      <a href="livro-manual-psicopatologia.html">Manual de Psicopatologia</a>
+      <a href="livro-antifacebook-v2.html" class="active">O Antifacebook</a>
+      <a href="livro-sindrome-pre-menstrual.html">Síndrome Pré-Menstrual</a>
+      <a href="livro-woody-allen.html">Woody Allen</a>
+    </div>
+  </div>
+  <div><a class="mob-link" href="index.html#artigos">Artigos científicos</a></div>
+  <div>
+    <div class="mob-link" onclick="toggleMob('mob-entrevistas')">Entrevistas ▾</div>
+    <div id="mob-entrevistas" class="mob-sub">
+      <a href="entrevistas-jornais.html">Jornais</a>
+      <a href="entrevistas-tv.html">TV</a>
+      <a href="entrevistas-podcast.html">Podcast</a>
+    </div>
+  </div>
+  <div><a class="mob-link" href="palestras.html">Palestras</a></div>
+  <div><a class="mob-link" href="index.html#contato">Contato</a></div>
+</div>
+
+<!-- ══ HERO ══════════════════════════════════════════════════════ -->
+<section class="book-hero">
+  <div class="hero-deco hero-deco-1"></div>
+  <div class="hero-deco hero-deco-2"></div>
+  <div class="hero-deco hero-deco-3"></div>
+  <div class="max-w-screen-xl mx-auto px-6 py-20 relative z-10 w-full">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Cover -->
+      <div class="flex justify-center lg:justify-end order-2 lg:order-1">
+        <div class="book-cover-wrap">
+          <img src="Livro O ANTIFACEBOOK.jpg" alt="Capa do livro O Antifacebook" loading="eager"/>
+        </div>
+      </div>
+      <!-- Info -->
+      <div class="order-1 lg:order-2">
+        <div class="hero-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Ensaio
+        </div>
+        <h1 class="hero-title text-5xl lg:text-6xl xl:text-7xl font-bold mb-3">O Antifacebook</h1>
+        <p class="hero-author mb-2">Elie Cheniaux</p>
+        <div class="hero-divider"></div>
+        <p class="hero-tagline mb-10">
+          Um olhar psiquiátrico corajoso sobre como as redes sociais colonizam a mente humana — e o caminho de volta para a autonomia psíquica no mundo real.
+        </p>
+        <div class="flex flex-wrap gap-4 mb-10">
+          <a href="#comprar" class="btn-primary">Comprar agora</a>
+          <a href="#sinopse" class="btn-outline">Ler sinopse</a>
+        </div>
+        <!-- Mini social proof -->
+        <div class="flex items-center gap-3 text-sm text-gray-500">
+          <div class="flex -space-x-2">
+            <div class="w-8 h-8 rounded-full bg-blue-100 border-2 border-white flex items-center justify-center text-xs">★</div>
+            <div class="w-8 h-8 rounded-full bg-indigo-100 border-2 border-white flex items-center justify-center text-xs">★</div>
+            <div class="w-8 h-8 rounded-full bg-sky-100 border-2 border-white flex items-center justify-center text-xs">★</div>
+          </div>
+          <span>Prefácio de <strong style="color:var(--navy)">Dr. Roberto Lent</strong> · Neurocientista, UFRJ</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STATS BAR ════════════════════════════════════════════════ -->
+<div class="stats-bar">
+  <div class="max-w-screen-xl mx-auto px-4 flex flex-wrap justify-center md:justify-start">
+    <div class="stat-pill">
+      <span class="stat-icon">📝</span>
+      <div>
+        <span class="stat-label">Gênero</span>
+        <span class="stat-value">Ensaio</span>
+      </div>
+    </div>
+    <div class="stat-pill">
+      <span class="stat-icon">📅</span>
+      <div>
+        <span class="stat-label">Ano</span>
+        <span class="stat-value">2019</span>
+      </div>
+    </div>
+    <div class="stat-pill">
+      <span class="stat-icon">📖</span>
+      <div>
+        <span class="stat-label">Páginas</span>
+        <span class="stat-value">~200</span>
+      </div>
+    </div>
+    <div class="stat-pill">
+      <span class="stat-icon">🏢</span>
+      <div>
+        <span class="stat-label">Editora</span>
+        <span class="stat-value">Editora Cognitivo</span>
+      </div>
+    </div>
+    <div class="stat-pill hidden sm:flex">
+      <span class="stat-icon">🌐</span>
+      <div>
+        <span class="stat-label">Idioma</span>
+        <span class="stat-value">Português</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ INNER TAB NAV ════════════════════════════════════════════ -->
+<div class="inner-tab-bar">
+  <div class="max-w-screen-lg mx-auto px-4 flex overflow-x-auto">
+    <a href="#sinopse" class="inner-tab">Sinopse</a>
+    <a href="#prefacio" class="inner-tab">Prefácio</a>
+    <a href="#comprar" class="inner-tab">Onde Comprar</a>
+    <a href="#outros-livros" class="inner-tab">Outros Livros</a>
+  </div>
+</div>
+
+<!-- ══ SINOPSE ══════════════════════════════════════════════════ -->
+<section id="sinopse" class="py-24 bg-white">
+  <div class="max-w-screen-lg mx-auto px-6">
+    <div class="mb-14 reveal">
+      <span class="section-label">Sobre o livro</span>
+      <h2 class="section-heading text-4xl font-bold mb-5">Sinopse</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="grid lg:grid-cols-3 gap-12 items-start">
+      <!-- Text -->
+      <div class="lg:col-span-2 space-y-6 text-gray-600 leading-relaxed text-base reveal">
+        <p>
+          <em class="font-semibold text-gray-800">O Antifacebook</em> é um ensaio que questiona o impacto das redes sociais na saúde mental contemporânea. Com o olhar clínico de um psiquiatra experiente, Elie Cheniaux analisa como plataformas como o Facebook transformaram não apenas a comunicação, mas a própria estrutura das relações humanas e a percepção de si mesmo.
+        </p>
+        <p>
+          O autor examina como a busca incessante por curtidas e aprovação cria um ciclo de dependência emocional, ansiedade social e distorções de identidade. Ao longo de capítulos densos e provocadores, a obra revela os mecanismos psicológicos que as grandes corporações exploram para manter os usuários conectados — e como isso afeta de maneira profunda a capacidade humana de viver plenamente no mundo real.
+        </p>
+        <p>
+          Com linguagem acessível e exemplos clínicos extraídos da prática psiquiátrica cotidiana, Cheniaux convida o leitor a repensar seu relacionamento com a tecnologia digital e a reconquistar sua autonomia psíquica. O livro não é uma condenação moralizante das redes sociais, mas uma análise rigorosa — e necessária — dos custos invisíveis de uma vida cada vez mais mediada por algoritmos.
+        </p>
+        <p>
+          Uma obra indispensável para profissionais de saúde mental, educadores, pais e qualquer pessoa que queira compreender como o mundo digital está moldando o sujeito contemporâneo — e o que pode ser feito para recuperar o controle de nossa própria vida interior.
+        </p>
+        <!-- Highlight box -->
+        <div class="rounded-10px p-6 border-l-4 mt-8" style="border-color:var(--accent);background:#eff6ff;border-radius:8px;">
+          <p class="font-semibold text-sm" style="color:var(--accent-dark)">Temas abordados na obra:</p>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <span class="px-3 py-1 rounded-full text-xs font-bold" style="background:white;color:var(--accent);border:1px solid var(--accent-light)">Saúde mental digital</span>
+            <span class="px-3 py-1 rounded-full text-xs font-bold" style="background:white;color:var(--accent);border:1px solid var(--accent-light)">Dependência tecnológica</span>
+            <span class="px-3 py-1 rounded-full text-xs font-bold" style="background:white;color:var(--accent);border:1px solid var(--accent-light)">Ansiedade social</span>
+            <span class="px-3 py-1 rounded-full text-xs font-bold" style="background:white;color:var(--accent);border:1px solid var(--accent-light)">Identidade e redes sociais</span>
+            <span class="px-3 py-1 rounded-full text-xs font-bold" style="background:white;color:var(--accent);border:1px solid var(--accent-light)">Psicologia dos algoritmos</span>
+            <span class="px-3 py-1 rounded-full text-xs font-bold" style="background:white;color:var(--accent);border:1px solid var(--accent-light)">Autonomia psíquica</span>
+          </div>
+        </div>
+      </div>
+      <!-- Ficha técnica -->
+      <div class="reveal reveal-delay-2">
+        <div class="ficha-card p-6">
+          <h3 class="font-bold text-base mb-5" style="color:var(--navy)">Ficha Técnica</h3>
+          <div class="space-y-1">
+            <div class="ficha-row"><span class="font-bold text-gray-700 text-sm">Autor</span><span class="text-gray-500 text-sm">Elie Cheniaux</span></div>
+            <div class="ficha-row"><span class="font-bold text-gray-700 text-sm">Editora</span><span class="text-gray-500 text-sm">Editora Cognitivo</span></div>
+            <div class="ficha-row"><span class="font-bold text-gray-700 text-sm">Ano</span><span class="text-gray-500 text-sm">2019</span></div>
+            <div class="ficha-row"><span class="font-bold text-gray-700 text-sm">Páginas</span><span class="text-gray-500 text-sm">~200 p.</span></div>
+            <div class="ficha-row"><span class="font-bold text-gray-700 text-sm">Gênero</span><span class="text-gray-500 text-sm">Ensaio</span></div>
+            <div class="ficha-row"><span class="font-bold text-gray-700 text-sm">Idioma</span><span class="text-gray-500 text-sm">Português</span></div>
+            <div class="ficha-row"><span class="font-bold text-gray-700 text-sm">Formato</span><span class="text-gray-500 text-sm">Impresso / eBook</span></div>
+          </div>
+          <a href="#comprar" class="btn-primary w-full text-center block mt-6" style="padding:13px 24px;">Comprar agora</a>
+          <a href="#comprar" class="btn-outline w-full text-center block mt-3" style="padding:11px 24px;font-size:.78rem;">Ver todas as opções</a>
+        </div>
+        <!-- Alt cover -->
+        <div class="mt-6 text-center">
+          <img src="Livro O ANTIFACEBOOK 2.jpg" alt="Capa alternativa O Antifacebook" class="w-full rounded-lg shadow-md hover:shadow-xl transition-shadow" style="max-height:280px;object-fit:cover;object-position:top;"/>
+          <p class="text-xs text-gray-400 mt-2">Edição alternativa</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PULL QUOTE ═══════════════════════════════════════════════ -->
+<section class="pull-quote-section py-20">
+  <div class="max-w-screen-lg mx-auto px-6 relative z-10 reveal">
+    <span class="pull-quote-mark">"</span>
+    <blockquote class="pull-quote-text mt-4 mb-8">
+      Cada curtida é uma pequena dose de dopamina. Cada notificação, um cordão invisível que nos puxa de volta para a tela. Não estamos usando as redes sociais — elas estão nos usando.
+    </blockquote>
+    <p class="pull-quote-attr">— Elie Cheniaux, <em>O Antifacebook</em></p>
+  </div>
+</section>
+
+<!-- ══ PREFÁCIO ════════════════════════════════════════════════ -->
+<section id="prefacio" class="py-24" style="background:linear-gradient(135deg,#f8faff 0%,#fff 60%,#eff6ff 100%);">
+  <div class="max-w-screen-lg mx-auto px-6">
+    <div class="mb-14 reveal">
+      <span class="section-label">Apresentação</span>
+      <h2 class="section-heading text-4xl font-bold mb-5">Prefácio</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="prefacio-card flex flex-col md:flex-row reveal">
+      <div class="prefacio-stripe"></div>
+      <div class="flex-1 p-8 lg:p-12">
+        <!-- Prefaciador -->
+        <div class="flex items-center gap-4 mb-8 pb-6 border-b border-gray-100">
+          <div class="prefacist-avatar">
+            <span style="font-size:1.4rem;">🧠</span>
+          </div>
+          <div>
+            <div class="font-bold text-lg" style="color:var(--navy)">Dr. Roberto Lent</div>
+            <div class="text-sm text-gray-400">Neurocientista · Instituto de Ciências Biomédicas, UFRJ</div>
+            <div class="text-xs mt-1" style="color:var(--accent)">Membro da Academia Brasileira de Ciências</div>
+          </div>
+        </div>
+        <!-- Quote -->
+        <div class="mb-8 overflow-hidden">
+          <span class="open-quote">"</span>
+          <p class="excerpt-text">
+            Elie Cheniaux nos presenteia com uma análise corajosa e necessária. Em tempos em que o digital coloniza o humano, este livro é um ato de resistência intelectual. Cheniaux transita com maestria entre a clínica psiquiátrica e a crítica cultural, mostrando como as plataformas de redes sociais exploram as vulnerabilidades mais fundamentais do cérebro humano — nossa necessidade de pertencimento, de validação e de conexão. É uma leitura que provoca desconforto saudável e convida à reflexão urgente sobre que tipo de vida queremos construir na era dos algoritmos.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="livros-prefacios.html" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider px-5 py-3 rounded" style="background:var(--navy);color:white;text-decoration:none;">
+            Ver todos os prefácios
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ONDE COMPRAR ══════════════════════════════════════════════ -->
+<section id="comprar" class="py-24 bg-white">
+  <div class="max-w-screen-lg mx-auto px-6">
+    <div class="mb-14 reveal">
+      <span class="section-label">Adquira o livro</span>
+      <h2 class="section-heading text-4xl font-bold mb-5">Onde Comprar</h2>
+      <div class="section-line"></div>
+      <p class="text-gray-500 mt-4 text-sm">Disponível nas principais livrarias online e em versão digital.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
+      <!-- Amazon -->
+      <a href="https://www.amazon.com.br/s?k=antifacebook+cheniaux" target="_blank" rel="noopener" class="buy-card">
+        <div class="buy-card-header">
+          <div class="buy-card-icon" style="background:#fff3cd;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M20.665 3.717l-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192L8.232 17.266v3.957c0 .747.563.985 1.07.455l2.968-2.924 5.815 4.317c1.07.586 1.84.284 2.108-.993l3.822-18.044c.39-1.567-.597-2.275-1.35-1.317z" fill="#ff9900"/></svg>
+          </div>
+          <span class="buy-tag" style="background:#fff3cd;color:#92400e;">Mais popular</span>
+          <div class="font-bold text-base mb-1" style="color:var(--navy)">Amazon Brasil</div>
+          <div class="text-xs text-gray-400">Entrega rápida · Frete grátis Prime</div>
+        </div>
+        <div class="buy-card-footer">
+          <span class="w-full block text-center text-xs font-bold uppercase tracking-wider py-2.5 rounded" style="background:#ff9900;color:white;">Comprar na Amazon →</span>
+        </div>
+      </a>
+      <!-- Kindle -->
+      <a href="https://www.amazon.com.br/s?k=antifacebook+cheniaux+kindle" target="_blank" rel="noopener" class="buy-card">
+        <div class="buy-card-header">
+          <div class="buy-card-icon" style="background:#e0f2fe;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0369a1" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>
+          </div>
+          <span class="buy-tag" style="background:#e0f2fe;color:#0c4a6e;">Versão digital</span>
+          <div class="font-bold text-base mb-1" style="color:var(--navy)">Kindle / eBook</div>
+          <div class="text-xs text-gray-400">Leitura imediata · Qualquer dispositivo</div>
+        </div>
+        <div class="buy-card-footer">
+          <span class="w-full block text-center text-xs font-bold uppercase tracking-wider py-2.5 rounded" style="background:#0369a1;color:white;">Baixar eBook →</span>
+        </div>
+      </a>
+      <!-- Livraria Cultura -->
+      <a href="https://www.livrariacultura.com.br/busca?Ntt=antifacebook+cheniaux" target="_blank" rel="noopener" class="buy-card">
+        <div class="buy-card-header">
+          <div class="buy-card-icon" style="background:#f0fdf4;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+          </div>
+          <span class="buy-tag" style="background:#f0fdf4;color:#166534;">Livraria</span>
+          <div class="font-bold text-base mb-1" style="color:var(--navy)">Livraria Cultura</div>
+          <div class="text-xs text-gray-400">Livraria tradicional · Entrega nacional</div>
+        </div>
+        <div class="buy-card-footer">
+          <span class="w-full block text-center text-xs font-bold uppercase tracking-wider py-2.5 rounded" style="background:#166534;color:white;">Comprar →</span>
+        </div>
+      </a>
+      <!-- Estante Virtual -->
+      <a href="https://www.estantevirtual.com.br/busca?q=antifacebook+cheniaux" target="_blank" rel="noopener" class="buy-card">
+        <div class="buy-card-header">
+          <div class="buy-card-icon" style="background:#fdf4ff;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7e22ce" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <span class="buy-tag" style="background:#fdf4ff;color:#6b21a8;">Novo e usado</span>
+          <div class="font-bold text-base mb-1" style="color:var(--navy)">Estante Virtual</div>
+          <div class="text-xs text-gray-400">Sebos e livreiros · Melhores preços</div>
+        </div>
+        <div class="buy-card-footer">
+          <span class="w-full block text-center text-xs font-bold uppercase tracking-wider py-2.5 rounded" style="background:#7e22ce;color:white;">Buscar →</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- CTA Banner -->
+    <div class="mt-14 rounded-xl p-8 flex flex-col md:flex-row items-center gap-6 justify-between reveal" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);">
+      <div>
+        <h3 class="font-bold text-lg mb-1" style="color:var(--navy);font-family:'Playfair Display',serif;">Universidades e bibliotecas</h3>
+        <p class="text-sm text-gray-500">Interessado em adquirir exemplares para sua instituição? Entre em contato com o autor.</p>
+      </div>
+      <a href="index.html#contato" class="btn-outline flex-shrink-0" style="border-color:var(--accent);color:var(--accent);">Entrar em contato</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ OUTROS LIVROS ════════════════════════════════════════════ -->
+<section id="outros-livros" class="py-24" style="background:linear-gradient(135deg,#f5f5f0 0%,#fff 100%);">
+  <div class="max-w-screen-lg mx-auto px-6">
+    <div class="text-center mb-14 reveal">
+      <span class="section-label" style="display:block;text-align:center;">Biblioteca do autor</span>
+      <h2 class="section-heading text-3xl font-bold mb-4">Outros Livros de Elie Cheniaux</h2>
+      <div class="section-line mx-auto"></div>
+    </div>
+    <div class="books-scroll reveal">
+      <a href="livro-cinema-loucura.html" class="book-thumb">
+        <img src="Livro CINEMA E LOUCURA.jpg" alt="Cinema e Loucura"/>
+        <div class="book-thumb-title">Cinema e Loucura</div>
+      </a>
+      <a href="livro-fogo-cinzas.html" class="book-thumb">
+        <img src="Livro Fogo e Cinzas -1.jpg" alt="Fogo e Cinzas"/>
+        <div class="book-thumb-title">Fogo e Cinzas</div>
+      </a>
+      <a href="livro-manual-psicopatologia.html" class="book-thumb">
+        <img src="LivroMANUAL.jpg" alt="Manual de Psicopatologia"/>
+        <div class="book-thumb-title">Manual de Psicopatologia</div>
+      </a>
+      <a href="livro-sindrome-pre-menstrual.html" class="book-thumb">
+        <img src="Livro SÍNDROME PRÉ-MENSTRUAL.jpg" alt="Síndrome Pré-Menstrual"/>
+        <div class="book-thumb-title">Síndrome Pré-Menstrual</div>
+      </a>
+      <a href="livro-woody-allen.html" class="book-thumb">
+        <img src="Livro WOODY ALLEN.jpg" alt="Woody Allen"/>
+        <div class="book-thumb-title">Woody Allen e a Psicanálise</div>
+      </a>
+      <a href="livros-capas.html" class="book-thumb" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:180px;background:linear-gradient(135deg,#1a4427,#2d6a4f);">
+        <div style="font-size:2rem;margin-bottom:8px;">📚</div>
+        <div class="book-thumb-title" style="color:white;text-align:center;font-size:.8rem;">Ver todos os livros</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════════════════════════ -->
+<footer class="py-12">
+  <div class="max-w-screen-lg mx-auto px-6 text-center">
+    <img src="DrElieLogo.avif" alt="Logo" class="w-12 h-12 rounded-full border-2 mx-auto mb-4" style="border-color:var(--gold);opacity:.8;"/>
+    <p class="font-bold text-2xl mb-1" style="font-family:'Playfair Display',serif;color:var(--gold-light)">Elie Cheniaux</p>
+    <p class="text-sm mb-2" style="color:#a8d5b5">Psiquiatra &nbsp;·&nbsp; Professor universitário &nbsp;·&nbsp; Escritor</p>
+    <div class="footer-divider"></div>
+    <div class="flex justify-center gap-6 text-sm mb-6 flex-wrap mt-4" style="color:#c8e6c9;">
+      <a href="index.html" class="hover:text-white transition-colors" style="text-decoration:none;">Início</a>
+      <a href="quem-sou-eu-biografia.html" class="hover:text-white transition-colors" style="text-decoration:none;">Biografia</a>
+      <a href="livros-capas.html" class="hover:text-white transition-colors" style="text-decoration:none;">Livros</a>
+      <a href="index.html#artigos" class="hover:text-white transition-colors" style="text-decoration:none;">Artigos</a>
+      <a href="entrevistas-jornais.html" class="hover:text-white transition-colors" style="text-decoration:none;">Entrevistas</a>
+      <a href="index.html#contato" class="hover:text-white transition-colors" style="text-decoration:none;">Contato</a>
+    </div>
+    <p class="text-xs" style="color:#6da87d;">© 2026 Elie Cheniaux. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<!-- ══ SCRIPTS ═══════════════════════════════════════════════════ -->
+<script>
+  // Mobile menu toggle
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  });
+  document.getElementById('close-menu').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.remove('open');
+  });
+  function toggleMob(id) {
+    document.getElementById(id).classList.toggle('open');
+  }
+
+  // Scroll-reveal via IntersectionObserver
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  // Active inner-tab on scroll
+  const sections = ['sinopse', 'prefacio', 'comprar', 'outros-livros'];
+  const tabs = document.querySelectorAll('.inner-tab');
+  function updateTabs() {
+    let cur = '';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= 130) cur = id;
+    });
+    tabs.forEach(t => {
+      t.classList.toggle('active', t.getAttribute('href') === '#' + cur);
+    });
+  }
+  window.addEventListener('scroll', updateTabs, { passive: true });
+  updateTabs();
+</script>
+</body>
+</html>
