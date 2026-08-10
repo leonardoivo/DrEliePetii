@@ -1,0 +1,8 @@
+/* ===== Generic template styles for the "entrevista" post type (jornais/tv/podcast) ===== */
+
+.pod-card { background:white; border-radius:8px; box-shadow:0 4px 18px rgba(0,0,0,.07); transition:transform .2s,box-shadow .2s; overflow:hidden; }
+.pod-card:hover { transform:translateY(-5px); box-shadow:0 16px 40px rgba(0,0,0,.12); }
+.pod-cover { width:100%; aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:3.5rem; }
+.stream-btn { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:20px; font-size:.72rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; transition:opacity .2s; text-decoration:none; }
+.stream-btn:hover { opacity:.8; }
+.filter-btn.active { background:var(--navy); color:white; }

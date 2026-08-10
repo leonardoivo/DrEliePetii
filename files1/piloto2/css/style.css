@@ -1,0 +1,33 @@
+/* ===== Base styles shared across pages ===== */
+
+.nav-item { position:relative; }
+.nav-link svg { width:12px; height:12px; transition:transform .2s; }
+.nav-item:hover > .nav-link svg { transform:rotate(180deg); }
+.nav-item:hover > .dropdown { display:block; }
+.dropdown a:last-child { border-bottom:none; }
+#mobile-menu { display:none; position:fixed; inset:0; z-index:200; background:white; overflow-y:auto; padding:80px 0 40px; }
+#mobile-menu.open { display:block; }
+.mob-sub.open { display:block; }
+footer { background:var(--navy); color:#c8d1e0; }
+.reveal.visible { opacity:1; transform:none; }
+h1, h2, h3, h4 { font-family:"Playfair Display",serif; }
+.nav-link:hover, .nav-link.active { color:var(--gold); }
+.mob-sub a.active { color:var(--gold); font-weight:700; }
+.breadcrumb a { color:var(--gold); }
+.tab-link { padding:12px 22px; font-size:.82rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; border-bottom:3px solid transparent; color:#9ca3af; transition:color .2s,border-color .2s; white-space:nowrap; }
+.tab-link:hover { color:var(--navy); }
+.tab-link.active { color:var(--gold); border-bottom-color:var(--gold); }
+h1, h2, h3 { font-family:"Playfair Display",serif; }
+.tag { display:inline-block; font-size:.68rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; }
+.thumb { position:relative; }
+.thumb-placeholder { width:100%; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center; font-size:3rem; }
+.play-btn { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
+.play-circle { width:56px; height:56px; background:rgba(255,255,255,.9); border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(0,0,0,.2); transition:transform .2s; }
+.card:hover .play-circle { transform:scale(1.1); }
+.dropdown-sep { height:1px; background:#f0ebe0; margin:4px 0; }
+.dropdown .book-link { font-size:.78rem; padding:8px 20px 8px 28px; color:#6b7280; }
+.dropdown .book-link:hover { color:var(--gold); background:#fdf8ee; }
+.inner-tab:hover { color:var(--navy); }
+.content-card { background:white; border-radius:8px; box-shadow:0 4px 20px rgba(0,0,0,.07); overflow:hidden; }
+.other-book-card { background:white; border-radius:6px; box-shadow:0 3px 14px rgba(0,0,0,.07); overflow:hidden; transition:transform .2s,box-shadow .2s; }
+.other-book-card:hover { transform:translateY(-4px); box-shadow:0 10px 30px rgba(0,0,0,.12); }

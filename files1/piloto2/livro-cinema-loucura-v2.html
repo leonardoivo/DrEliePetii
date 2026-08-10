@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="shortcut icon" href="img/DrElieLogo.ico"/>
+  <title>Cinema e Loucura | Elie Cheniaux</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/livro-cinema-loucura-v2.css">
+</head>
+<body>
+
+<!-- ══ NAV ══════════════════════════════════════════════════════ -->
+<nav id="main-nav" class="shadow-sm">
+  <div class="max-w-screen-xl mx-auto px-4 flex items-center justify-between">
+    <div class="flex items-center gap-3 flex-shrink-0 mr-6">
+     <img src="img/DrElieLogo.avif" alt="Logo" class="w-10 h-10 border-2 border-var(--gold)"/>
+      <a href="index.html" class="nav-logo text-xl py-4 font-bold">Elie Cheniaux</a>
+    </div>
+    <div class="hidden lg:flex items-center flex-wrap justify-end">
+      <div class="nav-item">
+        <a href="quem-sou-eu-biografia.html" class="nav-link">Quem sou eu<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        <div class="dropdown">
+          <a href="quem-sou-eu-biografia.html">Biografia</a>
+          <a href="BiPoLaB.html">Bipolab</a>
+          <a href="quem-sou-eu-curriculo.html">Currículo Lattes</a>
+          <a href="quem-sou-eu-discurso.html">Discurso de posse na AMRJ</a>
+          <a href="quem-sou-eu-memorial.html">Memorial</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="#" class="nav-link active">Livros<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        <div class="dropdown">
+          <a href="livro-cinema-loucura-v2.html" class="book-link active">Cinema e Loucura</a>
+          <a href="livro-fogo-cinzas-v2.html" class="book-link">Fogo & Cinzas</a>
+          <a href="livro-manual-psicopatologia-v2.html" class="book-link">Manual de Psicopatologia</a>
+          <a href="livro-antifacebook-v2.html" class="book-link">O Antifacebook</a>
+          <a href="livro-sindrome-pre-menstrual-v2.html" class="book-link">Síndrome Pré-Menstrual</a>
+          <a href="livro-woody-allen-v2.html" class="book-link">Woody Allen</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="index.html#artigos" class="nav-link">Artigos científicos</a></div>
+      <div class="nav-item">
+        <a href="entrevistas-jornais.html" class="nav-link">Entrevistas<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        <div class="dropdown">
+          <a href="entrevistas-jornais.html">Jornais</a>
+          <a href="entrevistas-tv.html">TV</a>
+          <a href="entrevistas-podcast.html">Podcast</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="palestras.html" class="nav-link">Palestras</a></div>
+         <!-- Encontros -->
+      <div class="nav-item">
+        <a href="#encontros" class="nav-link">Encontros especiais
+          <svg viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <div class="dropdown">
+          <a href="#fotos-encontros">Fotos</a>
+        </div>
+      </div>
+   <!-- Redes -->
+      <div class="nav-item">
+        <a href="#redes" class="nav-link">Redes Sociais
+          <svg viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <div class="dropdown">
+          <a href="https://facebook.com" target="_blank">Facebook</a>
+          <a href="https://instagram.com" target="_blank">Instagram</a>
+          <a href="https://youtube.com" target="_blank">YouTube</a>
+        </div>
+      </div>
+      
+            <!-- Blog -->
+      <div class="nav-item">
+        <a href="https://eliecheniaux.blogspot.com/" class="nav-link">Blog</a>
+      </div>
+
+            <!-- Outros textos -->
+      <div class="nav-item">
+        <a href="https://criticos.com.br/?p=12181&cat=4" class="nav-link">Outros textos</a>
+      </div>
+      <div class="nav-item"><a href="index.html#contato" class="nav-link">Contato</a></div>
+    </div>
+    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Abrir menu">
+      <span class="block w-6 h-0.5 bg-gray-700"></span>
+      <span class="block w-6 h-0.5 bg-gray-700"></span>
+      <span class="block w-6 h-0.5 bg-gray-700"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══ MOBILE MENU ═══════════════════════════════════════════════ -->
+<div id="mobile-menu">
+  <button id="close-menu" class="absolute top-5 right-6 text-3xl text-gray-600" aria-label="Fechar menu">&times;</button>
+  <div>
+    <div class="mob-link" onclick="toggleMob('mob-quem')">Quem sou eu ▾</div>
+    <div id="mob-quem" class="mob-sub">
+      <a href="quem-sou-eu-biografia.html">Biografia</a>
+      <a href="BiPoLaB.html">Bipolab</a>
+      <a href="quem-sou-eu-curriculo.html">Currículo Lattes</a>
+      <a href="quem-sou-eu-discurso.html">Discurso AMRJ</a>
+      <a href="quem-sou-eu-memorial.html">Memorial</a>
+    </div>
+  </div>
+  <div>
+    <div class="mob-link" onclick="toggleMob('mob-livros')">Livros ▾</div>
+    <div id="mob-livros" class="mob-sub open">
+      <a href="livro-cinema-loucura-v2.html">Cinema e Loucura</a>
+      <a href="livro-fogo-cinzas-v2.html">Fogo & Cinzas</a>
+      <a href="livro-manual-psicopatologia-v2.html">Manual de Psicopatologia</a>
+      <a href="livro-antifacebook-v2.html">O Antifacebook</a>
+      <a href="livro-sindrome-pre-menstrual-v2.html">Síndrome Pré-Menstrual</a>
+      <a href="livro-woody-allen-v2.html" class="active">Woody Allen</a>
+    </div>
+  </div>
+  <div><a class="mob-link" href="index.html#artigos">Artigos científicos</a></div>
+  <div>
+    <div class="mob-link" onclick="toggleMob('mob-entrevistas')">Entrevistas ▾</div>
+    <div id="mob-entrevistas" class="mob-sub">
+      <a href="entrevistas-jornais.html">Jornais</a>
+      <a href="entrevistas-tv.html">TV</a>
+      <a href="entrevistas-podcast.html">Podcast</a>
+    </div>
+  </div>
+  <div><a class="mob-link" href="palestras.html">Palestras</a></div>
+  <div><a class="mob-link" href="index.html#contato">Contato</a></div>
+</div>
+
+<!-- ══ HERO ══════════════════════════════════════════════════════ -->
+<section class="book-hero">
+  <div class="filmstrip"></div>
+  <div class="hero-deco hero-deco-1"></div>
+  <div class="hero-deco hero-deco-2"></div>
+  <div class="hero-deco hero-deco-3"></div>
+  <div class="max-w-screen-xl mx-auto px-6 py-20 relative z-10 w-full">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Cover -->
+      <div class="flex justify-center lg:justify-end order-2 lg:order-1">
+        <div class="book-cover-wrap">
+          <img src="img/Livro CINEMA E LOUCURA.jpg" alt="Capa do livro Cinema e Loucura" loading="eager"/>
+        </div>
+      </div>
+      <!-- Info -->
+      <div class="order-1 lg:order-2">
+        <div class="hero-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></svg>
+          Não-ficção acadêmica&nbsp;/&nbsp;Científica
+        </div>
+        <h1 class="hero-title text-5xl lg:text-6xl xl:text-7xl font-bold mb-3">Cinema e Loucura</h1>
+        <p class="hero-author mb-2">Elie Cheniaux, J. Landeira-Fernandez</p>
+        <div class="hero-divider"></div>
+        <p class="hero-tagline mb-10">
+        Conhecendo os Transtornos Mentais Através dos Filmes.
+        </p>
+        <div class="flex flex-wrap gap-4 mb-10">
+          <a href="#comprar" class="btn-primary">Comprar agora</a>
+          <a href="#sinopse" class="btn-outline">Ler sinopse</a>
+        </div>
+        <!-- Mini endorsement -->
+        <div class="flex items-center gap-3 text-sm text-gray-500">
+          <div class="flex -space-x-2">
+            <div class="w-8 h-8 rounded-full bg-red-100 border-2 border-white flex items-center justify-center text-xs">★</div>
+            <div class="w-8 h-8 rounded-full bg-rose-100 border-2 border-white flex items-center justify-center text-xs">★</div>
+            <div class="w-8 h-8 rounded-full bg-pink-100 border-2 border-white flex items-center justify-center text-xs">★</div>
+          </div>
+          <span>Prefácio de <strong style="color:var(--navy)">Ruy Castro</strong> · Escritor e biógrafo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STATS BAR ════════════════════════════════════════════════ -->
+<div class="stats-bar">
+  <div class="max-w-screen-xl mx-auto px-4 flex flex-wrap justify-center md:justify-start">
+    <div class="stat-pill">
+      <span class="stat-icon">🎭</span>
+      <div>
+        <span class="stat-label">Não-ficção acadêmica/científica</span>
+      </div>
+    </div>
+    <div class="stat-pill">
+      <span class="stat-icon">📅</span>
+      <div>
+        <span class="stat-label">Ano</span>
+        <span class="stat-value">2010</span>
+      </div>
+    </div>
+    <div class="stat-pill">
+      <span class="stat-icon">📖</span>
+      <div>
+        <span class="stat-label">Páginas</span>
+        <span class="stat-value">288</span>
+      </div>
+    </div>
+    <div class="stat-pill">
+      <span class="stat-icon">🏢</span>
+      <div>
+        <span class="stat-label">Editora</span>
+        <span class="stat-value">ARTMED EDITORA</span>
+      </div>
+    </div>
+    <div class="stat-pill hidden sm:flex">
+      <span class="stat-icon">🎬</span>
+      <div>
+        <span class="stat-label">Filmes analisados</span>
+        <span class="stat-value">+30 obras</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ INNER TAB NAV ════════════════════════════════════════════ -->
+<div class="inner-tab-bar">
+  <div class="max-w-screen-lg mx-auto px-4 flex overflow-x-auto">
+    <a href="#sinopse" class="inner-tab">Sinopse</a>
+    <a href="#prefacio" class="inner-tab">Prefácio</a>
+    <a href="#comprar" class="inner-tab">Onde Comprar</a>
+    <a href="#outros-livros" class="inner-tab">Outros Livros</a>
+  </div>
+</div>
+
+<!-- ══ SINOPSE ══════════════════════════════════════════════════ -->
+<section id="sinopse" class="py-24 bg-white">
+  <div class="max-w-screen-lg mx-auto px-6">
+    <div class="mb-14 reveal">
+      <span class="section-label">Sobre o livro</span>
+      <h2 class="section-heading text-4xl font-bold mb-5">Sinopse</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="grid lg:grid-cols-3 gap-12 items-start">
+      <!-- Text -->
+      <div class="lg:col-span-2 space-y-6 text-gray-600 leading-relaxed text-base reveal">
+        <p>
+          <em class="font-semibold text-gray-800">Cinema e Loucura</em> Neste livro surpreendente, os autores se propuseram a uma tarefa pioneira: usar
+personagens de filmes clássicos e modernos para auxiliar o leitor a compreender
+os mecanismos dos transtornos mentais, criando uma obra de interesse não
+apenas aos estudantes de saúde mental, mas a todos aqueles apaixonados por
+cinema.
+        </p>
+
+        <!-- Films grid -->
+        <div class="rounded-lg p-6 mt-4" style="background:var(--accent-warm);border-left:4px solid var(--accent);">
+          <p class="font-semibold text-sm mb-3" style="color:#7f1d1d;">Alguns filmes analisados na obra:</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="film-tag">A sombra do vulcão</span>
+            <span class="film-tag">As loucuras do Rei George</span>
+            <span class="film-tag">Contos proibidos do Marques de Sade</span>
+            <span class="film-tag">Freud, Além da Alma</span>
+            <span class="film-tag">Um Estranho no Ninho</span>
+            <span class="film-tag">Bicho de 7 cabeças</span>
+            <span class="film-tag">Amnesia</span>
+            <span class="film-tag">Um salto para felicidade</span>
+            <span class="film-tag">Memórias postumas</span>
+            <span class="film-tag">As filhas de Marvin</span>
+            <span class="film-tag">Meu nome é não é Johnny</span>
+            <span class="film-tag">+ outros</span>
+          </div>
+        </div>
+      </div>
+      <!-- Ficha técnica -->
+      <div class="reveal reveal-delay-2">
+        <div class="ficha-card p-6">
+          <h3 class="font-bold text-base mb-5" style="color:var(--navy)">Ficha Técnica</h3>
+          <div class="space-y-1">
+            <div class="ficha-row"><span class="font-bold text-gray-700 text-sm">Autor</span><span class="text-gray-500 text-sm">Elie Cheniaux, J. Landeira-Fernandez</span></div>
+            <div class="ficha-row"><span class="font-bold text-gray-700 text-sm">Editora</span><span class="text-gray-500 text-sm">Artmed Editora</span></div>
+            <div class="ficha-row"><span class="font-bold text-gray-700 text-sm">Ano</span><span class="text-gray-500 text-sm">2010</span></div>
+            <div class="ficha-row"><span class="font-bold text-gray-700 text-sm">Páginas</span><span class="text-gray-500 text-sm">288 p.</span></div>
+            <div class="ficha-row"><span class="font-bold text-gray-700 text-sm">Gênero</span><span class="text-gray-500 text-sm">Não-ficção acadêmica/Científica</span></div>
+            <div class="ficha-row"><span class="font-bold text-gray-700 text-sm">Idioma</span><span class="text-gray-500 text-sm">Português</span></div>
+            <div class="ficha-row"><span class="font-bold text-gray-700 text-sm">Formato</span><span class="text-gray-500 text-sm">Impresso</span></div>
+          </div>
+          <a href="#comprar" class="btn-primary w-full text-center block mt-6" style="padding:13px 24px;">Comprar agora</a>
+          <a href="#comprar" class="btn-outline w-full text-center block mt-3" style="padding:11px 24px;font-size:.78rem;">Ver todas as opções</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--══ PULL QUOTE ═══════════════════════════════════════════════
+<section class="pull-quote-section py-20">
+  <div class="max-w-screen-lg mx-auto px-6 relative z-10 reveal">
+    <span class="pull-quote-mark">"</span>
+    <blockquote class="pull-quote-text mt-4 mb-8">
+      O cinema não inventa a loucura — ele a espelha. E é nesse espelho muitas vezes distorcido que a sociedade aprende a temer, a compadecer ou a compreender aqueles que vivem à margem da normalidade psíquica.
+    </blockquote>
+    <p class="pull-quote-attr">— Elie Cheniaux, <em>Cinema e Loucura</em></p>
+  </div>
+</section>-->
+
+<!-- ══ PREFÁCIO ════════════════════════════════════════════════ -->
+<section id="prefacio" class="py-24" style="background:linear-gradient(135deg,#fff9f9 0%,#fff 60%,#fef2f2 100%);">
+  <div class="max-w-screen-lg mx-auto px-6">
+    <div class="mb-14 reveal">
+      <span class="section-label">Apresentação</span>
+      <h2 class="section-heading text-4xl font-bold mb-5">Prefácio</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="prefacio-card flex flex-col md:flex-row reveal">
+      <div class="prefacio-stripe" style="background:linear-gradient(180deg,var(--accent),#b91c1c);"></div>
+      <div class="flex-1 p-8 lg:p-12">
+        <!-- Prefaciador -->
+        <div class="flex items-center gap-4 mb-8 pb-6 border-b border-gray-100">
+          <div class="prefacist-avatar">
+            <span style="font-size:1.4rem;">✍️</span>
+          </div>
+          <div>
+            <div class="font-bold text-lg" style="color:var(--navy)">Ruy Castro</div>
+            <div class="text-sm text-gray-400">Escritor, biógrafo e jornalista</div>
+            <div class="text-xs mt-1" style="color:var(--accent)">Autor de <em>Estrela Solitária</em> e <em>Chega de Saudade</em></div>
+          </div>
+        </div>
+        <!-- Quote -->
+        <div class="mb-8 overflow-hidden">
+          <span class="open-quote">"</span>
+          <p class="excerpt-text">
+Exceto pelos filmes de Shirley Temple, Rin-Tin-Tin e, possivelmente, Xuxa, o cinema sempre foi
+o veículo por excelência dos transtornos mentais – cognitivos, psicóticos, dissociativos, sexuais –,
+
+sem falar nos transtornos relacionados a substâncias (álcool, anfetaminas, alucinógenos, opioi-
+des) e outros que tiram o personagem da “norma” e o tornam tão atraente (ou assustador) para
+
+a plateia.
+Mas, não sendo o cinema uma ciência exata, como saber se, por exemplo, Norman Bates,
+o protagonista de Psicose, é um psicopata ou uma vítima de transtorno de identidade? Como
+identificar as inúmeras parafilias exploradas em filmes como Lolita, Janela indiscreta e Tudo
+que você sempre quis saber sobre sexo? E como classificar o comportamento de Glenn Close em
+Atração fatal? (Uma dica: ela era borderline.)
+Neste surpreendente Cinema e loucura – Conhecendo os transtornos mentais através dos
+filmes1
+, os professores Jesus Landeira-Fernandez (PUC-Rio e UNESA) e Elie Cheniaux (UERJ e
+
+UFRJ) propuseram-se uma tarefa pioneira: usar personagens de 184 filmes clássicos e moder-
+nos, inclusive brasileiros, para ensinar ao leitor o mecanismo desses desvios que conduzem a
+
+tantos sofrimentos concretos.
+Pela primeira vez, os filmes de Alfred Hitchcock, Billy Wilder, Woody Allen, Stanley Kubrick,
+Martin Scorsese, Roman Polanski e outros grandes diretores são analisados à luz – ou às trevas
+– das doenças mentais. Agora você vai saber por que nós somos loucos por eles.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="livros-prefacios.html" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider px-5 py-3 rounded" style="background:var(--navy);color:white;text-decoration:none;">
+            Ver todos os prefácios
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ONDE COMPRAR ══════════════════════════════════════════════ -->
+<section id="comprar" class="py-24 bg-white">
+  <div class="max-w-screen-lg mx-auto px-6">
+    <div class="mb-14 reveal">
+      <span class="section-label">Adquira o livro</span>
+      <h2 class="section-heading text-4xl font-bold mb-5">Onde Comprar</h2>
+      <div class="section-line"></div>
+      <p class="text-gray-500 mt-4 text-sm">Disponível nas principais livrarias online e físicas do Brasil.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
+      <!-- Amazon -->
+      <a href="https://www.amazon.com.br/Cinema-Loucura-Conhecendo-Transtornos-Mentais/dp/8536321318" target="_blank" rel="noopener" class="buy-card">
+        <div class="buy-card-header">
+          <div class="buy-card-icon" style="background:#fff3cd;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M20.665 3.717l-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192L8.232 17.266v3.957c0 .747.563.985 1.07.455l2.968-2.924 5.815 4.317c1.07.586 1.84.284 2.108-.993l3.822-18.044c.39-1.567-.597-2.275-1.35-1.317z" fill="#ff9900"/></svg>
+          </div>
+          <span class="buy-tag" style="background:#fff3cd;color:#92400e;">Mais popular</span>
+          <div class="font-bold text-base mb-1" style="color:var(--navy)">Amazon Brasil</div>
+          <div class="text-xs text-gray-400">Entrega rápida · Frete grátis Prime</div>
+        </div>
+        <div class="buy-card-footer">
+          <span class="w-full block text-center text-xs font-bold uppercase tracking-wider py-2.5 rounded" style="background:#ff9900;color:white;">Comprar na Amazon →</span>
+        </div>
+      </a>
+      <!-- Kindle -->
+      <a href="https://www.amazon.com.br/Cinema-loucura-Conhecendo-transtornos-mentais-ebook/dp/B01690SVEG/ref=tmm_kin_swatch_0" target="_blank" rel="noopener" class="buy-card">
+        <div class="buy-card-header">
+          <div class="buy-card-icon" style="background:#fdf2f8;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9d174d" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>
+          </div>
+          <span class="buy-tag" style="background:#fdf2f8;color:#831843;">Versão digital</span>
+          <div class="font-bold text-base mb-1" style="color:var(--navy)">Kindle / eBook</div>
+          <div class="text-xs text-gray-400">Leitura imediata · Qualquer dispositivo</div>
+        </div>
+        <div class="buy-card-footer">
+          <span class="w-full block text-center text-xs font-bold uppercase tracking-wider py-2.5 rounded" style="background:#9d174d;color:white;">Baixar eBook →</span>
+        </div>
+      </a>
+      <!-- Loja Grupo A -->
+      <a href="https://loja.grupoa.com.br/marcas/artmed?utm_feeditemid=&utm_device=c&utm_term=&utm_source=google&utm_medium=cpc&utm_campaign=google_publishing_pmax_volta_as_aulas_2026&utm_group=&utm_content=&hsa_cam=23641325660&hsa_grp=&hsa_mt=&hsa_src=x&hsa_ad=&hsa_acc=9260032853&hsa_net=adwords&hsa_kw=&hsa_tgt=&hsa_ver=3&gad_source=1&gad_campaignid=23646072388&gbraid=0AAAAADyHXLSFrpSly4c4CTySNoomolIOP&gclid=Cj0KCQjwve7NBhC-ARIsALZy9HUgYhgP3uXTCw7NKKeazBwIPIrGz57L6VOnzh2S8vNf_s0kHUTtrLoaAjAkEALw_wcB#&search-term=cheniaux" target="_blank" rel="noopener" class="buy-card">
+        <div class="buy-card-header">
+          <div class="buy-card-icon" style="background:#f0fdf4;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+          </div>
+          <span class="buy-tag" style="background:#f0fdf4;color:#166534;">Livraria</span>
+          <div class="font-bold text-base mb-1" style="color:var(--navy)"> Grupo A+ Educação</div>
+          <div class="text-xs text-gray-400">Livraria tradicional · Entrega nacional</div>
+        </div>
+        <div class="buy-card-footer">
+          <span class="w-full block text-center text-xs font-bold uppercase tracking-wider py-2.5 rounded" style="background:#166534;color:white;">Comprar →</span>
+        </div>
+      </a> 
+      <!-- Livraria da Travessa-->
+      <a href="https://www.travessa.com.br/cinema-e-loucura-conhecendo-os-transtornos-mentais-atraves-dos-filmes/artigo/f9f1b997-c7d9-4765-9c4c-e6d90e134f28" target="_blank" rel="noopener" class="buy-card">
+        <div class="buy-card-header">
+          <div class="buy-card-icon" style="background:#fdf4ff;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7e22ce" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <span class="buy-tag" style="background:#f0fdf4;color:#166534;">Livraria</span>
+          <div class="font-bold text-base mb-1" style="color:var(--navy)">Livraria da Travessa</div>
+          <div class="text-xs text-gray-400">A maior rede de livrarias do Rio de Janeiro · Melhores preços</div>
+        </div>
+        <div class="buy-card-footer">
+          <span class="w-full block text-center text-xs font-bold uppercase tracking-wider py-2.5 rounded" style="background:#7e22ce;color:white;">Buscar →</span>
+        </div>
+      </a>
+            <!-- Livraria Martins Fontes-->
+      <a href="https://www.martinsfontespaulista.com.br/cinema-e-loucura-624867/p" target="_blank" rel="noopener" class="buy-card">
+        <div class="buy-card-header">
+          <div class="buy-card-icon" style="background:#fdf4ff;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7e22ce" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <span class="buy-tag" style="background:#f0fdf4;color:#166534;">Livraria</span>
+          <div class="font-bold text-base mb-1" style="color:var(--navy)">Livraria Martins Fontes</div>
+          <div class="text-xs text-gray-400">Livros nacionais e importados, com mais de 700 mil títulos.</div>
+        </div>
+        <div class="buy-card-footer">
+          <span class="w-full block text-center text-xs font-bold uppercase tracking-wider py-2.5 rounded" style="background:#7e22ce;color:white;">Buscar →</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Editora Rubio banner -->
+    <div class="mt-14 rounded-xl p-8 flex flex-col md:flex-row items-center gap-6 justify-between reveal" style="background:linear-gradient(135deg,#fff9f9,#fee2e2);">
+      <div>
+        <h3 class="font-bold text-lg mb-1" style="color:var(--navy);font-family:'Playfair Display',serif;">Artmed Editora</h3>
+        <p class="text-sm text-gray-500">Publicado pela Editora Rubio — referência em publicações de saúde no Brasil. Consulte também o catálogo completo da editora.</p>
+      </div>
+      <a href="https://loja.grupoa.com.br/cinema-e-loucura-9788536321318-p992338" target="_blank" rel="noopener" class="btn-outline flex-shrink-0" style="border-color:var(--accent);color:var(--accent);text-decoration:none;">Visitar editora</a>
+    </div>
+
+    <!-- Universidades CTA -->
+    <div class="mt-6 rounded-xl p-8 flex flex-col md:flex-row items-center gap-6 justify-between reveal" style="background:linear-gradient(135deg,#f5f5f0,#fff);">
+      <div>
+        <h3 class="font-bold text-lg mb-1" style="color:var(--navy);font-family:'Playfair Display',serif;">Indicação bibliográfica</h3>
+        <p class="text-sm text-gray-500">Professores que desejam adotar <em>Cinema e Loucura</em> em disciplinas de saúde mental, psicologia ou cinema podem entrar em contato com o autor.</p>
+      </div>
+      <a href="index.html#contato" class="btn-outline flex-shrink-0" style="text-decoration:none;">Entrar em contato</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ OUTROS LIVROS ════════════════════════════════════════════ -->
+<section id="outros-livros" class="py-24" style="background:linear-gradient(135deg,#f5f5f0 0%,#fff 100%);">
+  <div class="max-w-screen-lg mx-auto px-6">
+    <div class="text-center mb-14 reveal">
+      <span class="section-label" style="display:block;text-align:center;">Biblioteca do autor</span>
+      <h2 class="section-heading text-3xl font-bold mb-4">Outros Livros de Elie Cheniaux</h2>
+      <div class="section-line mx-auto"></div>
+    </div>
+    <div class="books-scroll reveal">
+      <a href="livro-antifacebook.html" class="book-thumb">
+        <img src="img/Livro O ANTIFACEBOOK.jpg" alt="O Antifacebook"/>
+        <div class="book-thumb-title">O Antifacebook</div>
+      </a>
+      <a href="livro-fogo-cinzas.html" class="book-thumb">
+        <img src="img/Livro Fogo e Cinzas -1.jpg" alt="Fogo & Cinzas"/>
+        <div class="book-thumb-title">Fogo & Cinzas</div>
+      </a>
+      <a href="livro-manual-psicopatologia.html" class="book-thumb">
+        <img src="img/LivroMANUAL.jpg" alt="Manual de Psicopatologia"/>
+        <div class="book-thumb-title">Manual de Psicopatologia</div>
+      </a>
+      <a href="livro-sindrome-pre-menstrual.html" class="book-thumb">
+        <img src="img/Livro SÍNDROME PRÉ-MENSTRUAL.jpg" alt="Síndrome Pré-Menstrual"/>
+        <div class="book-thumb-title">Síndrome Pré-Menstrual</div>
+      </a>
+      <a href="livro-woody-allen.html" class="book-thumb">
+        <img src="img/Livro WOODY ALLEN.jpg" alt="Woody Allen"/>
+        <div class="book-thumb-title">Woody Allen e a Psicanálise</div>
+      </a>
+      <a href="livros-capas.html" class="book-thumb" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:180px;background:linear-gradient(135deg,#1a4427,#2d6a4f);">
+        <div style="font-size:2rem;margin-bottom:8px;">📚</div>
+        <div class="book-thumb-title" style="color:white;text-align:center;font-size:.8rem;">Ver todos os livros</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════════════════════════ -->
+<footer class="py-12">
+  <div class="max-w-screen-lg mx-auto px-6 text-center">
+    <img src="img/DrElieLogo.avif" alt="Logo" class="w-12 h-12 rounded-full border-2 mx-auto mb-4" style="border-color:var(--gold);opacity:.8;"/>
+    <p class="font-bold text-2xl mb-1" style="font-family:'Playfair Display',serif;color:var(--gold-light)">Elie Cheniaux</p>
+    <p class="text-sm mb-2" style="color:#a8d5b5">Psiquiatra &nbsp;·&nbsp; Professor universitário &nbsp;·&nbsp; Escritor</p>
+    <div class="footer-divider"></div>
+    <div class="flex justify-center gap-6 text-sm mb-6 flex-wrap mt-4" style="color:#c8e6c9;">
+      <a href="index.html" class="hover:text-white transition-colors" style="text-decoration:none;">Início</a>
+      <a href="quem-sou-eu-biografia.html" class="hover:text-white transition-colors" style="text-decoration:none;">Biografia</a>
+      <a href="livros-capas.html" class="hover:text-white transition-colors" style="text-decoration:none;">Livros</a>
+      <a href="index.html#artigos" class="hover:text-white transition-colors" style="text-decoration:none;">Artigos</a>
+      <a href="entrevistas-jornais.html" class="hover:text-white transition-colors" style="text-decoration:none;">Entrevistas</a>
+      <a href="index.html#contato" class="hover:text-white transition-colors" style="text-decoration:none;">Contato</a>
+    </div>
+    <p class="text-xs" style="color:#6da87d;">© 2026 Elie Cheniaux. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<!-- ══ SCRIPTS ═══════════════════════════════════════════════════ -->
+<script src="js/script.js"></script>
+<script src="js/livro-cinema-loucura-v2.js"></script>
+</body>
+</html>

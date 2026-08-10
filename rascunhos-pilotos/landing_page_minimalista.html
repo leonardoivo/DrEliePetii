@@ -1,0 +1,385 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap');
+
+  .page-wrap {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--color-text-primary);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 2rem;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    background: var(--color-background-primary);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    letter-spacing: -0.5px;
+  }
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--color-text-primary); }
+
+  .hero {
+    min-height: 88vh;
+    display: flex;
+    align-items: center;
+    padding: 4rem 2rem;
+    background: var(--color-background-primary);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-inner {
+    max-width: 680px;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    border: 0.5px solid var(--color-border-secondary);
+    padding: 4px 12px;
+    border-radius: 99px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin: 0 0 1.5rem;
+    color: var(--color-text-primary);
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--color-text-secondary);
+  }
+  .hero-sub {
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--color-text-secondary);
+    max-width: 480px;
+    margin: 0 0 2.5rem;
+  }
+  .btn-primary {
+    display: inline-block;
+    padding: 12px 28px;
+    background: var(--color-text-primary);
+    color: var(--color-background-primary);
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 99px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.8; }
+  .btn-ghost {
+    display: inline-block;
+    padding: 12px 28px;
+    background: transparent;
+    color: var(--color-text-primary);
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 99px;
+    border: 0.5px solid var(--color-border-secondary);
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-left: 12px;
+    text-decoration: none;
+  }
+  .btn-ghost:hover { background: var(--color-background-secondary); }
+
+  .hero-deco {
+    position: absolute;
+    right: -80px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 420px;
+    height: 420px;
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero-deco::after {
+    content: '';
+    position: absolute;
+    inset: 40px;
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: 50%;
+  }
+
+  .divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 0; }
+
+  .section { padding: 5rem 2rem; }
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    margin: 0 0 1rem;
+    color: var(--color-text-primary);
+    max-width: 560px;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+    margin-top: 3rem;
+  }
+  .about-text p {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--color-text-secondary);
+    margin: 0 0 1rem;
+  }
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .stat-card {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-lg);
+    padding: 1.25rem;
+  }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem;
+    font-weight: 400;
+    letter-spacing: -1px;
+    color: var(--color-text-primary);
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    margin-top: 3rem;
+    background: var(--color-border-tertiary);
+  }
+  .service-card {
+    background: var(--color-background-primary);
+    padding: 1.75rem 1.5rem;
+    transition: background 0.2s;
+  }
+  .service-card:hover { background: var(--color-background-secondary); }
+  .service-icon {
+    width: 36px;
+    height: 36px;
+    border: 0.5px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 16px;
+  }
+  .service-card h3 {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0 0 8px;
+    color: var(--color-text-primary);
+  }
+  .service-card p {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .contact-section {
+    background: var(--color-background-secondary);
+    border-top: 0.5px solid var(--color-border-tertiary);
+  }
+  .contact-inner {
+    max-width: 600px;
+  }
+  .contact-form {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 11px 14px;
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-md);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--color-text-primary);
+    box-sizing: border-box;
+  }
+  .contact-form textarea { resize: vertical; min-height: 100px; }
+  .form-row { display: flex; gap: 12px; }
+  .form-row input { flex: 1; }
+
+  footer {
+    padding: 1.5rem 2rem;
+    border-top: 0.5px solid var(--color-border-tertiary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer p {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+</style>
+
+<div class="page-wrap">
+  <nav class="nav">
+    <span class="nav-logo">Studio.</span>
+    <ul class="nav-links">
+      <li><a href="#">Sobre</a></li>
+      <li><a href="#">Serviços</a></li>
+      <li><a href="#">Contato</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="hero-tag">Design &amp; Tecnologia</span>
+      <h1>Criamos experiências <em>digitais</em> que importam.</h1>
+      <p class="hero-sub">Transformamos ideias em produtos que as pessoas amam usar. Do conceito ao lançamento, com atenção a cada detalhe.</p>
+      <a class="btn-primary" href="#">Fale conosco</a>
+      <a class="btn-ghost" href="#">Ver trabalhos</a>
+    </div>
+    <div class="hero-deco"></div>
+  </section>
+
+  <hr class="divider">
+
+  <section class="section">
+    <p class="section-label">Sobre nós</p>
+    <h2 class="section-title">Uma equipe pequena com um impacto grande.</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Somos um estúdio independente focado em design de produto e desenvolvimento web. Acreditamos que o bom design é invisível — ele simplesmente funciona.</p>
+        <p>Desde 2018 ajudamos startups e empresas a construir produtos digitais que crescem junto com seus usuários.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <span class="stat-num">80+</span>
+          <span class="stat-label">Projetos entregues</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">6</span>
+          <span class="stat-label">Anos de experiência</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">12</span>
+          <span class="stat-label">Países atendidos</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">98%</span>
+          <span class="stat-label">Clientes satisfeitos</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section class="section">
+    <p class="section-label">Serviços</p>
+    <h2 class="section-title">O que fazemos bem feito.</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">✦</div>
+        <h3>Design de produto</h3>
+        <p>Interfaces intuitivas centradas na experiência do usuário real.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">◈</div>
+        <h3>Desenvolvimento web</h3>
+        <p>Código limpo, performático e escalável para a web moderna.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">◎</div>
+        <h3>Identidade visual</h3>
+        <p>Marcas memoráveis que comunicam o que você representa.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⬡</div>
+        <h3>Estratégia digital</h3>
+        <p>Decisões baseadas em dados para crescer de forma sustentável.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section class="section contact-section">
+    <div class="contact-inner">
+      <p class="section-label">Contato</p>
+      <h2 class="section-title">Vamos conversar sobre seu projeto.</h2>
+      <div class="contact-form">
+        <div class="form-row">
+          <input type="text" placeholder="Seu nome">
+          <input type="email" placeholder="E-mail">
+        </div>
+        <input type="text" placeholder="Assunto">
+        <textarea placeholder="Conte um pouco sobre o que você precisa..."></textarea>
+        <div>
+          <button class="btn-primary" onclick="alert('Mensagem enviada!')">Enviar mensagem</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Studio. Todos os direitos reservados.</p>
+    <p>Rio de Janeiro, BR</p>
+  </footer>
+</div>

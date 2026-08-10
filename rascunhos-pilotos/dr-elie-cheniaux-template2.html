@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seu Nome — Autor & Escritor</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green-dark:  #1b4332;
+      --green-mid:   #2d6a4f;
+      --green-light: #52b788;
+      --green-pale:  #b7e4c7;
+      --gold:        #c9a84c;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Jost', sans-serif; background: #f8faf8; color: #1a1a1a; overflow-x: hidden; }
+
+    /* ─── SCROLLBAR ─────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #e8f5e9; }
+    ::-webkit-scrollbar-thumb { background: var(--green-mid); border-radius: 3px; }
+
+    /* ─── SIDEBAR ───────────────────────────────── */
+    #sidebar {
+      position: fixed; top: 0; left: 0; height: 100vh; width: 280px; z-index: 100;
+      background: linear-gradient(180deg, var(--green-dark) 0%, var(--green-mid) 55%, var(--green-light) 100%);
+      overflow-y: auto; overflow-x: hidden;
+      transition: transform .35s cubic-bezier(.4,0,.2,1);
+      display: flex; flex-direction: column;
+    }
+    #sidebar.hidden-mobile { transform: translateX(-100%); }
+
+    /* logo area */
+    .sidebar-logo {
+      padding: 36px 24px 24px;
+      border-bottom: 1px solid rgba(255,255,255,.15);
+    }
+    .sidebar-logo .avatar {
+      width: 72px; height: 72px; border-radius: 50%;
+      border: 2px solid rgba(255,255,255,.5);
+      background: rgba(255,255,255,.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; color: rgba(255,255,255,.8);
+      margin-bottom: 12px;
+    }
+    .sidebar-logo h1 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: #fff; font-weight: 600; line-height: 1.2; }
+    .sidebar-logo p  { font-size: .7rem; color: rgba(255,255,255,.6); letter-spacing: .12em; text-transform: uppercase; margin-top: 4px; }
+
+    /* nav */
+    nav { flex: 1; padding: 8px 0 24px; }
+    .nav-item { position: relative; }
+    .nav-link {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 24px; color: rgba(255,255,255,.88);
+      font-size: .82rem; font-weight: 500; letter-spacing: .04em;
+      cursor: pointer; transition: background .2s, color .2s;
+      text-decoration: none; border: none; background: none; width: 100%; text-align: left;
+    }
+    .nav-link:hover, .nav-link.active { background: rgba(255,255,255,.15); color: #fff; }
+    .nav-link .arrow { font-size: .65rem; transition: transform .25s; }
+    .nav-link.open .arrow { transform: rotate(90deg); }
+
+    .submenu { display: none; background: rgba(0,0,0,.18); }
+    .submenu.open { display: block; }
+    .submenu a {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 24px 8px 36px; color: rgba(255,255,255,.75);
+      font-size: .78rem; text-decoration: none; transition: color .2s, background .2s;
+    }
+    .submenu a:hover { color: #fff; background: rgba(255,255,255,.1); }
+    .submenu a::before { content: '›'; font-size: 1rem; color: var(--green-pale); }
+
+    .nav-separator { height: 1px; background: rgba(255,255,255,.12); margin: 6px 24px; }
+
+    /* ─── OVERLAY ───────────────────────────────── */
+    #overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 90;
+    }
+    #overlay.show { display: block; }
+
+    /* ─── HAMBURGER ─────────────────────────────── */
+    #hamburger {
+      position: fixed; top: 16px; left: 16px; z-index: 110;
+      background: var(--green-dark); color: #fff; border: none;
+      width: 44px; height: 44px; border-radius: 8px;
+      display: none; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1.2rem; box-shadow: 0 2px 12px rgba(0,0,0,.3);
+    }
+
+    /* ─── MAIN CONTENT ──────────────────────────── */
+    #main { margin-left: 280px; min-height: 100vh; transition: margin .35s; }
+
+    /* ─── SECTIONS ──────────────────────────────── */
+    .section { display: none; animation: fadeIn .4s ease; }
+    .section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ─── HERO ──────────────────────────────────── */
+    #hero-section {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 50%, #74c69d 100%);
+      position: relative; overflow: hidden;
+      display: flex; align-items: center;
+    }
+    #hero-section::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(255,255,255,.06) 0%, transparent 70%);
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 900px; margin: 0 auto; padding: 80px 48px;
+    }
+    .hero-tag {
+      display: inline-block; font-size: .7rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--green-pale); border: 1px solid rgba(183,228,199,.4);
+      padding: 5px 14px; border-radius: 20px; margin-bottom: 28px;
+    }
+    .hero-inner h2 {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 6vw, 5rem);
+      color: #fff; font-weight: 300; line-height: 1.1; margin-bottom: 20px;
+    }
+    .hero-inner h2 em { font-style: italic; color: var(--green-pale); }
+    .hero-inner p {
+      font-size: 1.05rem; color: rgba(255,255,255,.75); max-width: 520px;
+      line-height: 1.8; margin-bottom: 40px;
+    }
+    .hero-cta {
+      display: inline-flex; gap: 16px; flex-wrap: wrap;
+    }
+    .btn-primary {
+      padding: 13px 32px; background: #fff; color: var(--green-dark);
+      font-size: .85rem; font-weight: 600; letter-spacing: .06em;
+      border-radius: 4px; text-decoration: none; transition: all .2s;
+    }
+    .btn-primary:hover { background: var(--green-pale); }
+    .btn-outline {
+      padding: 13px 32px; border: 1px solid rgba(255,255,255,.5); color: #fff;
+      font-size: .85rem; font-weight: 400; letter-spacing: .06em;
+      border-radius: 4px; text-decoration: none; transition: all .2s;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,.1); border-color: #fff; }
+
+    .hero-deco {
+      position: absolute; right: 48px; top: 50%; transform: translateY(-50%);
+      width: 300px; height: 300px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.12);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-deco::before {
+      content: ''; position: absolute;
+      width: 220px; height: 220px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .hero-deco .photo-placeholder {
+      width: 160px; height: 160px; border-radius: 50%;
+      background: rgba(255,255,255,.12); border: 2px solid rgba(255,255,255,.3);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.6); font-size: .7rem; text-align: center; gap: 8px;
+      cursor: pointer;
+    }
+    .hero-deco .photo-placeholder span { font-size: 2rem; }
+
+    /* ─── CARDS GRID ────────────────────────────── */
+    .cards-grid {
+      padding: 64px 48px; display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px;
+    }
+    .card {
+      background: #fff; border-radius: 10px; padding: 28px 24px;
+      border: 1px solid #e0ede4; cursor: pointer;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .card:hover {
+      transform: translateY(-4px); box-shadow: 0 12px 32px rgba(45,106,79,.15);
+      border-color: var(--green-light);
+    }
+    .card-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--green-dark), var(--green-light));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--green-dark); }
+    .card p  { font-size: .78rem; color: #666; line-height: 1.6; }
+
+    /* ─── INNER PAGE ────────────────────────────── */
+    .page-hero {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
+      padding: 60px 48px 50px; position: relative; overflow: hidden;
+    }
+    .page-hero::after {
+      content: ''; position: absolute; right: -60px; top: -60px;
+      width: 300px; height: 300px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .breadcrumb {
+      font-size: .72rem; color: rgba(255,255,255,.55); letter-spacing: .1em;
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .breadcrumb button { background: none; border: none; color: rgba(255,255,255,.55); cursor: pointer; }
+    .breadcrumb button:hover { color: rgba(255,255,255,.9); }
+    .page-hero h2 {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 4vw, 3rem);
+      color: #fff; font-weight: 300;
+    }
+    .page-hero p { color: rgba(255,255,255,.65); margin-top: 8px; font-size: .9rem; }
+
+    .page-body { padding: 48px; }
+
+    /* ─── BIOGRAPHY ─────────────────────────────── */
+    .bio-grid { display: grid; grid-template-columns: 1fr 320px; gap: 40px; align-items: start; }
+    .bio-photo-wrap {
+      width: 200px; height: 200px; border-radius: 50%;
+      border: 3px solid var(--green-light);
+      background: #e8f5e9;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem; color: var(--green-mid); cursor: pointer;
+      margin: 0 auto 32px; overflow: hidden;
+    }
+    .bio-photo-wrap img { width: 100%; height: 100%; object-fit: cover; }
+
+    .bio-field {
+      border-bottom: 1px solid #e0ede4; padding-bottom: 24px; margin-bottom: 24px;
+    }
+    .bio-field h4 {
+      font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--green-mid); margin-bottom: 10px; font-weight: 600;
+    }
+    .bio-field p, .bio-field div {
+      font-size: .9rem; color: #444; line-height: 1.8;
+      min-height: 28px;
+    }
+    [contenteditable="true"] {
+      outline: none; border-radius: 4px; padding: 2px 4px; transition: background .2s;
+    }
+    [contenteditable="true"]:focus { background: rgba(82,183,136,.08); }
+    [contenteditable="true"]:empty::before {
+      content: attr(data-ph); color: #bbb; font-style: italic;
+    }
+
+    .bio-sidebar-card {
+      background: #f2faf5; border: 1px solid #d0eadb; border-radius: 10px;
+      padding: 24px; margin-bottom: 20px;
+    }
+    .bio-sidebar-card h4 {
+      font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--green-dark); font-weight: 600; margin-bottom: 14px;
+      padding-bottom: 10px; border-bottom: 1px solid #d0eadb;
+    }
+    .info-row { display: flex; gap: 10px; margin-bottom: 10px; font-size: .82rem; color: #444; }
+    .info-row .label { color: var(--green-mid); font-weight: 500; min-width: 90px; flex-shrink: 0; }
+
+    /* Social icons row */
+    .social-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+    .social-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: 20px; font-size: .75rem; font-weight: 500;
+      text-decoration: none; border: 1px solid;
+      transition: all .2s;
+    }
+
+    /* ─── GENERIC CONTENT ───────────────────────── */
+    .content-placeholder {
+      background: #fff; border: 1px dashed #c8e6c9; border-radius: 10px;
+      padding: 56px 40px; text-align: center; color: #888;
+    }
+    .content-placeholder .icon { font-size: 3rem; margin-bottom: 16px; }
+    .content-placeholder h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--green-dark); margin-bottom: 8px; }
+    .content-placeholder p { font-size: .85rem; line-height: 1.7; }
+
+    /* ─── CONTACT ───────────────────────────────── */
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+    .contact-card {
+      background: #fff; border: 1px solid #e0ede4; border-radius: 10px;
+      padding: 28px 24px; display: flex; flex-direction: column; gap: 12px;
+    }
+    .contact-card .c-icon {
+      width: 48px; height: 48px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--green-dark), var(--green-light));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+    .contact-card h4 { font-weight: 600; color: var(--green-dark); font-size: .9rem; }
+    .contact-card p  { font-size: .83rem; color: #555; line-height: 1.6; }
+
+    /* ─── FOOTER ────────────────────────────────── */
+    footer {
+      background: var(--green-dark); color: rgba(255,255,255,.55);
+      text-align: center; padding: 28px 48px; font-size: .78rem;
+      letter-spacing: .06em;
+    }
+    footer strong { color: rgba(255,255,255,.85); }
+
+    /* ─── RESPONSIVE ────────────────────────────── */
+    @media (max-width: 900px) {
+      .bio-grid { grid-template-columns: 1fr; }
+      .hero-deco { display: none; }
+    }
+    @media (max-width: 768px) {
+      #sidebar { transform: translateX(-100%); }
+      #sidebar.open { transform: translateX(0); }
+      #hamburger { display: flex; }
+      #main { margin-left: 0; }
+      .hero-inner, .page-hero, .page-body, .cards-grid { padding-left: 24px; padding-right: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ SIDEBAR -->
+<aside id="sidebar" class="hidden-mobile">
+  <div class="sidebar-logo">
+    <div class="avatar">✍️</div>
+    <h1>Seu Nome Completo</h1>
+    <p>Escritor · Acadêmico</p>
+  </div>
+
+  <nav id="nav">
+    <!-- Quem sou eu -->
+    <div class="nav-item">
+      <button class="nav-link has-sub" data-target="sub-quem">
+        <span>👤 Quem sou eu</span><span class="arrow">›</span>
+      </button>
+      <div class="submenu" id="sub-quem">
+        <a href="#" onclick="showSection('bio')">Biografia</a>
+        <a href="#" onclick="showSection('curriculo')">Currículo Lattes</a>
+        <a href="#" onclick="showSection('discurso')">Discurso de Posse na AMRJ</a>
+        <a href="#" onclick="showSection('memorial')">Memorial</a>
+      </div>
+    </div>
+
+    <div class="nav-separator"></div>
+
+    <!-- Livros -->
+    <div class="nav-item">
+      <button class="nav-link has-sub" data-target="sub-livros">
+        <span>📚 Livros</span><span class="arrow">›</span>
+      </button>
+      <div class="submenu" id="sub-livros">
+        <a href="#" onclick="showSection('capas')">Fotos das Capas</a>
+        <a href="#" onclick="showSection('comprar')">Links para Comprar</a>
+        <a href="#" onclick="showSection('sinopses')">Sinopses (PDF)</a>
+        <a href="#" onclick="showSection('prefacios')">Prefácios (PDF)</a>
+      </div>
+    </div>
+
+    <div class="nav-separator"></div>
+
+    <!-- Artigos -->
+    <div class="nav-item">
+      <a class="nav-link" href="#" onclick="showSection('artigos')">
+        <span>📄 Artigos Publicados</span>
+      </a>
+    </div>
+
+    <div class="nav-separator"></div>
+
+    <!-- Entrevistas -->
+    <div class="nav-item">
+      <button class="nav-link has-sub" data-target="sub-entrevistas">
+        <span>🎙️ Entrevistas</span><span class="arrow">›</span>
+      </button>
+      <div class="submenu" id="sub-entrevistas">
+        <a href="#" onclick="showSection('jornais')">Jornais</a>
+        <a href="#" onclick="showSection('tv')">TV</a>
+        <a href="#" onclick="showSection('radio')">Rádio</a>
+        <a href="#" onclick="showSection('podcast')">Podcast</a>
+      </div>
+    </div>
+
+    <div class="nav-separator"></div>
+
+    <!-- Palestras -->
+    <div class="nav-item">
+      <a class="nav-link" href="#" onclick="showSection('palestras')">
+        <span>🎤 Palestras</span>
+      </a>
+    </div>
+
+    <div class="nav-separator"></div>
+
+    <!-- Encontros -->
+    <div class="nav-item">
+      <a class="nav-link" href="#" onclick="showSection('encontros')">
+        <span>📷 Encontros Especiais</span>
+      </a>
+    </div>
+
+    <div class="nav-separator"></div>
+
+    <!-- Redes Sociais -->
+    <div class="nav-item">
+      <button class="nav-link has-sub" data-target="sub-redes">
+        <span>🌐 Redes Sociais</span><span class="arrow">›</span>
+      </button>
+      <div class="submenu" id="sub-redes">
+        <a href="#" target="_blank">Facebook</a>
+        <a href="#" target="_blank">Instagram</a>
+        <a href="#" target="_blank">YouTube</a>
+        <a href="#" target="_blank">TikTok</a>
+      </div>
+    </div>
+
+    <div class="nav-separator"></div>
+
+    <!-- Blog -->
+    <div class="nav-item">
+      <button class="nav-link has-sub" data-target="sub-blog">
+        <span>✏️ Blog</span><span class="arrow">›</span>
+      </button>
+      <div class="submenu" id="sub-blog">
+        <a href="#" onclick="showSection('blog')">Blog Principal</a>
+        <a href="#" onclick="showSection('outros')">Outros Textos</a>
+      </div>
+    </div>
+
+    <div class="nav-separator"></div>
+
+    <!-- Contato -->
+    <div class="nav-item">
+      <a class="nav-link" href="#" onclick="showSection('contato')">
+        <span>📬 Contato</span>
+      </a>
+    </div>
+  </nav>
+</aside>
+
+<!-- hamburger -->
+<button id="hamburger" onclick="toggleSidebar()">☰</button>
+<!-- overlay -->
+<div id="overlay" onclick="toggleSidebar()"></div>
+
+<!-- ═══════════════════════════════════════════ MAIN -->
+<main id="main">
+
+  <!-- ── HOME ── -->
+  <section id="home" class="section active">
+    <div id="hero-section">
+      <div class="hero-inner">
+        <span class="hero-tag">Escritor · Pesquisador · Palestrante</span>
+        <h2>Bem-vindo ao universo<br>de <em>Seu Nome</em></h2>
+        <p>Explore minha trajetória literária, acadêmica e cultural. Aqui você encontra livros, artigos, entrevistas, palestras e muito mais.</p>
+        <div class="hero-cta">
+          <a href="#" class="btn-primary" onclick="showSection('bio'); return false;">Conheça minha história</a>
+          <a href="#" class="btn-outline" onclick="showSection('capas'); return false;">Ver meus livros</a>
+        </div>
+      </div>
+      <div class="hero-deco">
+        <div class="photo-placeholder" title="Clique para adicionar foto">
+          <span>📷</span>Sua foto aqui
+        </div>
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="cards-grid">
+      <div class="card" onclick="showSection('bio')">
+        <div class="card-icon">👤</div>
+        <h3>Quem sou eu</h3>
+        <p>Biografia, currículo, discurso de posse e memorial.</p>
+      </div>
+      <div class="card" onclick="showSection('capas')">
+        <div class="card-icon">📚</div>
+        <h3>Livros</h3>
+        <p>Capas, sinopses, prefácios e links para adquirir.</p>
+      </div>
+      <div class="card" onclick="showSection('artigos')">
+        <div class="card-icon">📄</div>
+        <h3>Artigos</h3>
+        <p>Produção acadêmica e textos publicados.</p>
+      </div>
+      <div class="card" onclick="showSection('jornais')">
+        <div class="card-icon">🎙️</div>
+        <h3>Entrevistas</h3>
+        <p>Jornais, TV, rádio e podcast.</p>
+      </div>
+      <div class="card" onclick="showSection('palestras')">
+        <div class="card-icon">🎤</div>
+        <h3>Palestras</h3>
+        <p>Conferências, aulas abertas e eventos.</p>
+      </div>
+      <div class="card" onclick="showSection('encontros')">
+        <div class="card-icon">📷</div>
+        <h3>Encontros Especiais</h3>
+        <p>Galeria de fotos em eventos e encontros.</p>
+      </div>
+      <div class="card" onclick="showSection('blog')">
+        <div class="card-icon">✏️</div>
+        <h3>Blog & Textos</h3>
+        <p>Artigos, reflexões e outros escritos.</p>
+      </div>
+      <div class="card" onclick="showSection('contato')">
+        <div class="card-icon">📬</div>
+        <h3>Contato</h3>
+        <p>Telefone, endereço e redes sociais.</p>
+      </div>
+    </div>
+
+    <footer>
+      <strong>Seu Nome Completo</strong> — Todos os direitos reservados &copy; 2025
+    </footer>
+  </section>
+
+  <!-- ── BIOGRAFIA ── -->
+  <section id="bio" class="section">
+    <div class="page-hero">
+      <div class="breadcrumb">
+        <button onclick="showSection('home')">Início</button> › Quem sou eu › Biografia
+      </div>
+      <h2>Biografia</h2>
+      <p>Minha trajetória de vida, formação e realizações</p>
+    </div>
+
+    <div class="page-body">
+      <div class="bio-grid">
+        <!-- Main Column -->
+        <div>
+          <!-- Photo -->
+          <div style="text-align:center; margin-bottom:32px;">
+            <div class="bio-photo-wrap" id="bio-photo-wrap" title="Clique para trocar a foto">
+              📷
+            </div>
+            <input type="file" id="photo-input" accept="image/*" style="display:none" onchange="loadPhoto(event)">
+            <p style="font-size:.72rem;color:#999;margin-top:6px;">Clique na foto para alterar</p>
+          </div>
+
+          <div class="bio-field">
+            <h4>Apresentação</h4>
+            <p contenteditable="true" data-ph="Escreva uma introdução sobre você..."></p>
+          </div>
+          <div class="bio-field">
+            <h4>Frase que me representa</h4>
+            <p contenteditable="true" data-ph='"Uma frase inspiradora que defina sua visão de mundo..."'
+               style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-style:italic; color:#2d6a4f;"></p>
+          </div>
+          <div class="bio-field">
+            <h4>Trajetória</h4>
+            <div contenteditable="true" data-ph="Conte sobre sua trajetória profissional e pessoal..." style="min-height:80px;"></div>
+          </div>
+          <div class="bio-field">
+            <h4>Formação Acadêmica</h4>
+            <div contenteditable="true" data-ph="Graduação, pós-graduação, doutorado, pós-doutorado..." style="min-height:60px;"></div>
+          </div>
+          <div class="bio-field">
+            <h4>Principais Realizações</h4>
+            <div contenteditable="true" data-ph="Prêmios, publicações de destaque, conquistas..." style="min-height:60px;"></div>
+          </div>
+          <div class="bio-field" style="border:none; margin:0; padding:0;">
+            <h4>Legado & Perspectivas</h4>
+            <div contenteditable="true" data-ph="O que você quer deixar para as próximas gerações..." style="min-height:60px;"></div>
+          </div>
+        </div>
+
+        <!-- Sidebar Column -->
+        <div>
+          <div class="bio-sidebar-card">
+            <h4>Dados Pessoais</h4>
+            <div class="info-row"><span class="label">Nome:</span><span contenteditable="true" data-ph="Seu nome completo"></span></div>
+            <div class="info-row"><span class="label">Nascimento:</span><span contenteditable="true" data-ph="dd/mm/aaaa"></span></div>
+            <div class="info-row"><span class="label">Naturalidade:</span><span contenteditable="true" data-ph="Cidade, Estado"></span></div>
+            <div class="info-row"><span class="label">Ocupação:</span><span contenteditable="true" data-ph="Escritor, Pesquisador..."></span></div>
+            <div class="info-row"><span class="label">Área:</span><span contenteditable="true" data-ph="Literatura, História..."></span></div>
+          </div>
+
+          <div class="bio-sidebar-card">
+            <h4>Contato</h4>
+            <div class="info-row"><span class="label">E-mail:</span><span contenteditable="true" data-ph="email@exemplo.com"></span></div>
+            <div class="info-row"><span class="label">Telefone:</span><span contenteditable="true" data-ph="(21) 9xxxx-xxxx"></span></div>
+            <div class="info-row"><span class="label">Cidade:</span><span contenteditable="true" data-ph="Rio de Janeiro, RJ"></span></div>
+          </div>
+
+          <div class="bio-sidebar-card">
+            <h4>Redes Sociais</h4>
+            <div class="social-row">
+              <a href="#" class="social-btn" style="color:#1877f2;border-color:#c8e0ff;">📘 Facebook</a>
+              <a href="#" class="social-btn" style="color:#e4405f;border-color:#ffd6df;">📸 Instagram</a>
+              <a href="#" class="social-btn" style="color:#ff0000;border-color:#ffd6d6;">▶️ YouTube</a>
+              <a href="#" class="social-btn" style="color:#000;border-color:#ccc;">🎵 TikTok</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer><strong>Seu Nome Completo</strong> — Todos os direitos reservados &copy; 2025</footer>
+  </section>
+
+  <!-- ── TEMPLATE SECTIONS ── -->
+  <section id="curriculo" class="section">
+    <div class="page-hero">
+      <div class="breadcrumb"><button onclick="showSection('home')">Início</button> › Currículo Lattes</div>
+      <h2>Currículo Lattes</h2>
+    </div>
+    <div class="page-body">
+      <div class="content-placeholder">
+        <div class="icon">🎓</div>
+        <h3>Currículo Lattes</h3>
+        <p>Insira aqui o link para o seu Currículo Lattes na Plataforma CNPq,<br>ou incorpore o conteúdo acadêmico completo.</p>
+        <a href="#" style="display:inline-block;margin-top:20px;padding:12px 28px;background:var(--green-mid);color:#fff;border-radius:4px;text-decoration:none;font-size:.85rem;">Acessar Currículo Lattes ↗</a>
+      </div>
+    </div>
+    <footer><strong>Seu Nome Completo</strong> — Todos os direitos reservados &copy; 2025</footer>
+  </section>
+
+  <section id="discurso" class="section">
+    <div class="page-hero">
+      <div class="breadcrumb"><button onclick="showSection('home')">Início</button> › Discurso de Posse na AMRJ</div>
+      <h2>Discurso de Posse na AMRJ</h2>
+    </div>
+    <div class="page-body">
+      <div class="content-placeholder">
+        <div class="icon">📜</div>
+        <h3>Discurso de Posse</h3>
+        <p>Adicione aqui o texto completo do discurso de posse<br>na Academia de Medicina do Rio de Janeiro.</p>
+      </div>
+    </div>
+    <footer><strong>Seu Nome Completo</strong> — Todos os direitos reservados &copy; 2025</footer>
+  </section>
+
+  <section id="memorial" class="section">
+    <div class="page-hero">
+      <div class="breadcrumb"><button onclick="showSection('home')">Início</button> › Memorial</div>
+      <h2>Memorial</h2>
+    </div>
+    <div class="page-body">
+      <div class="content-placeholder">
+        <div class="icon">📖</div>
+        <h3>Memorial Acadêmico</h3>
+        <p>Insira aqui o seu memorial acadêmico completo.</p>
+      </div>
+    </div>
+    <footer><strong>Seu Nome Completo</strong> — Todos os direitos reservados &copy; 2025</footer>
+  </section>
+
+  <section id="capas" class="section">
+    <div class="page-hero">
+      <div class="breadcrumb"><button onclick="showSection('home')">Início</button> › Livros › Capas</div>
+      <h2>Fotos das Capas</h2>
+    </div>
+    <div class="page-body">
+      <div class="content-placeholder">
+        <div class="icon">📚</div>
+        <h3>Galeria de Capas</h3>
+        <p>Adicione as imagens das capas dos seus livros publicados.</p>
+      </div>
+    </div>
+    <footer><strong>Seu Nome Completo</strong> — Todos os direitos reservados &copy; 2025</footer>
+  </section>
+
+  <section id="comprar" class="section">
+    <div class="page-hero">
+      <div class="breadcrumb"><button onclick="showSection('home')">Início</button> › Livros › Comprar</div>
+      <h2>Links para Comprar</h2>
+    </div>
+    <div class="page-body">
+      <div class="content-placeholder">
+        <div class="icon">🛒</div>
+        <h3>Onde Comprar</h3>
+        <p>Insira os links para Amazon, Livraria Cultura, Estante Virtual<br>e demais plataformas de venda.</p>
+      </div>
+    </div>
+    <footer><strong>Seu Nome Completo</strong> — Todos os direitos reservados &copy; 2025</footer>
+  </section>
+
+  <section id="sinopses" class="section">
+    <div class="page-hero">
+      <div class="breadcrumb"><button onclick="showSection('home')">Início</button> › Livros › Sinopses</div>
+      <h2>Sinopses</h2>
+    </div>
+    <div class="page-body">
+      <div class="content-placeholder">
+        <div class="icon">📋</div>
+        <h3>Sinopses dos Livros</h3>
+        <p>Adicione os links para os arquivos PDF com as sinopses de cada obra.</p>
+      </div>
+    </div>
+    <footer><strong>Seu Nome Completo</strong> — Todos os direitos reservados &copy; 2025</footer>
+  </section>
+
+  <section id="prefacios" class="section">
+    <div class="page-hero">
+      <div class="breadcrumb"><button onclick="showSection('home')">Início</button> › Livros › Prefácios</div>
+      <h2>Prefácios</h2>
+    </div>
+    <div class="page-body">
+      <div class="content-placeholder">
+        <div class="icon">✍️</div>
+        <h3>Prefácios dos Livros</h3>
+        <p>Adicione os links para os arquivos PDF com os prefácios de cada obra.</p>
+      </div>
+    </div>
+    <footer><strong>Seu Nome Completo</strong> — Todos os direitos reservados &copy; 2025</footer>
+  </section>
+
+  <section id="artigos" class="section">
+    <div class="page-hero">
+      <div class="breadcrumb"><button onclick="showSection('home')">Início</button> › Artigos</div>
+      <h2>Artigos Publicados</h2>
+    </div>
+    <div class="page-body">
+      <div class="content-placeholder">
+        <div class="icon">📄</div>
+        <h3>Produção Acadêmica</h3>
+        <p>Lista de artigos publicados em revistas, periódicos e coletâneas.</p>
+      </div>
+    </div>
+    <footer><strong>Seu Nome Completo</strong> — Todos os direitos reservados &copy; 2025</footer>
+  </section>
+
+  <section id="jornais" class="section">
+    <div class="page-hero">
+      <div class="breadcrumb"><button onclick="showSection('home')">Início</button> › Entrevistas › Jornais</div>
+      <h2>Entrevistas — Jornais</h2>
+    </div>
+    <div class="page-body">
+      <div class="content-placeholder"><div class="icon">📰</div><h3>Jornais</h3><p>Links e clippings de entrevistas publicadas em jornais.</p></div>
+    </div>
+    <footer><strong>Seu Nome Completo</strong> — Todos os direitos reservados &copy; 2025</footer>
+  </section>
+
+  <section id="tv" class="section">
+    <div class="page-hero">
+      <div class="breadcrumb"><button onclick="showSection('home')">Início</button> › Entrevistas › TV</div>
+      <h2>Entrevistas — TV</h2>
+    </div>
+    <div class="page-body">
+      <div class="content-placeholder"><div class="icon">📺</div><h3>Televisão</h3><p>Vídeos e links de aparições em programas de TV.</p></div>
+    </div>
+    <footer><strong>Seu Nome Completo</strong> — Todos os direitos reservados &copy; 2025</footer>
+  </section>
+
+  <section id="radio" class="section">
+    <div class="page-hero">
+      <div class="breadcrumb"><button onclick="showSection('home')">Início</button> › Entrevistas › Rádio</div>
+      <h2>Entrevistas — Rádio</h2>
+    </div>
+    <div class="page-body">
+      <div class="content-placeholder"><div class="icon">📻</div><h3>Rádio</h3><p>Áudios e links de entrevistas em programas de rádio.</p></div>
+    </div>
+    <footer><strong>Seu Nome Completo</strong> — Todos os direitos reservados &copy; 2025</footer>
+  </section>
+
+  <section id="podcast" class="section">
+    <div class="page-hero">
+      <div class="breadcrumb"><button onclick="showSection('home')">Início</button> › Entrevistas › Podcast</div>
+      <h2>Entrevistas — Podcast</h2>
+    </div>
+    <div class="page-body">
+      <div class="content-placeholder"><div class="icon">🎧</div><h3>Podcast</h3><p>Episódios de podcast em que participei como convidado.</p></div>
+    </div>
+    <footer><strong>Seu Nome Completo</strong> — Todos os direitos reservados &copy; 2025</footer>
+  </section>
+
+  <section id="palestras" class="section">
+    <div class="page-hero">
+      <div class="breadcrumb"><button onclick="showSection('home')">Início</button> › Palestras</div>
+      <h2>Palestras</h2>
+    </div>
+    <div class="page-body">
+      <div class="content-placeholder"><div class="icon">🎤</div><h3>Palestras e Conferências</h3><p>Lista de palestras, conferências e aulas abertas realizadas.</p></div>
+    </div>
+    <footer><strong>Seu Nome Completo</strong> — Todos os direitos reservados &copy; 2025</footer>
+  </section>
+
+  <section id="encontros" class="section">
+    <div class="page-hero">
+      <div class="breadcrumb"><button onclick="showSection('home')">Início</button> › Encontros Especiais</div>
+      <h2>Encontros Especiais</h2>
+    </div>
+    <div class="page-body">
+      <div class="content-placeholder"><div class="icon">📷</div><h3>Galeria de Fotos</h3><p>Fotos de encontros especiais, eventos e momentos marcantes.</p></div>
+    </div>
+    <footer><strong>Seu Nome Completo</strong> — Todos os direitos reservados &copy; 2025</footer>
+  </section>
+
+  <section id="blog" class="section">
+    <div class="page-hero">
+      <div class="breadcrumb"><button onclick="showSection('home')">Início</button> › Blog</div>
+      <h2>Blog</h2>
+    </div>
+    <div class="page-body">
+      <div class="content-placeholder"><div class="icon">✏️</div><h3>Blog & Publicações</h3><p>Artigos, reflexões e textos publicados no blog pessoal.</p></div>
+    </div>
+    <footer><strong>Seu Nome Completo</strong> — Todos os direitos reservados &copy; 2025</footer>
+  </section>
+
+  <section id="outros" class="section">
+    <div class="page-hero">
+      <div class="breadcrumb"><button onclick="showSection('home')">Início</button> › Outros Textos</div>
+      <h2>Outros Textos</h2>
+    </div>
+    <div class="page-body">
+      <div class="content-placeholder"><div class="icon">📝</div><h3>Outros Textos</h3><p>Crônicas, contos, ensaios e outros textos de autoria própria.</p></div>
+    </div>
+    <footer><strong>Seu Nome Completo</strong> — Todos os direitos reservados &copy; 2025</footer>
+  </section>
+
+  <!-- ── CONTATO ── -->
+  <section id="contato" class="section">
+    <div class="page-hero">
+      <div class="breadcrumb"><button onclick="showSection('home')">Início</button> › Contato</div>
+      <h2>Contato</h2>
+      <p>Telefone, endereço e redes sociais</p>
+    </div>
+    <div class="page-body">
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="c-icon">📞</div>
+          <h4>Telefone</h4>
+          <p contenteditable="true" data-ph="(21) 9xxxx-xxxx">(21) 9xxxx-xxxx</p>
+        </div>
+        <div class="contact-card">
+          <div class="c-icon">📧</div>
+          <h4>E-mail</h4>
+          <p contenteditable="true" data-ph="email@exemplo.com">email@exemplo.com</p>
+        </div>
+        <div class="contact-card">
+          <div class="c-icon">📍</div>
+          <h4>Endereço</h4>
+          <p contenteditable="true" data-ph="Rua, número, bairro&#10;Rio de Janeiro, RJ">Rio de Janeiro, RJ</p>
+        </div>
+        <div class="contact-card">
+          <div class="c-icon">📘</div>
+          <h4>Facebook</h4>
+          <p><a href="#" style="color:var(--green-mid);">facebook.com/seunome</a></p>
+        </div>
+        <div class="contact-card">
+          <div class="c-icon">📸</div>
+          <h4>Instagram</h4>
+          <p><a href="#" style="color:var(--green-mid);">@seunome</a></p>
+        </div>
+        <div class="contact-card">
+          <div class="c-icon">▶️</div>
+          <h4>YouTube</h4>
+          <p><a href="#" style="color:var(--green-mid);">Canal no YouTube</a></p>
+        </div>
+        <div class="contact-card">
+          <div class="c-icon">🎵</div>
+          <h4>TikTok</h4>
+          <p><a href="#" style="color:var(--green-mid);">@seunome</a></p>
+        </div>
+      </div>
+    </div>
+    <footer><strong>Seu Nome Completo</strong> — Todos os direitos reservados &copy; 2025</footer>
+  </section>
+
+</main>
+
+<script>
+  // ─── Navigation ───────────────────────────────────────────────────────────
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById(id);
+    if (el) { el.classList.add('active'); window.scrollTo(0,0); }
+    // close sidebar on mobile
+    if (window.innerWidth < 768) closeSidebar();
+  }
+
+  // ─── Submenu toggles ──────────────────────────────────────────────────────
+  document.querySelectorAll('.nav-link.has-sub').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.dataset.target;
+      const sub = document.getElementById(targetId);
+      const isOpen = sub.classList.contains('open');
+      // close all
+      document.querySelectorAll('.submenu').forEach(s => s.classList.remove('open'));
+      document.querySelectorAll('.nav-link.has-sub').forEach(b => b.classList.remove('open'));
+      if (!isOpen) { sub.classList.add('open'); btn.classList.add('open'); }
+    });
+  });
+
+  // ─── Sidebar mobile ───────────────────────────────────────────────────────
+  function toggleSidebar() {
+    const sb = document.getElementById('sidebar');
+    const ov = document.getElementById('overlay');
+    if (sb.classList.contains('open')) { closeSidebar(); } else { openSidebar(); }
+  }
+  function openSidebar() {
+    document.getElementById('sidebar').classList.add('open');
+    document.getElementById('overlay').classList.add('show');
+  }
+  function closeSidebar() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('show');
+  }
+
+  // On desktop always show sidebar
+  function handleResize() {
+    if (window.innerWidth >= 768) {
+      document.getElementById('sidebar').classList.remove('hidden-mobile', 'open');
+      document.getElementById('overlay').classList.remove('show');
+    } else {
+      document.getElementById('sidebar').classList.add('hidden-mobile');
+    }
+  }
+  window.addEventListener('resize', handleResize);
+  handleResize();
+
+  // ─── Photo upload ─────────────────────────────────────────────────────────
+  document.getElementById('bio-photo-wrap').addEventListener('click', () => {
+    document.getElementById('photo-input').click();
+  });
+  function loadPhoto(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const wrap = document.getElementById('bio-photo-wrap');
+      wrap.innerHTML = `<img src="${ev.target.result}" alt="Foto" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+    };
+    reader.readAsDataURL(file);
+  }
+</script>
+</body>
+</html>

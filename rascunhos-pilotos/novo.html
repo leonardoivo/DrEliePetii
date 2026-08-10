@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meu Site Pessoal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green-deep: #1b4332;
+      --green-mid: #2d6a4f;
+      --green-light: #52b788;
+      --green-pale: #95d5b2;
+      --green-ultra-light: #d8f3dc;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: #f8fdf9;
+      color: #1b4332;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* ── Pages ── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      background: linear-gradient(160deg, #1b4332 0%, #2d6a4f 40%, #52b788 80%, #95d5b2 100%);
+      min-height: 100vh;
+      width: 280px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 40;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+      overflow-y: auto;
+    }
+
+    .sidebar-header {
+      padding: 2rem 1.5rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      cursor: pointer;
+    }
+
+    .sidebar-header:hover { background: rgba(255,255,255,0.05); }
+
+    .sidebar-header h1 {
+      font-size: 1.4rem;
+      color: #fff;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .sidebar-header p {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.65);
+      margin-top: 0.25rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ── Nav items ── */
+    nav ul { list-style: none; padding: 0.75rem 0; margin: 0; }
+
+    .nav-item > .nav-link,
+    .nav-item > .nav-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 1.5rem;
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: background 0.2s, padding-left 0.2s;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-family: 'Lato', sans-serif;
+    }
+
+    .nav-item > .nav-link:hover,
+    .nav-item > .nav-toggle:hover {
+      background: rgba(255,255,255,0.12);
+      padding-left: 2rem;
+    }
+
+    .nav-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.12);
+      margin: 0.4rem 1.25rem;
+    }
+
+    .arrow-icon {
+      font-size: 0.6rem;
+      opacity: 0.6;
+      transition: transform 0.25s;
+    }
+
+    .nav-item.open > .nav-toggle .arrow-icon {
+      transform: rotate(180deg);
+    }
+
+    /* ── Submenus ── */
+    .submenu {
+      display: none;
+      background: rgba(0,0,0,0.1);
+      border-left: 3px solid rgba(255,255,255,0.2);
+      margin-left: 1.25rem;
+    }
+
+    .nav-item.open > .submenu { display: block; }
+
+    .submenu li a {
+      display: block;
+      padding: 0.45rem 1.25rem;
+      color: rgba(255,255,255,0.78);
+      font-size: 0.82rem;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .submenu li a:hover {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+    }
+
+    /* ── Mobile ── */
+    #hamburger {
+      display: none;
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      z-index: 50;
+      background: linear-gradient(135deg, #2d6a4f, #52b788);
+      border: none;
+      border-radius: 8px;
+      padding: 0.6rem 0.75rem;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    #hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+    }
+
+    #overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 30;
+    }
+
+    /* ── Main content ── */
+    .main-content {
+      margin-left: 280px;
+      padding: 3rem 2.5rem;
+      min-height: 100vh;
+      transition: margin 0.3s ease;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 50%, #52b788 100%);
+      border-radius: 16px;
+      padding: 3rem 2.5rem;
+      color: #fff;
+      margin-bottom: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 220px; height: 220px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; right: 60px;
+      width: 160px; height: 160px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+    }
+
+    .hero h2 { font-size: 2.2rem; font-weight: 700; line-height: 1.2; margin-bottom: 0.75rem; }
+    .hero p { font-size: 1rem; color: rgba(255,255,255,0.8); max-width: 520px; line-height: 1.7; }
+
+    /* ── Cards ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid #d8f3dc;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(45,106,79,0.12);
+    }
+
+    .card-icon {
+      width: 44px; height: 44px;
+      background: #d8f3dc;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 { font-size: 1rem; font-weight: 600; color: #1b4332; margin-bottom: 0.4rem; }
+    .card p { font-size: 0.82rem; color: #52b788; line-height: 1.5; }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1b4332;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #95d5b2;
+    }
+
+    /* ══ BIOGRAFIA ══ */
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: #52b788;
+      margin-bottom: 2rem;
+    }
+
+    .breadcrumb a {
+      color: #52b788;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .breadcrumb a:hover { color: #1b4332; text-decoration: underline; }
+    .breadcrumb span { color: #95d5b2; }
+
+    .bio-banner {
+      background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 55%, #52b788 100%);
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bio-banner::after {
+      content: '';
+      position: absolute;
+      top: -50px; right: -50px;
+      width: 200px; height: 200px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+
+    .bio-photo {
+      flex-shrink: 0;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      border: 3px dashed rgba(255,255,255,0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.2s;
+    }
+
+    .bio-photo:hover { background: rgba(255,255,255,0.18); }
+
+    .bio-photo input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .bio-photo img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: none;
+    }
+
+    .bio-photo-icon { font-size: 2rem; }
+    .bio-photo-label { font-size: 0.7rem; color: rgba(255,255,255,0.65); text-align: center; line-height: 1.3; padding: 0 0.5rem; }
+
+    .bio-banner-info { position: relative; z-index: 1; }
+
+    .bio-banner-info h2 {
+      font-size: 1.9rem;
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+
+    .bio-banner-info .bio-subtitle {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .bio-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .bio-tag {
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.9);
+      font-size: 0.75rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .bio-body {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .bio-main-card {
+      background: #fff;
+      border-radius: 14px;
+      border: 1px solid #d8f3dc;
+      overflow: hidden;
+    }
+
+    .bio-section {
+      padding: 1.75rem 2rem;
+      border-bottom: 1px solid #d8f3dc;
+    }
+
+    .bio-section:last-child { border-bottom: none; }
+
+    .bio-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1b4332;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .bio-section-icon {
+      width: 28px; height: 28px;
+      background: #d8f3dc;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem;
+    }
+
+    .bio-text {
+      font-size: 0.92rem;
+      line-height: 1.8;
+      color: #2d4a3e;
+      min-height: 80px;
+      width: 100%;
+      border: 1.5px dashed #d8f3dc;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-family: 'Lato', sans-serif;
+      resize: vertical;
+      background: #f8fdf9;
+      transition: border-color 0.2s, background 0.2s;
+      outline: none;
+    }
+
+    .bio-text:focus {
+      border-color: #52b788;
+      background: #fff;
+      border-style: solid;
+    }
+
+    .bio-text::placeholder { color: #95d5b2; font-style: italic; }
+
+    .edit-hint {
+      font-size: 0.72rem;
+      color: #95d5b2;
+      margin-top: 0.4rem;
+    }
+
+    .bio-quote {
+      background: #f0faf4;
+      border-left: 4px solid #52b788;
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.25rem;
+    }
+
+    .bio-quote textarea {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: #2d6a4f;
+      line-height: 1.7;
+      min-height: 60px;
+      width: 100%;
+      border: 1.5px dashed #95d5b2;
+      border-radius: 6px;
+      padding: 0.5rem 0.75rem;
+      background: transparent;
+      resize: vertical;
+      outline: none;
+    }
+
+    .bio-quote textarea:focus {
+      border-color: #52b788;
+      border-style: solid;
+      background: rgba(255,255,255,0.5);
+    }
+
+    .bio-quote textarea::placeholder { color: #95d5b2; }
+
+    .bio-sidebar-card {
+      background: #fff;
+      border-radius: 14px;
+      border: 1px solid #d8f3dc;
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+    }
+
+    .bio-sidebar-card-header {
+      background: linear-gradient(135deg, #1b4332, #2d6a4f);
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.75rem 1.25rem;
+    }
+
+    .bio-info-row {
+      display: flex;
+      flex-direction: column;
+      padding: 0.65rem 1.25rem;
+      border-bottom: 1px solid #d8f3dc;
+      gap: 0.25rem;
+    }
+
+    .bio-info-row:last-child { border-bottom: none; }
+
+    .bio-info-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #52b788;
+    }
+
+    .bio-info-value {
+      font-size: 0.85rem;
+      color: #1b4332;
+      border: 1.5px dashed #d8f3dc;
+      border-radius: 6px;
+      padding: 0.3rem 0.6rem;
+      font-family: 'Lato', sans-serif;
+      background: #f8fdf9;
+      outline: none;
+      width: 100%;
+      transition: border-color 0.2s;
+    }
+
+    .bio-info-value:focus {
+      border-color: #52b788;
+      border-style: solid;
+      background: #fff;
+    }
+
+    .bio-info-value::placeholder { color: #b7e4c7; font-style: italic; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+      #hamburger { display: flex; }
+      .main-content { margin-left: 0; padding: 5rem 1.25rem 2rem; }
+      #overlay.open { display: block; }
+      .bio-banner { flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; }
+      .bio-photo { width: 130px; height: 130px; }
+      .bio-body { grid-template-columns: 1fr; }
+      .bio-tags { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <button id="hamburger" aria-label="Abrir menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div id="overlay"></div>
+
+  <!-- ══════════ SIDEBAR ══════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header" onclick="showPage('home')">
+      <h1>Dr. Elie Cheniaux</h1>
+      <p>Site pessoal</p>
+    </div>
+
+    <nav>
+      <ul>
+
+        <li class="nav-item" id="n1">
+          <button class="nav-toggle" onclick="toggle('n1')">
+            Quem sou eu <span class="arrow-icon">▼</span>
+          </button>
+          <ul class="submenu">
+            <li><a href="#" onclick="showPage('biografia'); return false;">Biografia</a></li>
+            <li><a href="#">Currículo Lattes</a></li>
+            <li><a href="#">Discurso de posse na AMRJ</a></li>
+            <li><a href="#">Memorial</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-divider"></li>
+
+        <li class="nav-item" id="n2">
+          <button class="nav-toggle" onclick="toggle('n2')">
+            Livros <span class="arrow-icon">▼</span>
+          </button>
+          <ul class="submenu">
+            <li><a href="#">Fotos das capas</a></li>
+            <li><a href="#">Links para comprar</a></li>
+            <li><a href="#">Sinopses (PDF)</a></li>
+            <li><a href="#">Prefácios (PDF)</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-divider"></li>
+        <li class="nav-item"><a class="nav-link" href="#">Artigos publicados</a></li>
+        <li class="nav-divider"></li>
+
+        <li class="nav-item" id="n3">
+          <button class="nav-toggle" onclick="toggle('n3')">
+            Entrevistas <span class="arrow-icon">▼</span>
+          </button>
+          <ul class="submenu">
+            <li><a href="#">Jornais</a></li>
+            <li><a href="#">TV</a></li>
+            <li><a href="#">Rádio</a></li>
+            <li><a href="#">Podcast</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-divider"></li>
+        <li class="nav-item"><a class="nav-link" href="#">Palestras</a></li>
+        <li class="nav-divider"></li>
+        <li class="nav-item"><a class="nav-link" href="#">Encontros especiais — fotos</a></li>
+        <li class="nav-divider"></li>
+
+        <li class="nav-item" id="n4">
+          <button class="nav-toggle" onclick="toggle('n4')">
+            Redes Sociais <span class="arrow-icon">▼</span>
+          </button>
+          <ul class="submenu">
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">YouTube</a></li>
+            <li><a href="#">TikTok</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-divider"></li>
+
+        <li class="nav-item" id="n5">
+          <button class="nav-toggle" onclick="toggle('n5')">
+            Blog <span class="arrow-icon">▼</span>
+          </button>
+          <ul class="submenu">
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Outros textos</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-divider"></li>
+        <li class="nav-item"><a class="nav-link" href="#">Contato</a></li>
+
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- ══════════ CONTEÚDO PRINCIPAL ══════════ -->
+  <main class="main-content">
+
+    <!-- ─── HOME ─── -->
+    <div class="page active" id="page-home">
+      <section class="hero">
+        <h2>Bem-vindo ao meu espaço</h2>
+        <p>Aqui você encontra minha trajetória, obras, entrevistas, palestras e muito mais. Navegue pelo menu e explore.</p>
+      </section>
+
+      <h2 class="section-title">Destaques</h2>
+      <div class="cards-grid">
+        <div class="card" onclick="showPage('biografia')">
+          <div class="card-icon">👤</div>
+          <h3>Quem sou eu</h3>
+          <p>Biografia, currículo e trajetória pessoal.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📖</div>
+          <h3>Livros</h3>
+          <p>Conheça minhas publicações e onde adquiri-las.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎙️</div>
+          <h3>Entrevistas</h3>
+          <p>Jornais, TV, rádio e podcasts selecionados.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎤</div>
+          <h3>Palestras</h3>
+          <p>Temas e apresentações em eventos e congressos.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📷</div>
+          <h3>Encontros especiais</h3>
+          <p>Galeria de fotos de momentos marcantes.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📬</div>
+          <h3>Contato</h3>
+          <p>Telefone, redes sociais e endereço para contato.</p>
+        </div>
+      </div>
+
+      <footer style="text-align:center; color:#52b788; font-size:0.8rem; padding-top:2rem; border-top:1px solid #d8f3dc;">
+        © 2025 · Seu Nome · Todos os direitos reservados
+      </footer>
+    </div>
+
+    <!-- ─── BIOGRAFIA ─── -->
+    <div class="page" id="page-biografia">
+
+      <div class="breadcrumb">
+        <a onclick="showPage('home')">Início</a>
+        <span>›</span>
+        <span>Quem sou eu</span>
+        <span>›</span>
+        <strong style="color:#1b4332;">Biografia</strong>
+      </div>
+
+      <!-- Banner com foto -->
+      <div class="bio-banner">
+        <div class="bio-photo" title="Clique para adicionar sua foto">
+          <img id="bioPhotoImg" src="" alt="Foto" />
+          <input type="file" accept="image/*" onchange="loadPhoto(event)" />
+          <div class="bio-photo-icon" id="photoIcon">📷</div>
+          <div class="bio-photo-label" id="photoLabel">Clique para<br>adicionar foto</div>
+        </div>
+        <div class="bio-banner-info">
+          <h2>Seu Nome Completo</h2>
+          <div class="bio-subtitle">Escritor · Pesquisador · Conferencista</div>
+          <div class="bio-tags">
+            <span class="bio-tag">📍 Rio de Janeiro, RJ</span>
+            <span class="bio-tag">🎓 Academia de Marinha do Rio de Janeiro</span>
+            <span class="bio-tag">✍️ Autor</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Corpo -->
+      <div class="bio-body">
+
+        <!-- Coluna principal -->
+        <div>
+          <div class="bio-main-card">
+
+            <div class="bio-section">
+              <div class="bio-section-title">
+                <div class="bio-section-icon">📝</div>
+                Apresentação
+              </div>
+              <textarea class="bio-text" rows="5" placeholder="Escreva aqui uma apresentação geral sobre você. Quem é você? O que faz? Qual é sua missão ou propósito? Este é o primeiro texto que o visitante lerá sobre sua trajetória..."></textarea>
+              <div class="edit-hint">✏️ Clique no campo para editar</div>
+            </div>
+
+            <div class="bio-section">
+              <div class="bio-section-title">
+                <div class="bio-section-icon">💬</div>
+                Frase que te representa
+              </div>
+              <div class="bio-quote">
+                <textarea rows="2" placeholder="&quot;Escreva aqui uma citação sua ou que te inspire...&quot;"></textarea>
+              </div>
+            </div>
+
+            <div class="bio-section">
+              <div class="bio-section-title">
+                <div class="bio-section-icon">🗺️</div>
+                Trajetória
+              </div>
+              <textarea class="bio-text" rows="7" placeholder="Descreva aqui sua trajetória de vida e carreira. Onde nasceu, onde estudou, como chegou até onde está hoje. Fale sobre os momentos mais marcantes de sua vida profissional e pessoal..."></textarea>
+              <div class="edit-hint">✏️ Clique no campo para editar</div>
+            </div>
+
+            <div class="bio-section">
+              <div class="bio-section-title">
+                <div class="bio-section-icon">🎓</div>
+                Formação acadêmica
+              </div>
+              <textarea class="bio-text" rows="5" placeholder="Liste sua formação acadêmica: graduação, pós-graduação, especializações, cursos relevantes. Informe instituições e anos de conclusão..."></textarea>
+              <div class="edit-hint">✏️ Clique no campo para editar</div>
+            </div>
+
+            <div class="bio-section">
+              <div class="bio-section-title">
+                <div class="bio-section-icon">🏆</div>
+                Principais realizações
+              </div>
+              <textarea class="bio-text" rows="6" placeholder="Descreva suas principais conquistas e realizações ao longo da carreira: prêmios recebidos, reconhecimentos, projetos de impacto, publicações de destaque, cargos relevantes ocupados..."></textarea>
+              <div class="edit-hint">✏️ Clique no campo para editar</div>
+            </div>
+
+            <div class="bio-section">
+              <div class="bio-section-title">
+                <div class="bio-section-icon">🌱</div>
+                Legado e contribuições
+              </div>
+              <textarea class="bio-text" rows="5" placeholder="Fale sobre o que você acredita ser sua contribuição mais importante para a sociedade, para sua área de atuação ou para as pessoas ao seu redor. Qual legado deseja deixar?"></textarea>
+              <div class="edit-hint">✏️ Clique no campo para editar</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Coluna lateral -->
+        <div>
+
+          <div class="bio-sidebar-card">
+            <div class="bio-sidebar-card-header">Dados pessoais</div>
+            <div class="bio-info-row">
+              <span class="bio-info-label">Nome completo</span>
+              <input class="bio-info-value" type="text" placeholder="Seu nome completo" />
+            </div>
+            <div class="bio-info-row">
+              <span class="bio-info-label">Naturalidade</span>
+              <input class="bio-info-value" type="text" placeholder="Cidade, Estado" />
+            </div>
+            <div class="bio-info-row">
+              <span class="bio-info-label">Data de nascimento</span>
+              <input class="bio-info-value" type="text" placeholder="DD/MM/AAAA" />
+            </div>
+            <div class="bio-info-row">
+              <span class="bio-info-label">Formação</span>
+              <input class="bio-info-value" type="text" placeholder="Área de formação" />
+            </div>
+            <div class="bio-info-row">
+              <span class="bio-info-label">Área de atuação</span>
+              <input class="bio-info-value" type="text" placeholder="Ex.: Literatura, Pesquisa..." />
+            </div>
+          </div>
+
+          <div class="bio-sidebar-card">
+            <div class="bio-sidebar-card-header">Contato</div>
+            <div class="bio-info-row">
+              <span class="bio-info-label">E-mail</span>
+              <input class="bio-info-value" type="text" placeholder="seu@email.com" />
+            </div>
+            <div class="bio-info-row">
+              <span class="bio-info-label">Telefone</span>
+              <input class="bio-info-value" type="text" placeholder="(XX) XXXXX-XXXX" />
+            </div>
+            <div class="bio-info-row">
+              <span class="bio-info-label">Endereço</span>
+              <input class="bio-info-value" type="text" placeholder="Cidade, Estado" />
+            </div>
+          </div>
+
+          <div class="bio-sidebar-card">
+            <div class="bio-sidebar-card-header">Redes sociais</div>
+            <div class="bio-info-row">
+              <span class="bio-info-label">Facebook</span>
+              <input class="bio-info-value" type="text" placeholder="Link ou @usuario" />
+            </div>
+            <div class="bio-info-row">
+              <span class="bio-info-label">Instagram</span>
+              <input class="bio-info-value" type="text" placeholder="@usuario" />
+            </div>
+            <div class="bio-info-row">
+              <span class="bio-info-label">YouTube</span>
+              <input class="bio-info-value" type="text" placeholder="Link do canal" />
+            </div>
+            <div class="bio-info-row">
+              <span class="bio-info-label">TikTok</span>
+              <input class="bio-info-value" type="text" placeholder="@usuario" />
+            </div>
+          </div>
+
+          <div style="background:#d8f3dc; border-radius:10px; padding:1rem 1.25rem; font-size:0.78rem; color:#2d6a4f; line-height:1.6;">
+            <strong>💡 Dica:</strong> Todos os campos desta página são editáveis diretamente no navegador. Após preencher, peça ao desenvolvedor para salvar o conteúdo no HTML definitivo.
+          </div>
+
+        </div>
+      </div>
+
+      <div style="margin-top:2.5rem;">
+        <footer style="text-align:center; color:#52b788; font-size:0.8rem; padding-top:2rem; border-top:1px solid #d8f3dc;">
+          © 2025 · Seu Nome · Todos os direitos reservados
+        </footer>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page-' + id).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('overlay').classList.remove('open');
+    }
+
+    function toggle(id) {
+      const el = document.getElementById(id);
+      const wasOpen = el.classList.contains('open');
+      document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) el.classList.add('open');
+    }
+
+    const hamburger = document.getElementById('hamburger');
+    const sidebar   = document.getElementById('sidebar');
+    const overlay   = document.getElementById('overlay');
+
+    hamburger.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('open');
+    });
+
+    overlay.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('open');
+    });
+
+    function loadPhoto(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = document.getElementById('bioPhotoImg');
+        img.src = e.target.result;
+        img.style.display = 'block';
+        document.getElementById('photoIcon').style.display  = 'none';
+        document.getElementById('photoLabel').style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
+</body>
+</html>

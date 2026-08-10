@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Artigos Publicados | Meu Nome</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--gold:#c9a84c;--gold-light:#e8d5a0;--navy:#1a2744;}
+    body{font-family:'Lato',sans-serif;}
+    h1,h2,h3{font-family:'Playfair Display',serif;}
+    #main-nav{background:white;border-bottom:2px solid var(--gold);}
+    .nav-logo{font-family:'Playfair Display',serif;color:var(--navy);}
+    .nav-item{position:relative;}
+    .nav-link{display:flex;align-items:center;gap:4px;padding:18px 14px;font-size:.88rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);transition:color .2s;white-space:nowrap;}
+    .nav-link:hover,.nav-link.active{color:var(--gold);}
+    .nav-link svg{width:12px;height:12px;transition:transform .2s;}
+    .nav-item:hover>.nav-link svg{transform:rotate(180deg);}
+    .dropdown{display:none;position:absolute;top:100%;left:0;background:white;min-width:210px;border-top:3px solid var(--gold);box-shadow:0 8px 32px rgba(0,0,0,.10);z-index:100;}
+    .nav-item:hover>.dropdown{display:block;}
+    .dropdown a{display:block;padding:11px 20px;font-size:.84rem;color:var(--navy);border-bottom:1px solid #f3f0e8;transition:background .15s,color .15s;}
+    .dropdown a:last-child{border-bottom:none;}
+    .dropdown a:hover,.dropdown a.active{background:#fdf8ee;color:var(--gold);font-weight:700;}
+    #hamburger{cursor:pointer;}
+    #mobile-menu{display:none;position:fixed;inset:0;z-index:200;background:white;overflow-y:auto;padding:80px 0 40px;}
+    #mobile-menu.open{display:block;}
+    .mob-link{display:block;padding:13px 28px;font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);border-bottom:1px solid #f0ebe0;cursor:pointer;}
+    .mob-sub{display:none;background:#fdf8ee;}
+    .mob-sub.open{display:block;}
+    .mob-sub a{display:block;padding:10px 44px;font-size:.85rem;color:#4a5568;border-bottom:1px solid #ece8df;}
+    .mob-sub a.active{color:var(--gold);font-weight:700;}
+    .breadcrumb a{color:var(--gold);}
+
+    /* Hero — deep teal gradient for academic feel */
+    .page-hero{
+      background:linear-gradient(120deg,#f0fdfa 0%,#fff 55%,#ccfbf1 100%);
+      border-bottom:3px solid #5eead4;
+    }
+
+    /* Search bar */
+    .search-input{width:100%;border:2px solid #e5e7eb;border-radius:6px;padding:12px 18px;font-size:.95rem;outline:none;transition:border-color .2s;}
+    .search-input:focus{border-color:var(--gold);}
+
+    /* Filter pills */
+    .pill{display:inline-block;padding:6px 16px;border-radius:20px;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .15s;border:2px solid transparent;}
+    .pill.active,.pill:hover{background:var(--navy);color:white;border-color:var(--navy);}
+    .pill:not(.active){background:#f3f0e8;color:var(--navy);border-color:#f3f0e8;}
+
+    /* Article card */
+    .article-card{background:white;border-radius:6px;box-shadow:0 3px 16px rgba(0,0,0,.07);overflow:hidden;transition:transform .2s,box-shadow .2s;display:flex;}
+    .article-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.12);}
+    .article-accent{width:6px;flex-shrink:0;}
+
+    /* journal badge */
+    .journal-badge{display:inline-flex;align-items:center;gap:6px;background:#f8f7f3;border:1px solid #e8d5a0;border-radius:4px;padding:4px 10px;font-size:.72rem;font-weight:700;color:var(--navy);}
+
+    /* qualis pill */
+    .qualis{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:20px;}
+
+    /* stats strip */
+    .stat-strip{background:var(--navy);border-radius:6px;padding:20px 28px;}
+    .stat-strip-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold-light);}
+    .stat-strip-label{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#93c5fd;margin-top:2px;}
+
+    footer{background:var(--navy);color:#c8d1e0;}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .5s,transform .5s;}
+    .reveal.visible{opacity:1;transform:none;}
+  </style>
+</head>
+<body class="bg-gray-50">
+
+<!-- ══ NAV ══ -->
+<nav id="main-nav" class="sticky top-0 z-50 shadow-sm">
+  <div class="max-w-screen-xl mx-auto px-4 flex items-center justify-between">
+    <a href="index.html" class="nav-logo text-xl py-4 font-bold">Meu Nome</a>
+    <div class="hidden lg:flex items-center">
+      <div class="nav-item"><a href="quem-sou-eu-biografia.html" class="nav-link">Quem sou eu<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a><div class="dropdown"><a href="quem-sou-eu-biografia.html">Biografia</a><a href="quem-sou-eu-curriculo.html">Currículo Lattes</a><a href="quem-sou-eu-discurso.html">Discurso de posse na AMRJ</a><a href="quem-sou-eu-memorial.html">Memorial</a></div></div>
+      <div class="nav-item"><a href="livros-capas.html" class="nav-link">Livros<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a><div class="dropdown"><a href="livros-capas.html">Fotos das capas</a><a href="livros-comprar.html">Links para comprar</a><a href="livros-sinopses.html">Sinopses (PDFs)</a><a href="livros-prefacios.html">Prefácios (PDFs)</a></div></div>
+      <div class="nav-item"><a href="artigos-publicados.html" class="nav-link active">Artigos publicados</a></div>
+      <div class="nav-item"><a href="entrevistas-jornais.html" class="nav-link">Entrevistas<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a><div class="dropdown"><a href="entrevistas-jornais.html">Jornais</a><a href="entrevistas-tv.html">TV</a><a href="entrevistas-radio.html">Rádio</a><a href="entrevistas-podcast.html">Podcast</a></div></div>
+      <div class="nav-item"><a href="index.html#palestras" class="nav-link">Palestras</a></div>
+      <div class="nav-item"><a href="index.html#encontros" class="nav-link">Encontros especiais<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a><div class="dropdown"><a href="index.html#fotos-encontros">Fotos</a></div></div>
+      <div class="nav-item"><a href="index.html#redes" class="nav-link">Redes Sociais<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a><div class="dropdown"><a href="https://facebook.com" target="_blank">Facebook</a><a href="https://instagram.com" target="_blank">Instagram</a><a href="https://youtube.com" target="_blank">YouTube</a><a href="https://tiktok.com" target="_blank">TikTok</a></div></div>
+      <div class="nav-item"><a href="index.html#blog" class="nav-link">Blog<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a><div class="dropdown"><a href="index.html#blog-posts">Blog</a><a href="index.html#outros-textos">Outros textos</a></div></div>
+      <div class="nav-item"><a href="index.html#contato" class="nav-link">Contato</a></div>
+    </div>
+    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2"><span class="block w-6 h-0.5 bg-gray-700"></span><span class="block w-6 h-0.5 bg-gray-700"></span><span class="block w-6 h-0.5 bg-gray-700"></span></button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu">
+  <button id="close-menu" class="absolute top-5 right-6 text-3xl text-gray-600">&times;</button>
+  <div><div class="mob-link" onclick="toggleMob('mob-quem')">Quem sou eu ▾</div><div id="mob-quem" class="mob-sub"><a href="quem-sou-eu-biografia.html">Biografia</a><a href="quem-sou-eu-curriculo.html">Currículo Lattes</a><a href="quem-sou-eu-discurso.html">Discurso AMRJ</a><a href="quem-sou-eu-memorial.html">Memorial</a></div></div>
+  <div><div class="mob-link" onclick="toggleMob('mob-livros')">Livros ▾</div><div id="mob-livros" class="mob-sub"><a href="livros-capas.html">Fotos das capas</a><a href="livros-comprar.html">Onde comprar</a><a href="livros-sinopses.html">Sinopses</a><a href="livros-prefacios.html">Prefácios</a></div></div>
+  <div><a class="mob-link active" href="artigos-publicados.html" style="color:var(--gold)">Artigos publicados</a></div>
+  <div><div class="mob-link" onclick="toggleMob('mob-entrevistas')">Entrevistas ▾</div><div id="mob-entrevistas" class="mob-sub"><a href="entrevistas-jornais.html">Jornais</a><a href="entrevistas-tv.html">TV</a><a href="entrevistas-radio.html">Rádio</a><a href="entrevistas-podcast.html">Podcast</a></div></div>
+  <div><a class="mob-link" href="index.html#palestras">Palestras</a></div>
+  <div><div class="mob-link" onclick="toggleMob('mob-encontros')">Encontros ▾</div><div id="mob-encontros" class="mob-sub"><a href="index.html#fotos-encontros">Fotos</a></div></div>
+  <div><div class="mob-link" onclick="toggleMob('mob-redes')">Redes ▾</div><div id="mob-redes" class="mob-sub"><a href="https://facebook.com" target="_blank">Facebook</a><a href="https://instagram.com" target="_blank">Instagram</a><a href="https://youtube.com" target="_blank">YouTube</a><a href="https://tiktok.com" target="_blank">TikTok</a></div></div>
+  <div><div class="mob-link" onclick="toggleMob('mob-blog')">Blog ▾</div><div id="mob-blog" class="mob-sub"><a href="index.html#blog-posts">Blog</a><a href="index.html#outros-textos">Outros textos</a></div></div>
+  <div><a class="mob-link" href="index.html#contato">Contato</a></div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero py-14">
+  <div class="max-w-screen-lg mx-auto px-6">
+    <div class="breadcrumb text-sm mb-6 flex items-center gap-2">
+      <a href="index.html">Início</a><span class="text-gray-400">›</span><span style="color:var(--navy);font-weight:700">Artigos Publicados</span>
+    </div>
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest mb-1" style="color:var(--gold)">Produção Acadêmica</p>
+        <h1 class="text-4xl lg:text-5xl font-bold mb-3" style="color:var(--navy)">Artigos Publicados</h1>
+        <p class="text-gray-400 text-lg max-w-xl">Artigos em periódicos científicos, revistas especializadas e publicações acadêmicas nacionais e internacionais</p>
+      </div>
+      <!-- Stats strip -->
+      <div class="stat-strip flex gap-8 flex-shrink-0 rounded-lg">
+        <div><div class="stat-strip-num">XX</div><div class="stat-strip-label">Artigos</div></div>
+        <div><div class="stat-strip-num">XX</div><div class="stat-strip-label">Periódicos</div></div>
+        <div><div class="stat-strip-num">XX</div><div class="stat-strip-label">Anos</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<main class="max-w-screen-lg mx-auto px-6 py-14">
+
+  <!-- Search + filters -->
+  <div class="bg-white rounded-lg shadow p-6 mb-10 reveal">
+    <div class="mb-5">
+      <input type="text" id="search-input" class="search-input" placeholder="🔍  Buscar por título, revista ou palavra-chave…" oninput="filterArticles()">
+    </div>
+    <div class="flex flex-wrap gap-2 items-center">
+      <span class="text-xs font-bold uppercase tracking-widest text-gray-400 mr-1">Área:</span>
+      <button class="pill active" data-area="todos" onclick="setArea(this)">Todos</button>
+      <button class="pill" data-area="historia" onclick="setArea(this)">História</button>
+      <button class="pill" data-area="literatura" onclick="setArea(this)">Literatura</button>
+      <button class="pill" data-area="memoria" onclick="setArea(this)">Memória</button>
+      <button class="pill" data-area="cultura" onclick="setArea(this)">Cultura</button>
+      <button class="pill" data-area="naval" onclick="setArea(this)">Naval</button>
+    </div>
+  </div>
+
+  <!-- Results count -->
+  <div class="flex items-center justify-between mb-6 reveal">
+    <p class="text-sm text-gray-400"><span id="results-count">10</span> artigos encontrados</p>
+    <select id="sort-select" onchange="sortArticles()" class="text-sm border border-gray-200 rounded px-3 py-1.5 outline-none" style="color:var(--navy)">
+      <option value="recente">Mais recentes primeiro</option>
+      <option value="antigo">Mais antigos primeiro</option>
+      <option value="titulo">Título (A–Z)</option>
+    </select>
+  </div>
+
+  <!-- Articles list -->
+  <div id="articles-list" class="space-y-5">
+
+    <!-- Article 1 -->
+    <article class="article-card reveal" data-area="historia" data-year="2024" data-title="A Formação da Identidade Naval Brasileira no Século XIX">
+      <div class="article-accent" style="background:linear-gradient(180deg,#1a2744,#3b82f6)"></div>
+      <div class="flex-1 p-6">
+        <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="journal-badge">📰 Revista Brasileira de História</span>
+              <span class="qualis" style="background:#d1fae5;color:#065f46">Qualis A1</span>
+              <span class="text-xs text-gray-400">2024 · vol. 44, n. 87</span>
+            </div>
+            <h3 class="font-bold text-lg leading-snug mb-2" style="color:var(--navy);font-family:'Playfair Display',serif">
+              "A Formação da Identidade Naval Brasileira no Século XIX"
+            </h3>
+            <p class="text-gray-500 text-sm leading-relaxed mb-3">
+              Análise das práticas culturais e institucionais que moldaram a identidade da Marinha brasileira no período imperial, com base em fontes documentais inéditas do Arquivo da Marinha.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2 py-1 rounded" style="background:#e0f2fe;color:#0369a1">#história naval</span>
+              <span class="text-xs px-2 py-1 rounded" style="background:#f0fdf4;color:#166534">#identidade</span>
+              <span class="text-xs px-2 py-1 rounded" style="background:#fef9c3;color:#854d0e">#século XIX</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2 flex-shrink-0 lg:items-end">
+            <a href="#" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded" style="background:var(--navy);color:white">📄 Ler artigo</a>
+            <a href="#" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded border-2" style="border-color:var(--navy);color:var(--navy)">↓ PDF</a>
+            <span class="text-xs text-gray-400 text-right">DOI: 10.XXXX/rbh.v44n87</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Article 2 -->
+    <article class="article-card reveal" data-area="literatura" data-year="2024" data-title="Memória e Ficção na Literatura Brasileira Contemporânea">
+      <div class="article-accent" style="background:linear-gradient(180deg,#7c3aed,#a855f7)"></div>
+      <div class="flex-1 p-6">
+        <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="journal-badge">📰 Estudos de Literatura Brasileira</span>
+              <span class="qualis" style="background:#d1fae5;color:#065f46">Qualis A1</span>
+              <span class="text-xs text-gray-400">2024 · vol. 18, n. 2</span>
+            </div>
+            <h3 class="font-bold text-lg leading-snug mb-2" style="color:var(--navy);font-family:'Playfair Display',serif">
+              "Memória e Ficção na Literatura Brasileira Contemporânea"
+            </h3>
+            <p class="text-gray-500 text-sm leading-relaxed mb-3">
+              Estudo das relações entre memória autobiográfica e construção ficcional em romances brasileiros publicados entre 2000 e 2020, com ênfase nas obras de autores cariocas.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2 py-1 rounded" style="background:#f3e8ff;color:#6b21a8">#literatura</span>
+              <span class="text-xs px-2 py-1 rounded" style="background:#fce7f3;color:#9d174d">#memória</span>
+              <span class="text-xs px-2 py-1 rounded" style="background:#e0f2fe;color:#0369a1">#ficção</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2 flex-shrink-0 lg:items-end">
+            <a href="#" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded" style="background:var(--navy);color:white">📄 Ler artigo</a>
+            <a href="#" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded border-2" style="border-color:var(--navy);color:var(--navy)">↓ PDF</a>
+            <span class="text-xs text-gray-400 text-right">DOI: 10.XXXX/elb.v18n2</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Article 3 -->
+    <article class="article-card reveal" data-area="cultura" data-year="2023" data-title="Políticas Culturais e Memória Nacional: um Balanço">
+      <div class="article-accent" style="background:linear-gradient(180deg,#b45309,#f59e0b)"></div>
+      <div class="flex-1 p-6">
+        <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="journal-badge">📰 Revista de Cultura Brasileira</span>
+              <span class="qualis" style="background:#fef3c7;color:#92400e">Qualis A2</span>
+              <span class="text-xs text-gray-400">2023 · n. 31</span>
+            </div>
+            <h3 class="font-bold text-lg leading-snug mb-2" style="color:var(--navy);font-family:'Playfair Display',serif">
+              "Políticas Culturais e Memória Nacional: um Balanço"
+            </h3>
+            <p class="text-gray-500 text-sm leading-relaxed mb-3">
+              Avaliação crítica das políticas culturais implementadas no Brasil entre 1985 e 2022, com foco nos mecanismos de construção e preservação da memória nacional.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2 py-1 rounded" style="background:#fef3c7;color:#92400e">#políticas culturais</span>
+              <span class="text-xs px-2 py-1 rounded" style="background:#f0fdf4;color:#166534">#memória nacional</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2 flex-shrink-0 lg:items-end">
+            <a href="#" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded" style="background:var(--navy);color:white">📄 Ler artigo</a>
+            <a href="#" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded border-2" style="border-color:var(--navy);color:var(--navy)">↓ PDF</a>
+            <span class="text-xs text-gray-400 text-right">DOI: 10.XXXX/rcb.n31</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Article 4 -->
+    <article class="article-card reveal" data-area="naval" data-year="2023" data-title="Navegação e Cultura Letrada no Brasil Oitocentista">
+      <div class="article-accent" style="background:linear-gradient(180deg,#0e7490,#06b6d4)"></div>
+      <div class="flex-1 p-6">
+        <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="journal-badge">📰 Anais do Museu Histórico Nacional</span>
+              <span class="qualis" style="background:#d1fae5;color:#065f46">Qualis A2</span>
+              <span class="text-xs text-gray-400">2023 · vol. 55</span>
+            </div>
+            <h3 class="font-bold text-lg leading-snug mb-2" style="color:var(--navy);font-family:'Playfair Display',serif">
+              "Navegação e Cultura Letrada no Brasil Oitocentista"
+            </h3>
+            <p class="text-gray-500 text-sm leading-relaxed mb-3">
+              Investigação sobre as práticas de leitura e escrita entre oficiais e marinheiros brasileiros no século XIX, revelando uma cultura letrada mais rica do que se supunha.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2 py-1 rounded" style="background:#e0f2fe;color:#0369a1">#navegação</span>
+              <span class="text-xs px-2 py-1 rounded" style="background:#fef9c3;color:#854d0e">#leitura</span>
+              <span class="text-xs px-2 py-1 rounded" style="background:#fce7f3;color:#9d174d">#oitocentismo</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2 flex-shrink-0 lg:items-end">
+            <a href="#" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded" style="background:var(--navy);color:white">📄 Ler artigo</a>
+            <a href="#" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded border-2" style="border-color:var(--navy);color:var(--navy)">↓ PDF</a>
+            <span class="text-xs text-gray-400 text-right">DOI: 10.XXXX/amhn.v55</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Article 5 -->
+    <article class="article-card reveal" data-area="memoria" data-year="2022" data-title="O Lugar da Memória na Historiografia Brasileira">
+      <div class="article-accent" style="background:linear-gradient(180deg,#065f46,#34d399)"></div>
+      <div class="flex-1 p-6">
+        <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="journal-badge">📰 História: Questões e Debates</span>
+              <span class="qualis" style="background:#d1fae5;color:#065f46">Qualis A1</span>
+              <span class="text-xs text-gray-400">2022 · vol. 70, n. 1</span>
+            </div>
+            <h3 class="font-bold text-lg leading-snug mb-2" style="color:var(--navy);font-family:'Playfair Display',serif">
+              "O Lugar da Memória na Historiografia Brasileira"
+            </h3>
+            <p class="text-gray-500 text-sm leading-relaxed mb-3">
+              Revisão crítica do uso do conceito de memória na produção historiográfica brasileira das últimas três décadas, identificando tendências, lacunas e perspectivas futuras.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2 py-1 rounded" style="background:#f0fdf4;color:#166534">#historiografia</span>
+              <span class="text-xs px-2 py-1 rounded" style="background:#fce7f3;color:#9d174d">#memória coletiva</span>
+              <span class="text-xs px-2 py-1 rounded" style="background:#e0f2fe;color:#0369a1">#teoria</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2 flex-shrink-0 lg:items-end">
+            <a href="#" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded" style="background:var(--navy);color:white">📄 Ler artigo</a>
+            <a href="#" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded border-2" style="border-color:var(--navy);color:var(--navy)">↓ PDF</a>
+            <span class="text-xs text-gray-400 text-right">DOI: 10.XXXX/hqd.v70n1</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Article 6 -->
+    <article class="article-card reveal" data-area="literatura" data-year="2022" data-title="Rio de Janeiro na Ficção: Cidade e Personagem">
+      <div class="article-accent" style="background:linear-gradient(180deg,#9d174d,#ec4899)"></div>
+      <div class="flex-1 p-6">
+        <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="journal-badge">📰 Alea: Estudos Neolatinos</span>
+              <span class="qualis" style="background:#fef3c7;color:#92400e">Qualis A2</span>
+              <span class="text-xs text-gray-400">2022 · vol. 24, n. 3</span>
+            </div>
+            <h3 class="font-bold text-lg leading-snug mb-2" style="color:var(--navy);font-family:'Playfair Display',serif">
+              "Rio de Janeiro na Ficção: Cidade e Personagem"
+            </h3>
+            <p class="text-gray-500 text-sm leading-relaxed mb-3">
+              Análise da representação do Rio de Janeiro como espaço narrativo e como personagem coletiva em romances do século XX e XXI, traçando a evolução do imaginário literário sobre a cidade.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2 py-1 rounded" style="background:#fce7f3;color:#9d174d">#Rio de Janeiro</span>
+              <span class="text-xs px-2 py-1 rounded" style="background:#f3e8ff;color:#6b21a8">#romance urbano</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2 flex-shrink-0 lg:items-end">
+            <a href="#" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded" style="background:var(--navy);color:white">📄 Ler artigo</a>
+            <a href="#" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded border-2" style="border-color:var(--navy);color:var(--navy)">↓ PDF</a>
+            <span class="text-xs text-gray-400 text-right">DOI: 10.XXXX/alea.v24n3</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Article 7 -->
+    <article class="article-card reveal" data-area="historia" data-year="2021" data-title="Fontes Orais e Historiografia: Limites e Possibilidades">
+      <div class="article-accent" style="background:linear-gradient(180deg,#1e3a5f,#1a2744)"></div>
+      <div class="flex-1 p-6">
+        <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="journal-badge">📰 Topoi — Revista de História</span>
+              <span class="qualis" style="background:#d1fae5;color:#065f46">Qualis A1</span>
+              <span class="text-xs text-gray-400">2021 · vol. 22, n. 47</span>
+            </div>
+            <h3 class="font-bold text-lg leading-snug mb-2" style="color:var(--navy);font-family:'Playfair Display',serif">
+              "Fontes Orais e Historiografia: Limites e Possibilidades"
+            </h3>
+            <p class="text-gray-500 text-sm leading-relaxed mb-3">
+              Reflexão metodológica sobre o uso de fontes orais na pesquisa histórica brasileira, com estudo de caso baseado em entrevistas com veteranos da Marinha coletadas entre 2015 e 2020.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2 py-1 rounded" style="background:#e0f2fe;color:#0369a1">#história oral</span>
+              <span class="text-xs px-2 py-1 rounded" style="background:#fef9c3;color:#854d0e">#metodologia</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2 flex-shrink-0 lg:items-end">
+            <a href="#" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded" style="background:var(--navy);color:white">📄 Ler artigo</a>
+            <a href="#" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded border-2" style="border-color:var(--navy);color:var(--navy)">↓ PDF</a>
+            <span class="text-xs text-gray-400 text-right">DOI: 10.XXXX/topoi.v22n47</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Article 8 -->
+    <article class="article-card reveal" data-area="cultura" data-year="2020" data-title="A Escrita de Si: Diário, Autobiografia e Memórias no Brasil">
+      <div class="article-accent" style="background:linear-gradient(180deg,#92400e,#d97706)"></div>
+      <div class="flex-1 p-6">
+        <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="journal-badge">📰 Letras de Hoje</span>
+              <span class="qualis" style="background:#fef3c7;color:#92400e">Qualis A2</span>
+              <span class="text-xs text-gray-400">2020 · vol. 55, n. 4</span>
+            </div>
+            <h3 class="font-bold text-lg leading-snug mb-2" style="color:var(--navy);font-family:'Playfair Display',serif">
+              "A Escrita de Si: Diário, Autobiografia e Memórias no Brasil"
+            </h3>
+            <p class="text-gray-500 text-sm leading-relaxed mb-3">
+              Panorama crítico da produção autobiográfica brasileira do século XX, com análise das diferentes modalidades de escrita de si e suas implicações para a construção da subjetividade.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2 py-1 rounded" style="background:#fef3c7;color:#92400e">#autobiografia</span>
+              <span class="text-xs px-2 py-1 rounded" style="background:#f3e8ff;color:#6b21a8">#escrita de si</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2 flex-shrink-0 lg:items-end">
+            <a href="#" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded" style="background:var(--navy);color:white">📄 Ler artigo</a>
+            <a href="#" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded border-2" style="border-color:var(--navy);color:var(--navy)">↓ PDF</a>
+            <span class="text-xs text-gray-400 text-right">DOI: 10.XXXX/lh.v55n4</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Article 9 -->
+    <article class="article-card reveal" data-area="naval" data-year="2019" data-title="A Batalha Naval do Riachuelo na Memória Coletiva">
+      <div class="article-accent" style="background:linear-gradient(180deg,#1e40af,#3b82f6)"></div>
+      <div class="flex-1 p-6">
+        <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="journal-badge">📰 Varia Historia</span>
+              <span class="qualis" style="background:#d1fae5;color:#065f46">Qualis A1</span>
+              <span class="text-xs text-gray-400">2019 · vol. 35, n. 69</span>
+            </div>
+            <h3 class="font-bold text-lg leading-snug mb-2" style="color:var(--navy);font-family:'Playfair Display',serif">
+              "A Batalha Naval do Riachuelo na Memória Coletiva"
+            </h3>
+            <p class="text-gray-500 text-sm leading-relaxed mb-3">
+              Estudo sobre os processos de construção e transmissão da memória da Batalha do Riachuelo, desde a criação de monumentos no século XIX até as comemorações do bicentenário.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2 py-1 rounded" style="background:#e0f2fe;color:#0369a1">#Guerra do Paraguai</span>
+              <span class="text-xs px-2 py-1 rounded" style="background:#f0fdf4;color:#166534">#memória coletiva</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2 flex-shrink-0 lg:items-end">
+            <a href="#" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded" style="background:var(--navy);color:white">📄 Ler artigo</a>
+            <a href="#" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded border-2" style="border-color:var(--navy);color:var(--navy)">↓ PDF</a>
+            <span class="text-xs text-gray-400 text-right">DOI: 10.XXXX/vh.v35n69</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Article 10 -->
+    <article class="article-card reveal" data-area="memoria" data-year="2018" data-title="Patrimônio Imaterial e Identidade Cultural no Rio de Janeiro">
+      <div class="article-accent" style="background:linear-gradient(180deg,#5b21b6,#8b5cf6)"></div>
+      <div class="flex-1 p-6">
+        <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="journal-badge">📰 Patrimônio e Memória</span>
+              <span class="qualis" style="background:#fef3c7;color:#92400e">Qualis B1</span>
+              <span class="text-xs text-gray-400">2018 · vol. 14, n. 1</span>
+            </div>
+            <h3 class="font-bold text-lg leading-snug mb-2" style="color:var(--navy);font-family:'Playfair Display',serif">
+              "Patrimônio Imaterial e Identidade Cultural no Rio de Janeiro"
+            </h3>
+            <p class="text-gray-500 text-sm leading-relaxed mb-3">
+              Análise das políticas de preservação do patrimônio imaterial carioca e seus efeitos sobre a identidade cultural da cidade, com foco em manifestações afro-brasileiras e tradições portuárias.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2 py-1 rounded" style="background:#f3e8ff;color:#6b21a8">#patrimônio</span>
+              <span class="text-xs px-2 py-1 rounded" style="background:#fce7f3;color:#9d174d">#identidade cultural</span>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2 flex-shrink-0 lg:items-end">
+            <a href="#" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded" style="background:var(--navy);color:white">📄 Ler artigo</a>
+            <a href="#" target="_blank" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded border-2" style="border-color:var(--navy);color:var(--navy)">↓ PDF</a>
+            <span class="text-xs text-gray-400 text-right">DOI: 10.XXXX/pm.v14n1</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </div><!-- /#articles-list -->
+
+  <!-- Empty state -->
+  <div id="empty-state" class="hidden text-center py-20 text-gray-300">
+    <div class="text-6xl mb-4">🔍</div>
+    <p class="text-lg">Nenhum artigo encontrado para esses critérios.</p>
+    <button onclick="resetFilters()" class="mt-4 text-sm font-bold uppercase tracking-wider px-5 py-2 rounded" style="background:var(--navy);color:white">Limpar filtros</button>
+  </div>
+
+  <!-- Lattes CTA -->
+  <div class="mt-12 bg-white rounded shadow p-8 text-center reveal">
+    <div class="text-4xl mb-3">🎓</div>
+    <h3 class="text-xl font-bold mb-2" style="color:var(--navy)">Lista completa no Currículo Lattes</h3>
+    <p class="text-gray-400 text-sm mb-5">Para acessar todos os artigos, capítulos e produções acadêmicas, consulte o Currículo Lattes completo na plataforma CNPq.</p>
+    <div class="flex justify-center gap-4 flex-wrap">
+      <a href="http://lattes.cnpq.br/" target="_blank" class="inline-block px-8 py-3 rounded font-bold text-sm uppercase tracking-wide transition-transform hover:-translate-y-1" style="background:var(--navy);color:white">Acessar Lattes CNPq →</a>
+      <a href="quem-sou-eu-curriculo.html" class="inline-block px-8 py-3 rounded font-bold text-sm uppercase tracking-wide border-2 transition-all hover:border-yellow-400" style="border-color:var(--navy);color:var(--navy)">Ver Currículo completo</a>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="py-10 mt-10">
+  <div class="max-w-screen-lg mx-auto px-6 text-center">
+    <p class="font-bold text-lg mb-1" style="font-family:'Playfair Display',serif;color:var(--gold-light)">Meu Nome Completo</p>
+    <p class="text-sm text-blue-200 mb-5">Escritor · Pesquisador · Acadêmico</p>
+    <div class="flex justify-center gap-6 text-sm text-blue-300 mb-5 flex-wrap">
+      <a href="index.html" class="hover:text-white">Início</a>
+      <a href="quem-sou-eu-curriculo.html" class="hover:text-white">Currículo</a>
+      <a href="livros-capas.html" class="hover:text-white">Livros</a>
+      <a href="index.html#contato" class="hover:text-white">Contato</a>
+    </div>
+    <p class="text-xs text-blue-400">© 2025 Meu Nome. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobile-menu').classList.toggle('open'));
+  document.getElementById('close-menu').addEventListener('click',()=>document.getElementById('mobile-menu').classList.remove('open'));
+  function toggleMob(id){document.getElementById(id).classList.toggle('open');}
+  const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+
+  let currentArea = 'todos';
+  let currentSearch = '';
+
+  function setArea(btn){
+    document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    currentArea = btn.dataset.area;
+    applyFilters();
+  }
+
+  function filterArticles(){
+    currentSearch = document.getElementById('search-input').value.toLowerCase();
+    applyFilters();
+  }
+
+  function applyFilters(){
+    const articles = document.querySelectorAll('#articles-list article');
+    let visible = 0;
+    articles.forEach(a=>{
+      const matchArea = currentArea==='todos' || a.dataset.area===currentArea;
+      const matchSearch = !currentSearch || a.dataset.title.toLowerCase().includes(currentSearch) || a.textContent.toLowerCase().includes(currentSearch);
+      a.style.display = (matchArea && matchSearch) ? '' : 'none';
+      if(matchArea && matchSearch) visible++;
+    });
+    document.getElementById('results-count').textContent = visible;
+    document.getElementById('empty-state').classList.toggle('hidden', visible>0);
+  }
+
+  function sortArticles(){
+    const val = document.getElementById('sort-select').value;
+    const list = document.getElementById('articles-list');
+    const articles = Array.from(list.querySelectorAll('article'));
+    articles.sort((a,b)=>{
+      if(val==='recente') return parseInt(b.dataset.year)-parseInt(a.dataset.year);
+      if(val==='antigo') return parseInt(a.dataset.year)-parseInt(b.dataset.year);
+      if(val==='titulo') return a.dataset.title.localeCompare(b.dataset.title,'pt');
+      return 0;
+    });
+    articles.forEach(a=>list.appendChild(a));
+  }
+
+  function resetFilters(){
+    currentSearch=''; currentArea='todos';
+    document.getElementById('search-input').value='';
+    document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
+    document.querySelector('.pill[data-area="todos"]').classList.add('active');
+    applyFilters();
+  }
+</script>
+</body>
+</html>

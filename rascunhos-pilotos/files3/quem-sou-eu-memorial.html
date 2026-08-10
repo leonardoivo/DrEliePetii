@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Memorial | Meu Nome</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--gold:#c9a84c;--gold-light:#e8d5a0;--navy:#1a2744;}
+    body{font-family:'Lato',sans-serif;}
+    h1,h2,h3,h4{font-family:'Playfair Display',serif;}
+    #main-nav{background:white;border-bottom:2px solid var(--gold);}
+    .nav-logo{font-family:'Playfair Display',serif;color:var(--navy);}
+    .nav-item{position:relative;}
+    .nav-link{display:flex;align-items:center;gap:4px;padding:18px 14px;font-size:.88rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);transition:color .2s;white-space:nowrap;}
+    .nav-link:hover,.nav-link.active{color:var(--gold);}
+    .nav-link svg{width:12px;height:12px;transition:transform .2s;}
+    .nav-item:hover>.nav-link svg{transform:rotate(180deg);}
+    .dropdown{display:none;position:absolute;top:100%;left:0;background:white;min-width:220px;border-top:3px solid var(--gold);box-shadow:0 8px 32px rgba(0,0,0,.10);z-index:100;}
+    .nav-item:hover>.dropdown{display:block;}
+    .dropdown a{display:block;padding:11px 20px;font-size:.84rem;color:var(--navy);border-bottom:1px solid #f3f0e8;transition:background .15s,color .15s;}
+    .dropdown a:last-child{border-bottom:none;}
+    .dropdown a:hover,.dropdown a.active{background:#fdf8ee;color:var(--gold);font-weight:700;}
+    #hamburger{cursor:pointer;}
+    #mobile-menu{display:none;position:fixed;inset:0;z-index:200;background:white;overflow-y:auto;padding:80px 0 40px;}
+    #mobile-menu.open{display:block;}
+    .mob-link{display:block;padding:13px 28px;font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);border-bottom:1px solid #f0ebe0;cursor:pointer;}
+    .mob-sub{display:none;background:#fdf8ee;}
+    .mob-sub.open{display:block;}
+    .mob-sub a{display:block;padding:10px 44px;font-size:.85rem;color:#4a5568;border-bottom:1px solid #ece8df;}
+    .mob-sub a.active{color:var(--gold);font-weight:700;}
+    .breadcrumb a{color:var(--gold);}
+    /* warm amber hero for memorial */
+    .page-hero{background:linear-gradient(120deg,#fffbeb 0%,#fff 55%,#fef9ec 100%);border-bottom:3px solid #fde68a;}
+    .tab-link{padding:12px 22px;font-size:.82rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;border-bottom:3px solid transparent;color:#9ca3af;transition:color .2s,border-color .2s;white-space:nowrap;}
+    .tab-link:hover{color:var(--navy);}
+    .tab-link.active{color:var(--gold);border-bottom-color:var(--gold);}
+    /* chapter nav sidebar */
+    .chapter-nav a{display:block;padding:8px 14px;border-left:3px solid transparent;font-size:.84rem;color:#6b7280;transition:all .15s;}
+    .chapter-nav a:hover,.chapter-nav a.active{border-left-color:var(--gold);color:var(--navy);font-weight:700;background:#fdf8ee;}
+    /* memorial prose */
+    .memorial-prose{font-family:'Playfair Display',serif;font-size:1.06rem;line-height:1.95;color:#1f2937;}
+    .memorial-prose p{margin-bottom:1.5rem;}
+    .memorial-prose p:last-child{margin-bottom:0;}
+    .memorial-prose h2{font-size:1.55rem;font-weight:700;color:var(--navy);margin:3rem 0 1rem;padding-bottom:.5rem;border-bottom:2px solid var(--gold-light);}
+    .memorial-prose .drop-cap::first-letter{float:left;font-size:4.2rem;font-weight:700;line-height:.85;color:var(--gold);margin-right:10px;margin-top:4px;}
+    .memorial-prose blockquote{border-left:4px solid var(--gold);padding:16px 24px;background:#fdf8ee;margin:24px 0;border-radius:0 4px 4px 0;font-style:italic;}
+    /* photo caption */
+    .photo-block{background:white;border-radius:4px;box-shadow:0 4px 14px rgba(0,0,0,.08);overflow:hidden;}
+    .photo-placeholder{display:flex;align-items:center;justify-content:center;font-size:3rem;background:linear-gradient(135deg,#f0ebd8,#e8d5a0);}
+    footer{background:var(--navy);color:#c8d1e0;}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .55s,transform .55s;}
+    .reveal.visible{opacity:1;transform:none;}
+  </style>
+</head>
+<body class="bg-gray-50">
+
+<!-- NAV -->
+<nav id="main-nav" class="sticky top-0 z-50 shadow-sm">
+  <div class="max-w-screen-xl mx-auto px-4 flex items-center justify-between">
+    <a href="index.html" class="nav-logo text-xl py-4 font-bold">Meu Nome</a>
+    <div class="hidden lg:flex items-center">
+      <div class="nav-item">
+        <a href="#" class="nav-link active">Quem sou eu<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        <div class="dropdown">
+          <a href="quem-sou-eu-biografia.html">Biografia</a>
+          <a href="quem-sou-eu-curriculo.html">Currículo Lattes</a>
+          <a href="quem-sou-eu-discurso.html">Discurso de posse na AMRJ</a>
+          <a href="quem-sou-eu-memorial.html" class="active">Memorial</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="index.html#livros" class="nav-link">Livros<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a><div class="dropdown"><a href="livros-capas.html">Fotos das capas</a><a href="livros-comprar.html">Links para comprar</a><a href="livros-sinopses.html">Sinopses (PDFs)</a><a href="livros-prefacios.html">Prefácios (PDFs)</a></div></div>
+      <div class="nav-item"><a href="artigos-publicados.html" class="nav-link">Artigos publicados</a></div>
+      <div class="nav-item"><a href="entrevistas-jornais.html" class="nav-link">Entrevistas<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a><div class="dropdown"><a href="entrevistas-jornais.html">Jornais</a><a href="entrevistas-tv.html">TV</a><a href="entrevistas-radio.html">Rádio</a><a href="entrevistas-podcast.html">Podcast</a></div></div>
+      <div class="nav-item"><a href="index.html#palestras" class="nav-link">Palestras</a></div>
+      <div class="nav-item"><a href="index.html#encontros" class="nav-link">Encontros especiais<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a><div class="dropdown"><a href="index.html#fotos-encontros">Fotos</a></div></div>
+      <div class="nav-item"><a href="index.html#redes" class="nav-link">Redes Sociais<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a><div class="dropdown"><a href="https://facebook.com" target="_blank">Facebook</a><a href="https://instagram.com" target="_blank">Instagram</a><a href="https://youtube.com" target="_blank">YouTube</a><a href="https://tiktok.com" target="_blank">TikTok</a></div></div>
+      <div class="nav-item"><a href="index.html#blog" class="nav-link">Blog<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a><div class="dropdown"><a href="index.html#blog-posts">Blog</a><a href="index.html#outros-textos">Outros textos</a></div></div>
+      <div class="nav-item"><a href="index.html#contato" class="nav-link">Contato</a></div>
+    </div>
+    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2"><span class="block w-6 h-0.5 bg-gray-700"></span><span class="block w-6 h-0.5 bg-gray-700"></span><span class="block w-6 h-0.5 bg-gray-700"></span></button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu">
+  <button id="close-menu" class="absolute top-5 right-6 text-3xl text-gray-600">&times;</button>
+  <div><div class="mob-link" onclick="toggleMob('mob-quem')">Quem sou eu ▾</div><div id="mob-quem" class="mob-sub open"><a href="quem-sou-eu-biografia.html">Biografia</a><a href="quem-sou-eu-curriculo.html">Currículo Lattes</a><a href="quem-sou-eu-discurso.html">Discurso AMRJ</a><a href="quem-sou-eu-memorial.html" class="active">Memorial</a></div></div>
+  <div><div class="mob-link" onclick="toggleMob('mob-livros')">Livros ▾</div><div id="mob-livros" class="mob-sub"><a href="livros-capas.html">Fotos das capas</a><a href="livros-comprar.html">Onde comprar</a><a href="livros-sinopses.html">Sinopses</a><a href="livros-prefacios.html">Prefácios</a></div></div>
+  <div><a class="mob-link" href="artigos-publicados.html">Artigos publicados</a></div>
+  <div><div class="mob-link" onclick="toggleMob('mob-entrevistas')">Entrevistas ▾</div><div id="mob-entrevistas" class="mob-sub"><a href="entrevistas-jornais.html">Jornais</a><a href="entrevistas-tv.html">TV</a><a href="entrevistas-radio.html">Rádio</a><a href="entrevistas-podcast.html">Podcast</a></div></div>
+  <div><a class="mob-link" href="index.html#palestras">Palestras</a></div>
+  <div><div class="mob-link" onclick="toggleMob('mob-encontros')">Encontros ▾</div><div id="mob-encontros" class="mob-sub"><a href="index.html#fotos-encontros">Fotos</a></div></div>
+  <div><div class="mob-link" onclick="toggleMob('mob-redes')">Redes ▾</div><div id="mob-redes" class="mob-sub"><a href="https://facebook.com" target="_blank">Facebook</a><a href="https://instagram.com" target="_blank">Instagram</a><a href="https://youtube.com" target="_blank">YouTube</a><a href="https://tiktok.com" target="_blank">TikTok</a></div></div>
+  <div><div class="mob-link" onclick="toggleMob('mob-blog')">Blog ▾</div><div id="mob-blog" class="mob-sub"><a href="index.html#blog-posts">Blog</a><a href="index.html#outros-textos">Outros textos</a></div></div>
+  <div><a class="mob-link" href="index.html#contato">Contato</a></div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero py-14">
+  <div class="max-w-screen-lg mx-auto px-6">
+    <div class="breadcrumb text-sm mb-6 flex items-center gap-2">
+      <a href="index.html">Início</a><span class="text-gray-400">›</span><span class="text-gray-400">Quem sou eu</span><span class="text-gray-400">›</span><span style="color:var(--navy);font-weight:700">Memorial</span>
+    </div>
+    <div class="flex items-start gap-6">
+      <div class="text-5xl flex-shrink-0">📜</div>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest mb-1" style="color:var(--gold)">Quem sou eu</p>
+        <h1 class="text-4xl lg:text-5xl font-bold mb-3" style="color:var(--navy)">Memorial</h1>
+        <p class="text-gray-400 text-lg max-w-xl">Relato autobiográfico de minha trajetória intelectual, acadêmica e literária — escrito para guardar e compartilhar o que aprendi com a vida e com os livros</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TAB NAV -->
+<div class="bg-white border-b border-gray-100 sticky top-[62px] z-40 shadow-sm">
+  <div class="max-w-screen-lg mx-auto px-6 flex overflow-x-auto">
+    <a href="quem-sou-eu-biografia.html" class="tab-link">👤 Biografia</a>
+    <a href="quem-sou-eu-curriculo.html" class="tab-link">🎓 Currículo Lattes</a>
+    <a href="quem-sou-eu-discurso.html" class="tab-link">🏛️ Discurso AMRJ</a>
+    <a href="quem-sou-eu-memorial.html" class="tab-link active">📜 Memorial</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main class="max-w-screen-lg mx-auto px-6 py-14">
+  <div class="grid lg:grid-cols-4 gap-10">
+
+    <!-- Sticky chapter nav (desktop) -->
+    <div class="hidden lg:block">
+      <div class="sticky top-32">
+        <div class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3 px-2">Capítulos</div>
+        <nav class="chapter-nav">
+          <a href="#cap-origens" class="active">I. As origens</a>
+          <a href="#cap-formacao">II. A formação</a>
+          <a href="#cap-vocacao">III. A vocação</a>
+          <a href="#cap-carreira">IV. A carreira</a>
+          <a href="#cap-obras">V. As obras</a>
+          <a href="#cap-hoje">VI. O presente</a>
+        </nav>
+        <div class="mt-8 px-2">
+          <a href="#" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded w-full justify-center" style="background:var(--navy);color:white">↓ Baixar PDF</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Memorial text -->
+    <div class="lg:col-span-3">
+
+      <!-- Photo block -->
+      <div class="photo-block mb-10 reveal">
+        <div class="photo-placeholder h-56">📸</div>
+        <div class="p-4 text-center text-sm text-gray-400 italic">Legenda da foto: [Lugar e data]. Foto: [Crédito]</div>
+      </div>
+
+      <!-- Chapter I -->
+      <section id="cap-origens" class="mb-14 reveal">
+        <div class="text-xs font-bold uppercase tracking-widest mb-2" style="color:var(--gold)">Capítulo I</div>
+        <h2 class="text-3xl font-bold mb-6" style="color:var(--navy)">As origens</h2>
+        <div class="memorial-prose">
+          <p class="drop-cap">Há momentos em que a memória nos surpreende com a nitidez de uma fotografia antiga — cheiros, texturas, a luz de uma tarde que nunca mais voltou. Para mim, o ponto de partida de tudo é uma casa no [Bairro], com uma estante de livros que parecia tocar o teto e um avô que contava histórias com a mesma seriedade com que os navegadores consultavam as estrelas.</p>
+          <p>Nasci e cresci no Rio de Janeiro em uma família que valorizava a educação acima de tudo. Meu pai, [profissão do pai], tinha o hábito de ler em voz alta à mesa de jantar — jornais, romances, poemas. Aprendi muito cedo que as palavras não eram meros instrumentos de comunicação, mas a substância com que se constrói a identidade de um povo.</p>
+          <blockquote>
+            "A leitura foi, desde sempre, meu modo de estar no mundo — uma forma de ser simultaneamente eu mesmo e todos os outros."
+          </blockquote>
+          <p>A cidade era grande e complexa, cheia de contradições que ainda me fascinam. O Rio que conheci na infância — com seus morros, praias, tradições e vozes — nunca deixou de ser uma fonte inesgotável de perguntas sobre quem somos e de onde viemos.</p>
+        </div>
+      </section>
+
+      <!-- Chapter II -->
+      <section id="cap-formacao" class="mb-14 reveal">
+        <div class="text-xs font-bold uppercase tracking-widest mb-2" style="color:var(--gold)">Capítulo II</div>
+        <h2 class="text-3xl font-bold mb-6" style="color:var(--navy)">A formação</h2>
+        <div class="memorial-prose">
+          <p>A escola foi o espaço onde a curiosidade ganhou método. Tive a sorte de encontrar professores excepcionais que me ensinaram não apenas conteúdos, mas formas de pensar — a importância da dúvida, o valor da pesquisa, a beleza do rigor intelectual aliado à sensibilidade.</p>
+          <p>O ingresso na universidade representou a passagem definitiva para um universo que sempre intuí existir mas que só então se abriu completamente. Lá descobri que o conhecimento era infinito e que a humildade intelectual não é uma fraqueza, mas a condição de qualquer aprendizado genuíno.</p>
+          <p>A pós-graduação me colocou diante dos grandes desafios da pesquisa: a solidão produtiva da escrita, o diálogo com fontes e ideias que nos transformam, a responsabilidade de contribuir para o conhecimento acumulado da humanidade.</p>
+        </div>
+      </section>
+
+      <!-- Chapter III -->
+      <section id="cap-vocacao" class="mb-14 reveal">
+        <div class="text-xs font-bold uppercase tracking-widest mb-2" style="color:var(--gold)">Capítulo III</div>
+        <h2 class="text-3xl font-bold mb-6" style="color:var(--navy)">A vocação</h2>
+        <div class="memorial-prose">
+          <p>A vocação para a escrita não chegou como uma revelação súbita. Foi se construindo lentamente, em noites de caderno aberto, em conversas com escritores mais experientes, em leituras que me deixavam com a sensação de que havia algo ainda por ser dito — e que talvez eu pudesse dizê-lo.</p>
+          <p>O primeiro livro publicado foi ao mesmo tempo uma realização e um começo. Aprendi que escrever não é transcrever pensamentos prontos, mas construir pensamento no próprio ato da escrita — uma descoberta que nunca deixa de me surpreender.</p>
+          <blockquote>
+            "Cada livro é uma conversa com o leitor que ainda não conheço, mas em quem acredito."
+          </blockquote>
+        </div>
+      </section>
+
+      <!-- Chapter IV -->
+      <section id="cap-carreira" class="mb-14 reveal">
+        <div class="text-xs font-bold uppercase tracking-widest mb-2" style="color:var(--gold)">Capítulo IV</div>
+        <h2 class="text-3xl font-bold mb-6" style="color:var(--navy)">A carreira</h2>
+        <div class="memorial-prose">
+          <p>A vida profissional se desdobrou em múltiplas frentes — o magistério, a pesquisa, a escrita, a participação em instituições culturais. Cada uma dessas dimensões enriqueceu as outras de maneiras que nunca poderia ter previsto.</p>
+          <p>A docência me ensinou que ensinar é também aprender — e que nenhuma ideia está verdadeiramente consolidada até que possamos explicá-la de modo simples e verdadeiro para quem ainda não a conhece.</p>
+        </div>
+      </section>
+
+      <!-- Chapter V -->
+      <section id="cap-obras" class="mb-14 reveal">
+        <div class="text-xs font-bold uppercase tracking-widest mb-2" style="color:var(--gold)">Capítulo V</div>
+        <h2 class="text-3xl font-bold mb-6" style="color:var(--navy)">As obras</h2>
+        <div class="memorial-prose">
+          <p>Cada livro que escrevi nasceu de uma necessidade — de entender algo, de guardar algo, de dialogar com algo. Não concebo a escrita como um ato de vaidade, mas como uma forma de responsabilidade com o leitor e com o tempo.</p>
+          <p>As obras que mais me orgulham não são necessariamente as mais premiadas ou as mais vendidas, mas aquelas em que sinto que consegui dizer com clareza e honestidade o que tinha a dizer. Esse é o critério que me interessa.</p>
+        </div>
+        <div class="mt-6">
+          <a href="index.html#livros" class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider px-5 py-2.5 rounded transition-transform hover:-translate-y-1" style="background:var(--navy);color:white">📚 Ver todos os livros →</a>
+        </div>
+      </section>
+
+      <!-- Chapter VI -->
+      <section id="cap-hoje" class="mb-10 reveal">
+        <div class="text-xs font-bold uppercase tracking-widest mb-2" style="color:var(--gold)">Capítulo VI</div>
+        <h2 class="text-3xl font-bold mb-6" style="color:var(--navy)">O presente</h2>
+        <div class="memorial-prose">
+          <p>Chego ao presente com gratidão e com curiosidade intacta. Os anos trouxeram perspectiva — a capacidade de ver os erros sem pena excessiva e as conquistas sem orgulho desproporcional. Aprendi que a vida intelectual é uma maratona, não uma corrida de velocidade.</p>
+          <p>Continuo escrevendo, pesquisando, lendo, conversando. O projeto mais urgente é sempre o próximo — a próxima página em branco, a próxima pergunta sem resposta, o próximo leitor que ainda não encontrei mas que, tenho certeza, está por aí esperando.</p>
+          <blockquote>
+            "Enquanto houver uma página em branco, há esperança. Enquanto houver esperança, há razão para escrever."
+          </blockquote>
+        </div>
+      </section>
+
+      <!-- Download -->
+      <div class="flex gap-4 flex-wrap reveal">
+        <a href="#" class="inline-flex items-center gap-2 px-6 py-3 rounded font-bold text-sm uppercase tracking-wide transition-transform hover:-translate-y-1" style="background:var(--navy);color:white">↓ Baixar Memorial em PDF</a>
+        <a href="quem-sou-eu-biografia.html" class="inline-flex items-center gap-2 px-6 py-3 rounded font-bold text-sm uppercase tracking-wide border-2 transition-all" style="border-color:var(--navy);color:var(--navy)">← Ver Biografia</a>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="py-10 mt-10">
+  <div class="max-w-screen-lg mx-auto px-6 text-center">
+    <p class="font-bold text-lg mb-1" style="font-family:'Playfair Display',serif;color:var(--gold-light)">Meu Nome Completo</p>
+    <p class="text-sm text-blue-200 mb-5">Escritor · Pesquisador · Acadêmico</p>
+    <div class="flex justify-center gap-6 text-sm text-blue-300 mb-5 flex-wrap">
+      <a href="index.html" class="hover:text-white">Início</a>
+      <a href="quem-sou-eu-biografia.html" class="hover:text-white">Biografia</a>
+      <a href="index.html#livros" class="hover:text-white">Livros</a>
+      <a href="index.html#contato" class="hover:text-white">Contato</a>
+    </div>
+    <p class="text-xs text-blue-400">© 2025 Meu Nome. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobile-menu').classList.toggle('open'));
+  document.getElementById('close-menu').addEventListener('click',()=>document.getElementById('mobile-menu').classList.remove('open'));
+  function toggleMob(id){document.getElementById(id).classList.toggle('open');}
+  const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+  // Highlight chapter nav on scroll
+  const sections=document.querySelectorAll('section[id]');
+  const chLinks=document.querySelectorAll('.chapter-nav a');
+  window.addEventListener('scroll',()=>{
+    let cur='';
+    sections.forEach(s=>{if(window.scrollY>=s.offsetTop-180)cur=s.id;});
+    chLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+cur);});
+  });
+</script>
+</body>
+</html>

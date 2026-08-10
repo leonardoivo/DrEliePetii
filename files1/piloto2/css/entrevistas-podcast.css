@@ -1,0 +1,21 @@
+/* ===== Page-specific styles: entrevistas-podcast ===== */
+
+:root { --gold:#c9a84c; --gold-light:#e8d5a0; --navy:#1a4427; }
+body { font-family:"Lato",sans-serif; }
+#main-nav { background:white; border-bottom:2px solid var(--gold); }
+.nav-logo { font-family:"Playfair Display",serif; color:var(--navy); white-space:nowrap; }
+.nav-link { display:flex; align-items:center; gap:4px; padding:18px 10px; font-size:.88rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--navy); transition:color .2s; white-space:nowrap; }
+.dropdown { display:none; position:absolute; top:100%; left:0; background:white; min-width:210px; border-top:3px solid var(--gold); box-shadow:0 8px 32px rgba(0,0,0,.10); z-index:100; }
+.dropdown a { display:block; padding:11px 20px; font-size:.84rem; color:var(--navy); border-bottom:1px solid #f3f0e8; transition:background .15s,color .15s; }
+.dropdown a:hover, .dropdown a.active { background:#9de17b; color:var(--gold); font-weight:700; }
+#hamburger { cursor:pointer; }
+.mob-link { display:block; padding:13px 28px; font-size:.95rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--navy); border-bottom:1px solid #f0ebe0; cursor:pointer; }
+.mob-sub { display:none; background:#9de17b; }
+.mob-sub a { display:block; padding:10px 44px; font-size:.85rem; color:#4a5568; border-bottom:1px solid #ece8df; }
+.page-hero { background:linear-gradient(120deg,#9de17b 0%,#fff 60%,#ede9fe 100%); border-bottom:3px solid #ddd6fe; }
+.pod-card { background:white; border-radius:8px; box-shadow:0 4px 18px rgba(0,0,0,.07); transition:transform .2s,box-shadow .2s; overflow:hidden; }
+.pod-card:hover { transform:translateY(-5px); box-shadow:0 16px 40px rgba(0,0,0,.12); }
+.pod-cover { width:100%; aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:3.5rem; }
+.stream-btn { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:20px; font-size:.72rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; transition:opacity .2s; }
+.stream-btn:hover { opacity:.8; }
+.reveal { opacity:0; transform:translateY(24px); transition:opacity .5s,transform .5s; }

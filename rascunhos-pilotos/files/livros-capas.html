@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fotos das Capas | Meu Nome</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--gold:#c9a84c;--gold-light:#e8d5a0;--navy:#1a2744;}
+    body{font-family:'Lato',sans-serif;}
+    h1,h2,h3{font-family:'Playfair Display',serif;}
+    #main-nav{background:white;border-bottom:2px solid var(--gold);}
+    .nav-logo{font-family:'Playfair Display',serif;color:var(--navy);}
+    .nav-item{position:relative;}
+    .nav-link{display:flex;align-items:center;gap:4px;padding:18px 14px;font-size:.88rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);transition:color .2s;white-space:nowrap;}
+    .nav-link:hover,.nav-link.active{color:var(--gold);}
+    .nav-link svg{width:12px;height:12px;transition:transform .2s;}
+    .nav-item:hover>.nav-link svg{transform:rotate(180deg);}
+    .dropdown{display:none;position:absolute;top:100%;left:0;background:white;min-width:210px;border-top:3px solid var(--gold);box-shadow:0 8px 32px rgba(0,0,0,.10);z-index:100;}
+    .nav-item:hover>.dropdown{display:block;}
+    .dropdown a{display:block;padding:11px 20px;font-size:.84rem;color:var(--navy);border-bottom:1px solid #f3f0e8;transition:background .15s,color .15s;}
+    .dropdown a:last-child{border-bottom:none;}
+    .dropdown a:hover,.dropdown a.active{background:#fdf8ee;color:var(--gold);font-weight:700;}
+    #hamburger{cursor:pointer;}
+    #mobile-menu{display:none;position:fixed;inset:0;z-index:200;background:white;overflow-y:auto;padding:80px 0 40px;}
+    #mobile-menu.open{display:block;}
+    .mob-link{display:block;padding:13px 28px;font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);border-bottom:1px solid #f0ebe0;cursor:pointer;}
+    .mob-sub{display:none;background:#fdf8ee;}
+    .mob-sub.open{display:block;}
+    .mob-sub a{display:block;padding:10px 44px;font-size:.85rem;color:#4a5568;border-bottom:1px solid #ece8df;}
+    .mob-sub a.active{color:var(--gold);font-weight:700;}
+    .breadcrumb a{color:var(--gold);}
+    .page-hero{background:linear-gradient(120deg,#fdf8ee 0%,#fff 55%,#f5f0e5 100%);border-bottom:3px solid var(--gold-light);}
+    .tab-link{padding:12px 22px;font-size:.82rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;border-bottom:3px solid transparent;color:#9ca3af;transition:color .2s,border-color .2s;white-space:nowrap;}
+    .tab-link:hover{color:var(--navy);}
+    .tab-link.active{color:var(--gold);border-bottom-color:var(--gold);}
+    /* book card */
+    .book-card{background:white;border-radius:6px;box-shadow:0 4px 20px rgba(0,0,0,.08);overflow:hidden;transition:transform .25s,box-shadow .25s;cursor:pointer;}
+    .book-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 16px 40px rgba(0,0,0,.15);}
+    .book-cover{width:100%;aspect-ratio:2/3;display:flex;align-items:center;justify-content:center;font-size:4rem;position:relative;}
+    .book-year-badge{position:absolute;top:10px;right:10px;background:var(--gold);color:white;font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:3px 9px;border-radius:20px;}
+    /* lightbox */
+    #lightbox{display:none;position:fixed;inset:0;z-index:300;background:rgba(10,15,30,.92);align-items:center;justify-content:center;}
+    #lightbox.open{display:flex;}
+    #lb-inner{background:white;border-radius:8px;max-width:520px;width:90%;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.4);}
+    #lb-cover{width:100%;aspect-ratio:2/3;max-height:400px;display:flex;align-items:center;justify-content:center;font-size:7rem;}
+    #lb-close{position:absolute;top:18px;right:22px;font-size:2rem;color:white;cursor:pointer;line-height:1;}
+    .tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px;}
+    footer{background:var(--navy);color:#c8d1e0;}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .5s,transform .5s;}
+    .reveal.visible{opacity:1;transform:none;}
+  </style>
+</head>
+<body class="bg-gray-50">
+
+<!-- NAV -->
+<nav id="main-nav" class="sticky top-0 z-50 shadow-sm">
+  <div class="max-w-screen-xl mx-auto px-4 flex items-center justify-between">
+    <a href="index.html" class="nav-logo text-xl py-4 font-bold">Meu Nome</a>
+    <div class="hidden lg:flex items-center">
+      <div class="nav-item"><a href="quem-sou-eu-biografia.html" class="nav-link">Quem sou eu<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a><div class="dropdown"><a href="quem-sou-eu-biografia.html">Biografia</a><a href="quem-sou-eu-curriculo.html">Currículo Lattes</a><a href="quem-sou-eu-discurso.html">Discurso de posse na AMRJ</a><a href="quem-sou-eu-memorial.html">Memorial</a></div></div>
+      <div class="nav-item">
+        <a href="#" class="nav-link active">Livros<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        <div class="dropdown">
+          <a href="livros-capas.html" class="active">Fotos das capas</a>
+          <a href="livros-comprar.html">Links para comprar</a>
+          <a href="livros-sinopses.html">Sinopses (PDFs)</a>
+          <a href="livros-prefacios.html">Prefácios (PDFs)</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="artigos-publicados.html" class="nav-link">Artigos publicados</a></div>
+      <div class="nav-item"><a href="entrevistas-jornais.html" class="nav-link">Entrevistas<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a><div class="dropdown"><a href="entrevistas-jornais.html">Jornais</a><a href="entrevistas-tv.html">TV</a><a href="entrevistas-radio.html">Rádio</a><a href="entrevistas-podcast.html">Podcast</a></div></div>
+      <div class="nav-item"><a href="index.html#palestras" class="nav-link">Palestras</a></div>
+      <div class="nav-item"><a href="index.html#encontros" class="nav-link">Encontros especiais<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a><div class="dropdown"><a href="index.html#fotos-encontros">Fotos</a></div></div>
+      <div class="nav-item"><a href="index.html#redes" class="nav-link">Redes Sociais<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a><div class="dropdown"><a href="https://facebook.com" target="_blank">Facebook</a><a href="https://instagram.com" target="_blank">Instagram</a><a href="https://youtube.com" target="_blank">YouTube</a><a href="https://tiktok.com" target="_blank">TikTok</a></div></div>
+      <div class="nav-item"><a href="index.html#blog" class="nav-link">Blog<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a><div class="dropdown"><a href="index.html#blog-posts">Blog</a><a href="index.html#outros-textos">Outros textos</a></div></div>
+      <div class="nav-item"><a href="index.html#contato" class="nav-link">Contato</a></div>
+    </div>
+    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2"><span class="block w-6 h-0.5 bg-gray-700"></span><span class="block w-6 h-0.5 bg-gray-700"></span><span class="block w-6 h-0.5 bg-gray-700"></span></button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu">
+  <button id="close-menu" class="absolute top-5 right-6 text-3xl text-gray-600">&times;</button>
+  <div><div class="mob-link" onclick="toggleMob('mob-quem')">Quem sou eu ▾</div><div id="mob-quem" class="mob-sub"><a href="quem-sou-eu-biografia.html">Biografia</a><a href="quem-sou-eu-curriculo.html">Currículo Lattes</a><a href="quem-sou-eu-discurso.html">Discurso AMRJ</a><a href="quem-sou-eu-memorial.html">Memorial</a></div></div>
+  <div><div class="mob-link" onclick="toggleMob('mob-livros')">Livros ▾</div><div id="mob-livros" class="mob-sub open"><a href="livros-capas.html" class="active">Fotos das capas</a><a href="livros-comprar.html">Links para comprar</a><a href="livros-sinopses.html">Sinopses (PDFs)</a><a href="livros-prefacios.html">Prefácios (PDFs)</a></div></div>
+  <div><a class="mob-link" href="artigos-publicados.html">Artigos publicados</a></div>
+  <div><div class="mob-link" onclick="toggleMob('mob-entrevistas')">Entrevistas ▾</div><div id="mob-entrevistas" class="mob-sub"><a href="entrevistas-jornais.html">Jornais</a><a href="entrevistas-tv.html">TV</a><a href="entrevistas-radio.html">Rádio</a><a href="entrevistas-podcast.html">Podcast</a></div></div>
+  <div><a class="mob-link" href="index.html#palestras">Palestras</a></div>
+  <div><div class="mob-link" onclick="toggleMob('mob-encontros')">Encontros ▾</div><div id="mob-encontros" class="mob-sub"><a href="index.html#fotos-encontros">Fotos</a></div></div>
+  <div><div class="mob-link" onclick="toggleMob('mob-redes')">Redes ▾</div><div id="mob-redes" class="mob-sub"><a href="https://facebook.com" target="_blank">Facebook</a><a href="https://instagram.com" target="_blank">Instagram</a><a href="https://youtube.com" target="_blank">YouTube</a><a href="https://tiktok.com" target="_blank">TikTok</a></div></div>
+  <div><div class="mob-link" onclick="toggleMob('mob-blog')">Blog ▾</div><div id="mob-blog" class="mob-sub"><a href="index.html#blog-posts">Blog</a><a href="index.html#outros-textos">Outros textos</a></div></div>
+  <div><a class="mob-link" href="index.html#contato">Contato</a></div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero py-14">
+  <div class="max-w-screen-lg mx-auto px-6">
+    <div class="breadcrumb text-sm mb-6 flex items-center gap-2">
+      <a href="index.html">Início</a><span class="text-gray-400">›</span><span class="text-gray-400">Livros</span><span class="text-gray-400">›</span><span style="color:var(--navy);font-weight:700">Fotos das Capas</span>
+    </div>
+    <div class="flex items-center gap-5">
+      <div class="text-5xl">📚</div>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest mb-1" style="color:var(--gold)">Livros</p>
+        <h1 class="text-4xl lg:text-5xl font-bold" style="color:var(--navy)">Fotos das Capas</h1>
+        <p class="text-gray-400 mt-2">Galeria completa das obras publicadas — clique em qualquer capa para ampliar</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TAB NAV -->
+<div class="bg-white border-b border-gray-100 sticky top-[62px] z-40 shadow-sm">
+  <div class="max-w-screen-lg mx-auto px-6 flex overflow-x-auto">
+    <a href="livros-capas.html" class="tab-link active">📚 Fotos das Capas</a>
+    <a href="livros-comprar.html" class="tab-link">🛒 Onde Comprar</a>
+    <a href="livros-sinopses.html" class="tab-link">📄 Sinopses</a>
+    <a href="livros-prefacios.html" class="tab-link">📑 Prefácios</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<main class="max-w-screen-lg mx-auto px-6 py-14">
+
+  <!-- Filter bar -->
+  <div class="flex flex-wrap gap-3 mb-10 reveal">
+    <span class="text-sm font-bold text-gray-400 self-center mr-2">Filtrar:</span>
+    <button onclick="filterBooks(this,'todos')" class="filter-btn text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full active-filter" style="background:var(--navy);color:white">Todos</button>
+    <button onclick="filterBooks(this,'romance')" class="filter-btn text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full" style="background:#f3f0e8;color:var(--navy)">Romance</button>
+    <button onclick="filterBooks(this,'historia')" class="filter-btn text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full" style="background:#f3f0e8;color:var(--navy)">História</button>
+    <button onclick="filterBooks(this,'ensaio')" class="filter-btn text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full" style="background:#f3f0e8;color:var(--navy)">Ensaio</button>
+    <button onclick="filterBooks(this,'poesia')" class="filter-btn text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full" style="background:#f3f0e8;color:var(--navy)">Poesia</button>
+  </div>
+
+  <!-- Grid -->
+  <div id="books-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 reveal">
+
+    <div class="book-card" data-genre="romance" data-title="Título do Primeiro Livro" data-year="2024" data-publisher="Editora X" data-desc="Uma narrativa envolvente sobre memória e identidade no Brasil contemporâneo. Obra premiada e aclamada pela crítica." onclick="openLB(this)">
+      <div class="book-cover" style="background:linear-gradient(160deg,#1a2744,#2d4a7a);">📖<div class="book-year-badge">2024</div></div>
+      <div class="p-4"><h3 class="font-bold text-sm leading-snug mb-1" style="color:var(--navy)">Título do Primeiro Livro</h3><p class="text-xs text-gray-400">Romance · Editora X</p></div>
+    </div>
+
+    <div class="book-card" data-genre="historia" data-title="A Marinha e o Brasil" data-year="2022" data-publisher="Editora Naval" data-desc="Pesquisa histórica aprofundada sobre a presença da Marinha na formação da identidade nacional brasileira." onclick="openLB(this)">
+      <div class="book-cover" style="background:linear-gradient(160deg,#064e3b,#065f46);">📗<div class="book-year-badge">2022</div></div>
+      <div class="p-4"><h3 class="font-bold text-sm leading-snug mb-1" style="color:var(--navy)">A Marinha e o Brasil</h3><p class="text-xs text-gray-400">História · Editora Naval</p></div>
+    </div>
+
+    <div class="book-card" data-genre="ensaio" data-title="Ensaios sobre Memória" data-year="2021" data-publisher="Editora Y" data-desc="Coletânea de ensaios que explora as relações entre memória, identidade cultural e produção literária no Brasil." onclick="openLB(this)">
+      <div class="book-cover" style="background:linear-gradient(160deg,#7c2d12,#9a3412);">📕<div class="book-year-badge">2021</div></div>
+      <div class="p-4"><h3 class="font-bold text-sm leading-snug mb-1" style="color:var(--navy)">Ensaios sobre Memória</h3><p class="text-xs text-gray-400">Ensaio · Editora Y</p></div>
+    </div>
+
+    <div class="book-card" data-genre="poesia" data-title="Versos do Mar" data-year="2019" data-publisher="Editora Azul" data-desc="Primeira coletânea de poesia, marcada por imagens marinhas e reflexões sobre o tempo e a condição humana." onclick="openLB(this)">
+      <div class="book-cover" style="background:linear-gradient(160deg,#1e3a5f,#1a5276);">📘<div class="book-year-badge">2019</div></div>
+      <div class="p-4"><h3 class="font-bold text-sm leading-snug mb-1" style="color:var(--navy)">Versos do Mar</h3><p class="text-xs text-gray-400">Poesia · Editora Azul</p></div>
+    </div>
+
+    <div class="book-card" data-genre="romance" data-title="O Rio que Passa" data-year="2017" data-publisher="Editora Z" data-desc="Romance ambientado no Rio de Janeiro do início do século XX, explorando as transformações urbanas e sociais da cidade." onclick="openLB(this)">
+      <div class="book-cover" style="background:linear-gradient(160deg,#4a1942,#7b2d8b);">📙<div class="book-year-badge">2017</div></div>
+      <div class="p-4"><h3 class="font-bold text-sm leading-snug mb-1" style="color:var(--navy)">O Rio que Passa</h3><p class="text-xs text-gray-400">Romance · Editora Z</p></div>
+    </div>
+
+    <div class="book-card" data-genre="historia" data-title="Navegadores e Letras" data-year="2015" data-publisher="Editora W" data-desc="Estudo sobre a cultura letrada entre os navegadores e marinheiros brasileiros nos séculos XVIII e XIX." onclick="openLB(this)">
+      <div class="book-cover" style="background:linear-gradient(160deg,#92400e,#b45309);">📒<div class="book-year-badge">2015</div></div>
+      <div class="p-4"><h3 class="font-bold text-sm leading-snug mb-1" style="color:var(--navy)">Navegadores e Letras</h3><p class="text-xs text-gray-400">História · Editora W</p></div>
+    </div>
+
+    <div class="book-card" data-genre="ensaio" data-title="O Lugar da Cultura" data-year="2012" data-publisher="Editora V" data-desc="Ensaio sobre o lugar da cultura na sociedade brasileira contemporânea, com análise de políticas culturais e produção artística." onclick="openLB(this)">
+      <div class="book-cover" style="background:linear-gradient(160deg,#1a3a2a,#155724);">📔<div class="book-year-badge">2012</div></div>
+      <div class="p-4"><h3 class="font-bold text-sm leading-snug mb-1" style="color:var(--navy)">O Lugar da Cultura</h3><p class="text-xs text-gray-400">Ensaio · Editora V</p></div>
+    </div>
+
+    <div class="book-card" data-genre="romance" data-title="Primeira Obra" data-year="2008" data-publisher="Editora U" data-desc="Obra de estreia, que já apontava os temas que marcariam toda a trajetória literária: memória, identidade e o Rio de Janeiro." onclick="openLB(this)">
+      <div class="book-cover" style="background:linear-gradient(160deg,#2c2c54,#3c3c8a);">📓<div class="book-year-badge">2008</div></div>
+      <div class="p-4"><h3 class="font-bold text-sm leading-snug mb-1" style="color:var(--navy)">Primeira Obra</h3><p class="text-xs text-gray-400">Romance · Editora U</p></div>
+    </div>
+
+  </div>
+</main>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLB(event)">
+  <span id="lb-close" onclick="closeLB()">&times;</span>
+  <div id="lb-inner">
+    <div id="lb-cover" style="font-size:7rem;background:#f0ebd8;"></div>
+    <div class="p-6">
+      <div class="text-xs font-bold uppercase tracking-widest mb-1" style="color:var(--gold)" id="lb-meta"></div>
+      <h3 class="text-2xl font-bold mb-3" style="font-family:'Playfair Display',serif;color:var(--navy)" id="lb-title"></h3>
+      <p class="text-gray-500 text-sm leading-relaxed mb-5" id="lb-desc"></p>
+      <div class="flex gap-3 flex-wrap">
+        <a href="livros-comprar.html" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded" style="background:var(--navy);color:white">🛒 Onde comprar</a>
+        <a href="livros-sinopses.html" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded border-2" style="border-color:var(--navy);color:var(--navy)">📄 Sinopse PDF</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="py-10 mt-10">
+  <div class="max-w-screen-lg mx-auto px-6 text-center">
+    <p class="font-bold text-lg mb-1" style="font-family:'Playfair Display',serif;color:var(--gold-light)">Meu Nome Completo</p>
+    <p class="text-sm text-blue-200 mb-5">Escritor · Pesquisador · Acadêmico</p>
+    <div class="flex justify-center gap-6 text-sm text-blue-300 mb-5 flex-wrap">
+      <a href="index.html" class="hover:text-white">Início</a>
+      <a href="livros-capas.html" class="hover:text-white">Livros</a>
+      <a href="index.html#artigos" class="hover:text-white">Artigos</a>
+      <a href="index.html#contato" class="hover:text-white">Contato</a>
+    </div>
+    <p class="text-xs text-blue-400">© 2025 Meu Nome. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobile-menu').classList.toggle('open'));
+  document.getElementById('close-menu').addEventListener('click',()=>document.getElementById('mobile-menu').classList.remove('open'));
+  function toggleMob(id){document.getElementById(id).classList.toggle('open');}
+  const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+
+  function filterBooks(btn, genre){
+    document.querySelectorAll('.filter-btn').forEach(b=>{b.style.background='#f3f0e8';b.style.color='var(--navy)';});
+    btn.style.background='var(--navy)';btn.style.color='white';
+    document.querySelectorAll('#books-grid .book-card').forEach(c=>{
+      c.style.display=(genre==='todos'||c.dataset.genre===genre)?'':'none';
+    });
+  }
+
+  function openLB(card){
+    const lb=document.getElementById('lightbox');
+    document.getElementById('lb-title').textContent=card.dataset.title;
+    document.getElementById('lb-meta').textContent=card.dataset.year+' · '+card.dataset.publisher;
+    document.getElementById('lb-desc').textContent=card.dataset.desc;
+    const cover=card.querySelector('.book-cover');
+    const lbCover=document.getElementById('lb-cover');
+    lbCover.style.background=cover.style.background;
+    lbCover.textContent=cover.textContent.replace(/[0-9]/g,'').trim();
+    lb.classList.add('open');
+  }
+  function closeLB(e){
+    if(!e||e.target===document.getElementById('lightbox')||e.target===document.getElementById('lb-close'))
+      document.getElementById('lightbox').classList.remove('open');
+  }
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('lightbox').classList.remove('open');});
+</script>
+</body>
+</html>

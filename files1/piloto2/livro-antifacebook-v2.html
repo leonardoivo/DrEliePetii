@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="shortcut icon" href="img/DrElieLogo.ico"/>
+  <title>O Antifacebook | Elie Cheniaux</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/livro-antifacebook-v2.css">
+</head>
+<body>
+
+<!-- ══ NAV ══════════════════════════════════════════════════════ -->
+<nav id="main-nav" class="shadow-sm">
+  <div class="max-w-screen-xl mx-auto px-4 flex items-center justify-between">
+    <div class="flex items-center gap-3 flex-shrink-0 mr-6">
+     <img src="img/DrElieLogo.avif" alt="Logo" class="w-10 h-10 border-2 border-var(--gold)"/>
+      <a href="index.html" class="nav-logo text-xl py-4 font-bold">Elie Cheniaux</a>
+    </div>
+    <div class="hidden lg:flex items-center flex-wrap justify-end">
+      <div class="nav-item">
+        <a href="quem-sou-eu-biografia.html" class="nav-link">Quem sou eu<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        <div class="dropdown">
+          <a href="quem-sou-eu-biografia.html">Biografia</a>
+          <a href="BiPoLaB.html">Bipolab</a>
+          <a href="quem-sou-eu-curriculo.html">Currículo Lattes</a>
+          <a href="quem-sou-eu-discurso.html">Discurso de posse na AMRJ</a>
+          <a href="quem-sou-eu-memorial.html">Memorial</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="#" class="nav-link active">Livros<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        <div class="dropdown">
+      <a href="livro-cinema-loucura-v2.html">Cinema e Loucura</a>
+      <a href="livro-fogo-cinzas-v2.html">Fogo & Cinzas</a>
+      <a href="livro-manual-psicopatologia-v2.html">Manual de Psicopatologia</a>
+      <a href="livro-antifacebook-v2.html">O Antifacebook</a>
+      <a href="livro-sindrome-pre-menstrual-v2.html">Síndrome Pré-Menstrual</a>
+      <a href="livro-woody-allen-v2.html" class="active">Woody Allen</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="index.html#artigos" class="nav-link">Artigos científicos</a></div>
+      <div class="nav-item">
+        <a href="entrevistas-jornais.html" class="nav-link">Entrevistas<svg viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+        <div class="dropdown">
+          <a href="entrevistas-jornais.html">Jornais</a>
+          <a href="entrevistas-tv.html">TV</a>
+          <a href="entrevistas-podcast.html">Podcast</a>
+        </div>
+      </div>
+      <div class="nav-item"><a href="palestras.html" class="nav-link">Palestras</a></div>
+       <!-- Encontros -->
+      <div class="nav-item">
+        <a href="#encontros" class="nav-link">Encontros especiais
+          <svg viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <div class="dropdown">
+          <a href="#fotos-encontros">Fotos</a>
+        </div>
+      </div>
+   <!-- Redes -->
+      <div class="nav-item">
+        <a href="#redes" class="nav-link">Redes Sociais
+          <svg viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <div class="dropdown">
+          <a href="https://facebook.com" target="_blank">Facebook</a>
+          <a href="https://instagram.com" target="_blank">Instagram</a>
+          <a href="https://youtube.com" target="_blank">YouTube</a>
+        </div>
+      </div>
+      
+            <!-- Blog -->
+      <div class="nav-item">
+        <a href="https://eliecheniaux.blogspot.com/" class="nav-link">Blog</a>
+      </div>
+
+            <!-- Outros textos -->
+      <div class="nav-item">
+        <a href="https://criticos.com.br/?p=12181&cat=4" class="nav-link">Outros textos</a>
+      </div>
+      <div class="nav-item"><a href="index.html#contato" class="nav-link">Contato</a></div>
+    </div>
+    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Abrir menu">
+      <span class="block w-6 h-0.5 bg-gray-700"></span>
+      <span class="block w-6 h-0.5 bg-gray-700"></span>
+      <span class="block w-6 h-0.5 bg-gray-700"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══ MOBILE MENU ═══════════════════════════════════════════════ -->
+<div id="mobile-menu">
+  <button id="close-menu" class="absolute top-5 right-6 text-3xl text-gray-600" aria-label="Fechar menu">&times;</button>
+  <div>
+    <div class="mob-link" onclick="toggleMob('mob-quem')">Quem sou eu ▾</div>
+    <div id="mob-quem" class="mob-sub">
+      <a href="quem-sou-eu-biografia.html">Biografia</a>
+      <a href="BiPoLaB.html">Bipolab</a>
+      <a href="quem-sou-eu-curriculo.html">Currículo Lattes</a>
+      <a href="quem-sou-eu-discurso.html">Discurso AMRJ</a>
+      <a href="quem-sou-eu-memorial.html">Memorial</a>
+    </div>
+  </div>
+  <div>
+    <div class="mob-link" onclick="toggleMob('mob-livros')">Livros ▾</div>
+    <div id="mob-livros" class="mob-sub open">
+      <a href="livro-cinema-loucura-v2.html">Cinema e Loucura</a>
+      <a href="livro-fogo-cinzas-v2.html">Fogo & Cinzas</a>
+      <a href="livro-manual-psicopatologia-v2.html">Manual de Psicopatologia</a>
+      <a href="livro-antifacebook-v2.html">O Antifacebook</a>
+      <a href="livro-sindrome-pre-menstrual-v2.html">Síndrome Pré-Menstrual</a>
+      <a href="livro-woody-allen-v2.html" class="active">Woody Allen</a>
+    </div>
+  </div>
+  <div><a class="mob-link" href="index.html#artigos">Artigos científicos</a></div>
+  <div>
+    <div class="mob-link" onclick="toggleMob('mob-entrevistas')">Entrevistas ▾</div>
+    <div id="mob-entrevistas" class="mob-sub">
+      <a href="entrevistas-jornais.html">Jornais</a>
+      <a href="entrevistas-tv.html">TV</a>
+      <a href="entrevistas-podcast.html">Podcast</a>
+    </div>
+  </div>
+  <div><a class="mob-link" href="palestras.html">Palestras</a></div>
+        <!-- Encontros -->
+      <div>
+        <a  href="#encontros" class="mob-link">Encontros especiais
+          <svg viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <div class="dropdown">
+          <a href="#fotos-encontros">Fotos</a>
+        </div>
+      </div>
+   <!-- Redes -->
+      <div>
+        <a href="#redes" class="mob-link">Redes Sociais
+          <svg viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <div class="dropdown">
+          <a href="https://facebook.com" target="_blank">Facebook</a>
+          <a href="https://instagram.com" target="_blank">Instagram</a>
+          <a href="https://youtube.com" target="_blank">YouTube</a>
+        </div>
+      </div>
+      
+            <!-- Blog -->
+      <div>
+        <a href="https://eliecheniaux.blogspot.com/" class="mob-link">Blog</a>
+      </div>
+
+            <!-- Outros textos -->
+      <div>
+        <a class="mob-link" href="https://criticos.com.br/?p=12181&cat=4" >Outros textos</a>
+      </div>
+      
+  <div><a class="mob-link" href="index.html#contato">Contato</a></div>
+</div>
+
+<!-- ══ HERO ══════════════════════════════════════════════════════ -->
+<section class="book-hero">
+  <div class="hero-deco hero-deco-1"></div>
+  <div class="hero-deco hero-deco-2"></div>
+  <div class="hero-deco hero-deco-3"></div>
+  <div class="max-w-screen-xl mx-auto px-6 py-20 relative z-10 w-full">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <!-- Cover -->
+      <div class="flex justify-center lg:justify-end order-2 lg:order-1">
+        <div class="book-cover-wrap">
+          <img src="img/Livro O ANTIFACEBOOK.jpg" alt="Capa do livro O Antifacebook" loading="eager"/>
+        </div>
+      </div>
+      <!-- Info -->
+      <div class="order-1 lg:order-2">
+        <div class="hero-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Autoficção
+        </div>
+                <div class="hero-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      Crônica
+        </div>
+        <h1 class="hero-title text-5xl lg:text-6xl xl:text-7xl font-bold mb-3">O Antifacebook</h1>
+        <p class="hero-author mb-2">Elie Cheniaux</p>
+        <div class="hero-divider"></div>
+        <p class="hero-tagline mb-10">
+Meus encontros e desencontros com Woody Allen, Hitchcock, Freud, Deus, o Flamengo, as mulheres e... comigo mesmo
+        </p>
+        <div class="flex flex-wrap gap-4 mb-10">
+          <a href="#comprar" class="btn-primary">Comprar agora</a>
+          <a href="#sinopse" class="btn-outline">Ler sinopse</a>
+        </div>
+        <!-- Mini social proof -->
+        <div class="flex items-center gap-3 text-sm text-gray-500">
+          <div class="flex -space-x-2">
+            <div class="w-8 h-8 rounded-full bg-blue-100 border-2 border-white flex items-center justify-center text-xs">★</div>
+            <div class="w-8 h-8 rounded-full bg-indigo-100 border-2 border-white flex items-center justify-center text-xs">★</div>
+            <div class="w-8 h-8 rounded-full bg-sky-100 border-2 border-white flex items-center justify-center text-xs">★</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STATS BAR ════════════════════════════════════════════════ -->
+<div class="stats-bar">
+  <div class="max-w-screen-xl mx-auto px-4 flex flex-wrap justify-center md:justify-start">
+    <div class="stat-pill">
+      <span class="stat-icon">📝</span>
+      <div>
+        <span class="stat-label">Gênero</span>
+        <span class="stat-value">Autoficção, Crônica</span>
+      </div>
+    </div>
+    <div class="stat-pill">
+      <span class="stat-icon">📅</span>
+      <div>
+        <span class="stat-label">Ano</span>
+        <span class="stat-value">2014</span>
+      </div>
+    </div>
+    <div class="stat-pill">
+      <span class="stat-icon">📖</span>
+      <div>
+        <span class="stat-label">Páginas</span>
+        <span class="stat-value">77</span>
+      </div>
+    </div>
+    <div class="stat-pill">
+      <span class="stat-icon">🏢</span>
+      <div>
+        <span class="stat-label">Editora</span>
+        <span class="stat-value">Editora Prospectiva</span>
+      </div>
+    </div>
+    <div class="stat-pill hidden sm:flex">
+      <span class="stat-icon">🌐</span>
+      <div>
+        <span class="stat-label">Idioma</span>
+        <span class="stat-value">Português</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ INNER TAB NAV ════════════════════════════════════════════ -->
+<div class="inner-tab-bar">
+  <div class="max-w-screen-lg mx-auto px-4 flex overflow-x-auto">
+    <a href="#sinopse" class="inner-tab">Sinopse</a>
+    <a href="#comprar" class="inner-tab">Onde Comprar</a>
+    <a href="#outros-livros" class="inner-tab">Outros Livros</a>
+  </div>
+</div>
+
+<!-- ══ SINOPSE ══════════════════════════════════════════════════ -->
+<section id="sinopse" class="py-24 bg-white">
+  <div class="max-w-screen-lg mx-auto px-6">
+    <div class="mb-14 reveal">
+      <span class="section-label">Sobre o livro</span>
+      <h2 class="section-heading text-4xl font-bold mb-5">Sinopse</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="grid lg:grid-cols-3 gap-12 items-start">
+      <!-- Text -->
+      <div class="lg:col-span-2 space-y-6 text-gray-600 leading-relaxed text-base reveal">
+        <p>
+          <em class="font-semibold text-gray-800">“O Antifacebook”</em> apresenta 24 textos de humor, num formato de crônica, curtos e escritos em primeira pessoa. São narrados fatos da vida do autor - que não necessariamente ocorreram -, mas a ênfase está menos nos relatos do que nos comentários, marcados por uma alta dose de ironia – especialmente autoironia – e, vez por outra, algum lirismo. 
+        </p>
+        <p>
+          Os principais temas abordados são: amor, sexo e casamento; felicidade, solidão e autoestima; futebol e Flamengo; religião; psiquiatria e psicanálise; e cinema. 
+        </p>
+        <p>
+          Nas crônicas, vários personagens são recorrentes, sendo citados, cada um deles, exatamente 117 vezes. 
+        </p>
+        <p>
+          Alguns são reais, como Zico, Chico Buarque, Nelson Rodrigues, Woody Allen, Alfred Hitchcock e Scarlett Johansson; e outros são fictícios, como o general Waldick (“o adorável vizinho do 505”), Deise (“a sedutora colega do ensino médio”), a mãe, a ex-esposa, Deus e, o mais fictício de todos, o “eu”. 
+        </p>
+        <!-- Highlight box -->
+        <div class="rounded-10px p-6 border-l-4 mt-8" style="border-color:var(--accent);background:#eff6ff;border-radius:8px;">
+          <p class="font-semibold text-sm" style="color:var(--accent-dark)">Temas abordados na obra:</p>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <span class="px-3 py-1 rounded-full text-xs font-bold" style="background:white;color:var(--accent);border:1px solid var(--accent-light)">Amor</span>
+            <span class="px-3 py-1 rounded-full text-xs font-bold" style="background:white;color:var(--accent);border:1px solid var(--accent-light)">Sexo e casamento</span>
+            <span class="px-3 py-1 rounded-full text-xs font-bold" style="background:white;color:var(--accent);border:1px solid var(--accent-light)">Felicidade</span>
+            <span class="px-3 py-1 rounded-full text-xs font-bold" style="background:white;color:var(--accent);border:1px solid var(--accent-light)">Solidão e autoestima</span>
+            <span class="px-3 py-1 rounded-full text-xs font-bold" style="background:white;color:var(--accent);border:1px solid var(--accent-light)">Religião</span>
+            <span class="px-3 py-1 rounded-full text-xs font-bold" style="background:white;color:var(--accent);border:1px solid var(--accent-light)">Psiquiatria e psicanálise</span>
+            <span class="px-3 py-1 rounded-full text-xs font-bold" style="background:white;color:var(--accent);border:1px solid var(--accent-light)">Cinema</span>
+
+          </div>
+        </div>
+      </div>
+      <!-- Ficha técnica -->
+      <div class="reveal reveal-delay-2">
+        <div class="ficha-card p-6">
+          <h3 class="font-bold text-base mb-5" style="color:var(--navy)">Ficha Técnica</h3>
+          <div class="space-y-1">
+            <div class="ficha-row"><span class="font-bold text-gray-700 text-sm">Autor</span><span class="text-gray-500 text-sm">Elie Cheniaux</span></div>
+            <div class="ficha-row"><span class="font-bold text-gray-700 text-sm">Editora</span><span class="text-gray-500 text-sm">Editora Prospectiva</span></div>
+            <div class="ficha-row"><span class="font-bold text-gray-700 text-sm">Ano</span><span class="text-gray-500 text-sm">2014</span></div>
+            <div class="ficha-row"><span class="font-bold text-gray-700 text-sm">Páginas</span><span class="text-gray-500 text-sm">77 p.</span></div>
+            <div class="ficha-row"><span class="font-bold text-gray-700 text-sm">Gênero</span><span class="text-gray-500 text-sm">Autoficção, Crônica</span></div>
+            <div class="ficha-row"><span class="font-bold text-gray-700 text-sm">Idioma</span><span class="text-gray-500 text-sm">Português</span></div>
+            <div class="ficha-row"><span class="font-bold text-gray-700 text-sm">Formato</span><span class="text-gray-500 text-sm">Impresso / eBook</span></div>
+          </div>
+          <a href="#comprar" class="btn-primary w-full text-center block mt-6" style="padding:13px 24px;">Comprar agora</a>
+          <a href="#comprar" class="btn-outline w-full text-center block mt-3" style="padding:11px 24px;font-size:.78rem;">Ver todas as opções</a>
+        </div>
+        <!-- Alt cover -->
+        <div class="mt-6 text-center">
+          <img src="img/Livro O ANTIFACEBOOK 2.jpg" alt="Capa alternativa O Antifacebook" class="w-full rounded-lg shadow-md hover:shadow-xl transition-shadow" style="max-height:280px;object-fit:cover;object-position:top;"/>
+          <p class="text-xs text-gray-400 mt-2">Edição alternativa</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PULL QUOTE ═══════════════════════════════════════════════ -->
+<section class="pull-quote-section py-20">
+  <div class="max-w-screen-lg mx-auto px-6 relative z-10 reveal">
+    <span class="pull-quote-mark">"</span>
+    <blockquote class="pull-quote-text mt-4 mb-8">
+Neste livro, apresento 24 crônicas curtas de humor, todas escritas em primeira pessoa. Nelas, narro episódios da minha própria vida — que não necessariamente aconteceram —, mas o foco não está tanto no que se passou, e sim nos meus comentários sobre cada situação. Tudo isso vem recheado com uma boa dose de ironia, muita autoironia e, de vez em quando, um toque de lirismo. </blockquote>
+    <p class="pull-quote-attr">— Elie Cheniaux, <em>O Antifacebook</em></p>
+  </div>
+</section>
+
+
+<!-- ══ ONDE COMPRAR ══════════════════════════════════════════════ -->
+<section id="comprar" class="py-24 bg-white">
+  <div class="max-w-screen-lg mx-auto px-6">
+    <div class="mb-14 reveal">
+      <span class="section-label">Adquira o livro</span>
+      <h2 class="section-heading text-4xl font-bold mb-5">Onde Comprar</h2>
+      <div class="section-line"></div>
+      <p class="text-gray-500 mt-4 text-sm">Disponível nas principais livrarias online e em versão digital.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
+      <!-- Amazon -->
+      <a href="https://www.amazon.com.br/s?k=cheniaux+o+antifacebook&i=stripbooks&__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=1RL1NQ5MLP50H&sprefix=cheniaux+o+antifacebook%2Cstripbooks%2C200&ref=nb_sb_nos" target="_blank" rel="noopener" class="buy-card">
+        <div class="buy-card-header">
+          <div class="buy-card-icon" style="background:#fff3cd;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M20.665 3.717l-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192L8.232 17.266v3.957c0 .747.563.985 1.07.455l2.968-2.924 5.815 4.317c1.07.586 1.84.284 2.108-.993l3.822-18.044c.39-1.567-.597-2.275-1.35-1.317z" fill="#ff9900"/></svg>
+          </div>
+          <span class="buy-tag" style="background:#fff3cd;color:#92400e;">Mais popular</span>
+          <div class="font-bold text-base mb-1" style="color:var(--navy)">Amazon Brasil</div>
+          <div class="text-xs text-gray-400">Entrega rápida · Frete grátis Prime</div>
+        </div>
+        <div class="buy-card-footer">
+          <span class="w-full block text-center text-xs font-bold uppercase tracking-wider py-2.5 rounded" style="background:#ff9900;color:white;">Comprar na Amazon →</span>
+        </div>
+      </a>
+      <!-- Kindle -->
+      <a href="https://www.amazon.com.br/kindle-dbs/hz/subscribe/ku?ref=dbs_p_ebk_r00_pbcb_diupu0&passThroughAsin=B07X4JN9W4" target="_blank" rel="noopener" class="buy-card">
+        <div class="buy-card-header">
+          <div class="buy-card-icon" style="background:#e0f2fe;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0369a1" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>
+          </div>
+          <span class="buy-tag" style="background:#e0f2fe;color:#0c4a6e;">Versão digital</span>
+          <div class="font-bold text-base mb-1" style="color:var(--navy)">Kindle / eBook</div>
+          <div class="text-xs text-gray-400">Leitura imediata · Qualquer dispositivo</div>
+        </div>
+        <div class="buy-card-footer">
+          <span class="w-full block text-center text-xs font-bold uppercase tracking-wider py-2.5 rounded" style="background:#0369a1;color:white;">Baixar eBook →</span>
+        </div>
+      </a>
+      <!-- Livraria Cultura -->
+      <a href="https://www.soupro.com.br/web/index.php/livros/o-antifacebook" target="_blank" rel="noopener" class="buy-card">
+        <div class="buy-card-header">
+          <div class="buy-card-icon" style="background:#f0fdf4;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+          </div>
+          <span class="buy-tag" style="background:#f0fdf4;color:#166534;">Editora</span>
+          <div class="font-bold text-base mb-1" style="color:var(--navy)">Editora Prospectiva</div>
+          <div class="text-xs text-gray-400">Seja pró!</div>
+        </div>
+        <div class="buy-card-footer">
+          <span class="w-full block text-center text-xs font-bold uppercase tracking-wider py-2.5 rounded" style="background:#166534;color:white;">Comprar →</span>
+        </div>
+      </a>
+      <!-- Estante Virtual -->
+      <a href="https://digitalizabrasil.com.br/e-books/o-antifacebook" target="_blank" rel="noopener" class="buy-card">
+        <div class="buy-card-header">
+          <div class="buy-card-icon" style="background:#fdf4ff;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7e22ce" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <span class="buy-tag" style="background:#fdf4ff;color:#6b21a8;">Livros Digitais</span>
+          <div class="font-bold text-base mb-1" style="color:var(--navy)">Digitaliza Brasil</div>
+          <div class="text-xs text-gray-400">Conversão e distribuiçao de conteúdos digitais</div>
+        </div>
+        <div class="buy-card-footer">
+          <span class="w-full block text-center text-xs font-bold uppercase tracking-wider py-2.5 rounded" style="background:#7e22ce;color:white;">Buscar →</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- CTA Banner -->
+    <div class="mt-14 rounded-xl p-8 flex flex-col md:flex-row items-center gap-6 justify-between reveal" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);">
+      <div>
+        <h3 class="font-bold text-lg mb-1" style="color:var(--navy);font-family:'Playfair Display',serif;">Universidades e bibliotecas</h3>
+        <p class="text-sm text-gray-500">Interessado em adquirir exemplares para sua instituição? Entre em contato com o autor.</p>
+      </div>
+      <a href="index.html#contato" class="btn-outline flex-shrink-0" style="border-color:var(--accent);color:var(--accent);">Entrar em contato</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ OUTROS LIVROS ════════════════════════════════════════════ -->
+<section id="outros-livros" class="py-24" style="background:linear-gradient(135deg,#f5f5f0 0%,#fff 100%);">
+  <div class="max-w-screen-lg mx-auto px-6">
+    <div class="text-center mb-14 reveal">
+      <span class="section-label" style="display:block;text-align:center;">Biblioteca do autor</span>
+      <h2 class="section-heading text-3xl font-bold mb-4">Outros Livros de Elie Cheniaux</h2>
+      <div class="section-line mx-auto"></div>
+    </div>
+    <div class="books-scroll reveal">
+      <a href="livro-cinema-loucura.html" class="book-thumb">
+        <img src="img/Livro CINEMA E LOUCURA.jpg" alt="Cinema e Loucura"/>
+        <div class="book-thumb-title">Cinema e Loucura</div>
+      </a>
+      <a href="livro-fogo-cinzas.html" class="book-thumb">
+        <img src="img/Livro Fogo e Cinzas -1.jpg" alt="Fogo & Cinzas"/>
+        <div class="book-thumb-title">Fogo & Cinzas</div>
+      </a>
+      <a href="livro-manual-psicopatologia.html" class="book-thumb">
+        <img src="img/LivroMANUAL.jpg" alt="Manual de Psicopatologia"/>
+        <div class="book-thumb-title">Manual de Psicopatologia</div>
+      </a>
+      <a href="livro-sindrome-pre-menstrual.html" class="book-thumb">
+        <img src="img/Livro SÍNDROME PRÉ-MENSTRUAL.jpg" alt="Síndrome Pré-Menstrual"/>
+        <div class="book-thumb-title">Síndrome Pré-Menstrual</div>
+      </a>
+      <a href="livro-woody-allen.html" class="book-thumb">
+        <img src="img/Livro WOODY ALLEN.jpg" alt="Woody Allen"/>
+        <div class="book-thumb-title">Woody Allen e a Psicanálise</div>
+      </a>
+      <a href="livros-capas.html" class="book-thumb" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:180px;background:linear-gradient(135deg,#1a4427,#2d6a4f);">
+        <div style="font-size:2rem;margin-bottom:8px;">📚</div>
+        <div class="book-thumb-title" style="color:white;text-align:center;font-size:.8rem;">Ver todos os livros</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ════════════════════════════════════════════════════ -->
+<footer class="py-12">
+  <div class="max-w-screen-lg mx-auto px-6 text-center">
+    <img src="img/DrElieLogo.avif" alt="Logo" class="w-12 h-12 rounded-full border-2 mx-auto mb-4" style="border-color:var(--gold);opacity:.8;"/>
+    <p class="font-bold text-2xl mb-1" style="font-family:'Playfair Display',serif;color:var(--gold-light)">Elie Cheniaux</p>
+    <p class="text-sm mb-2" style="color:#a8d5b5">Psiquiatra &nbsp;·&nbsp; Professor universitário &nbsp;·&nbsp; Escritor</p>
+    <div class="footer-divider"></div>
+    <div class="flex justify-center gap-6 text-sm mb-6 flex-wrap mt-4" style="color:#c8e6c9;">
+      <a href="index.html" class="hover:text-white transition-colors" style="text-decoration:none;">Início</a>
+      <a href="quem-sou-eu-biografia.html" class="hover:text-white transition-colors" style="text-decoration:none;">Biografia</a>
+      <a href="livros-capas.html" class="hover:text-white transition-colors" style="text-decoration:none;">Livros</a>
+      <a href="index.html#artigos" class="hover:text-white transition-colors" style="text-decoration:none;">Artigos</a>
+      <a href="entrevistas-jornais.html" class="hover:text-white transition-colors" style="text-decoration:none;">Entrevistas</a>
+      <a href="index.html#contato" class="hover:text-white transition-colors" style="text-decoration:none;">Contato</a>
+    </div>
+    <p class="text-xs" style="color:#6da87d;">© 2026 Elie Cheniaux. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<!-- ══ SCRIPTS ═══════════════════════════════════════════════════ -->
+<script src="js/script.js"></script>
+<script src="js/livro-antifacebook-v2.js"></script>
+</body>
+</html>
