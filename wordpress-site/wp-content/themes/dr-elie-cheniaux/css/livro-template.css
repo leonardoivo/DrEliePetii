@@ -36,8 +36,10 @@ h1, h2, h3, .font-display { font-family:"Playfair Display",serif; }
 .section-heading { font-family:"Playfair Display",serif; color:var(--navy); }
 .section-line { width:50px; height:3px; background:linear-gradient(90deg,var(--accent),var(--gold)); border-radius:2px; }
 .ficha-card { background:white; border-radius:10px; box-shadow:0 4px 24px rgba(0,0,0,.08); overflow:hidden; border-top:4px solid var(--accent); padding:24px; }
-.ficha-row { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #f3f4f6; font-size:.875rem; }
+.ficha-row { display:flex; justify-content:space-between; align-items:flex-start; gap:20px; padding:10px 0; border-bottom:1px solid #f3f4f6; font-size:.875rem; }
 .ficha-row:last-child { border-bottom:none; }
+.ficha-row > span:first-child { flex-shrink:0; white-space:nowrap; }
+.ficha-row > span:last-child { text-align:right; }
 .pull-quote-section { background:linear-gradient(135deg,var(--accent-dark) 0%,var(--accent) 100%); position:relative; overflow:hidden; padding:64px 0; }
 .pull-quote-mark { font-family:"Playfair Display",serif; font-size:8rem; line-height:.6; color:rgba(255,255,255,.15); display:block; margin-bottom:-20px; }
 .pull-quote-text { font-family:"Playfair Display",serif; font-style:italic; color:white; font-size:1.5rem; line-height:1.65; max-width:780px; }

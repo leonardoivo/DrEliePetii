@@ -67,15 +67,10 @@ function dec_seed_pages() {
     'biografia' => array(
         'title' => 'Biografia',
         'content' => '
-<div class="grid lg:grid-cols-3 gap-12">
-<!-- Main text -->
-<div class="lg:col-span-2 space-y-10">
-<!-- Intro -->
 <div class="reveal">
 <div class="prose">
 <ul class="list-disc list-inside space-y-2">
-<li>Professor Titular de psiquiatria da Faculdade de Ciências Médicas da Universidade do Estado do Rio de Janeiro (FCM-UERJ)    
-  <br/><a href="https://fcm.uerj.br/dem" target="_blank">https://fcm.uerj.br/dem</a></li>
+<li>Professor Titular de psiquiatria da Faculdade de Ciências Médicas da Universidade do Estado do Rio de Janeiro (FCM-UERJ)<br/><a href="https://fcm.uerj.br/dem" target="_blank">https://fcm.uerj.br/dem</a></li>
 <li>Médico graduado pela Universidade do Estado do Rio de Janeiro, especialista em psiquiatria pela Associação Brasileira de Psiquiatria (ABP) <br/><a href="https://www.abp.org.br/lista-de-psiquiatras" target="_blank">https://www.abp.org.br/lista-de-psiquiatras</a></li>
 <li>RQE: 9397 (CREMERJ) Especialista em Psiquiatria <br/><a href="https://portal.cremerj.org.br/busca-medicos" target="_blank">https://portal.cremerj.org.br/busca-medicos</a></li>
 <li>Ex-professor do Programa de Pós-graduação em Psiquiatria e Saúde Mental da Universidade Federal do Rio de Janeiro (PROPSAM-IPUB-UFRJ) <a href="https://propsam.ipub.ufrj.br" target="_blank">https://propsam.ipub.ufrj.br</a></li>
@@ -88,31 +83,6 @@ function dec_seed_pages() {
 <li>Psicanalista, membro licenciado da Sociedade Psicanalítica do Rio de Janeiro (SPRJ) <a href="https://sprj.org.br/site/" target="_blank">https://sprj.org.br/site/</a></li>
 </ul>
 </div>
-</div>
-<!-- Timeline -->
-</div>
-<!-- Sidebar -->
-<aside class="space-y-6">
-<!-- Quick facts -->
-<!-- Navigation cards -->
-<div class="reveal">
-<h3 class="font-bold text-xs uppercase tracking-widest text-gray-400 mb-3">Continuar lendo</h3>
-<div class="space-y-3">
-<a class="flex items-center gap-3 bg-white rounded shadow p-4 hover:shadow-md transition-shadow" href="quem-sou-eu-curriculo.html">
-<span class="text-2xl">🎓</span>
-<div><div class="font-bold text-sm" style="color:var(--navy)">Currículo Lattes</div><div class="text-xs text-gray-400">Produção acadêmica completa</div></div>
-</a>
-<a class="flex items-center gap-3 bg-white rounded shadow p-4 hover:shadow-md transition-shadow" href="quem-sou-eu-discurso.html">
-<span class="text-2xl">🏛️</span>
-<div><div class="font-bold text-sm" style="color:var(--navy)">Discurso na AMRJ</div><div class="text-xs text-gray-400">Leia o discurso de posse</div></div>
-</a>
-<a class="flex items-center gap-3 bg-white rounded shadow p-4 hover:shadow-md transition-shadow" href="quem-sou-eu-memorial.html">
-<span class="text-2xl">📜</span>
-<div><div class="font-bold text-sm" style="color:var(--navy)">Memorial</div><div class="text-xs text-gray-400">Reflexões e memórias</div></div>
-</a>
-</div>
-</div>
-</aside>
 </div>
 ',
     ),
@@ -142,7 +112,7 @@ function dec_seed_pages() {
 <!-- Meta card -->
 <div class="speech-meta mb-8 reveal">
 <div class="grid sm:grid-cols-3 gap-6 text-sm">
-<div><div class="text-blue-300 text-xs font-bold uppercase tracking-widest mb-1">Data</div><div class="font-bold">Setembro de 2019</div></div>
+<div><div class="text-blue-300 text-xs font-bold uppercase tracking-widest mb-1">Data</div><div class="font-bold">Julho de 2024</div></div>
 <div><div class="text-blue-300 text-xs font-bold uppercase tracking-widest mb-1">Local</div><div class="font-bold">Sede da AMRJ, Rio de Janeiro</div></div>
 <div><div class="text-blue-300 text-xs font-bold uppercase tracking-widest mb-1">Cadeira</div><div class="font-bold">Nº 56 — Patrono: Dr. José de Paula Lopes Pontes</div></div>
 </div>
@@ -166,20 +136,7 @@ function dec_seed_pages() {
     ),
     'memorial' => array(
         'title' => 'Memorial',
-        'content' => '
-<div>
-<!-- Memorial text -->
-<div>
-<iframe height="700px" src="/wp-content/themes/dr-elie-cheniaux/pdf/Memorial_para_AMRJ.pdf#toolbar=0" style="border:1px solid #e5e7eb; border-radius:6px;" width="100%">
-              &lt;p&gt;Seu navegador não suporta exibição de PDF.&lt;/p&gt;
-            </iframe>
-<!-- Download -->
-<div class="flex gap-4 flex-wrap reveal">
-<a class="inline-flex items-center gap-2 px-6 py-3 rounded font-bold text-sm uppercase tracking-wide border-2 transition-all" href="quem-sou-eu-biografia.html" style="border-color:var(--navy);color:var(--navy)">← Ver Biografia</a>
-</div>
-</div>
-</div>
-',
+        'content' => '',
     ),
     'bipolab' => array(
         'title' => 'Sobre o BiPoLaB',
@@ -245,6 +202,7 @@ function dec_seed_livros() {
             'Crônica',
         ),
         'cover_img' => 'Livro O ANTIFACEBOOK.jpg',
+        'capa_home' => 'Livro O ANTIFACEBOOK 2.jpg',
         'endorsement' => '',
         'stats' => array(
             array(
@@ -352,12 +310,13 @@ function dec_seed_livros() {
     array(
         'slug' => 'livro-cinema-loucura-v2',
         'title' => 'Cinema e Loucura',
+        'subtitulo' => 'Conhecendo os Transtornos Mentais Através dos Filmes',
         'author' => 'Elie Cheniaux, J. Landeira-Fernandez',
-        'tagline' => 'Conhecendo os Transtornos Mentais Através dos Filmes.',
         'badges' => array(
             'Não-ficção acadêmica / Científica',
         ),
-        'cover_img' => 'Livro CINEMA E LOUCURA.jpg',
+        'cover_img' => 'Livro CINEMA E LOUCURA 2.jpg',
+        'capa_home' => 'Livro CINEMA E LOUCURA.jpg',
         'endorsement' => 'Prefácio de Ruy Castro · Escritor e biógrafo',
         'stats' => array(
             array(
@@ -496,11 +455,13 @@ function dec_seed_livros() {
         'slug' => 'livro-fogo-cinzas-v2',
         'title' => 'Fogo & Cinzas',
         'author' => 'Elie Cheniaux e Thiara Cruz',
+        'subtitulo' => 'AS INCRÍVEIS HISTÓRIAS DE BIPOLARES FAMOSOS',
         'tagline' => 'O título faz referência a uma metáfora, criada pelo psiquiatra grego Athanasios Koukopoulos, que compara as fases de mania e de depressão do transtorno bipolar com Fogo & Cinzas, respectivamente. A obra aborda histórias de vida e do adoecimento mental de 17 celebridades que sofriam ou sofrem do transtorno, como Vicent Van Gogh, Alberto Santos Dumont, Edgar Allan Poe, Ernest Hemingway, Virginia Woolf, Ulysses Guimarães, Kanye West, entre outros..',
         'badges' => array(
             'Narrativa / Psiquiatria',
         ),
-        'cover_img' => 'Livro Fogo e Cinzas -1.jpg',
+        'cover_img' => 'Livro Fogo e Cinzas -2.jpg',
+        'capa_home' => 'Livro Fogo e Cinzas -2.jpg',
         'endorsement' => '',
         'stats' => array(
             array(
@@ -628,13 +589,14 @@ function dec_seed_livros() {
         'badges' => array(
             'Medicina · Psiquiatria · Livro Didático',
         ),
-        'cover_img' => 'LivroMANUAL.jpg',
+        'cover_img' => 'Livro MANUAL-2.jpeg',
+        'capa_home' => 'LivroMANUAL.jpg',
         'endorsement' => '',
         'stats' => array(
             array(
                 'icon' => '',
                 'label' => 'Ano',
-                'value' => '7ª edição · 2020',
+                'value' => '7ª edição · 2026',
             ),
             array(
                 'icon' => '',
@@ -659,9 +621,25 @@ function dec_seed_livros() {
         'pull_attr' => '',
         'prefacio' => array(
             'nome' => 'Humberto Corrêa',
-            'cargo' => 'Humberto Corrêa Professor Titular de Psiquiatria da Faculdade de Medicina da Universidade Federal de Minas Gerais',
-            'extra' => 'Apresentação',
+            'cargo' => 'Professor Titular de Psiquiatria da Faculdade de Medicina da Universidade Federal de Minas Gerais',
+            'extra' => 'Membro Titular da Academia Mineira de Medicina',
             'texto' => 'Junto aos manuscritos da sétima edição, revista e ampliada, do Manual de Psicopatologia do professor Elie Cheniaux, recebi o convite para escrever o seu prefácio. Só nessa pequena frase introdutória acima temos várias informações muito relevantes para nossos leitores. Comecemos, primeiramente, pela que pode parecer a mais simples delas. Trata-se da sétima edição de um livro em um mercado editorial que é, no Brasil, podemos assim considerar, restrito. De fato, o número de livros lidos anualmente por cada brasileiro não nos coloca em nenhum ranking internacional de destaque, muitos autores têm dificuldade em publicar suas obras, e muitos livros, por vezes excelentes livros, não passam da sua primeira edição. A sétima edição de um livro é motivo de comemoração e um “atestado” de sucesso! Em segundo lugar, trata-se de um livro de psicopatologia. Podemos dizer que a origem dessa disciplina se dá com Karl Jaspers no seu “A Psicopatologia Geral”, de 1913, que lançou as suas bases e que têm como elementos fundadores uma clínica minuciosa e um rigor filosófico. A psicopatologia, base do exame psiquiátrico, exige tempo, treinamento, disciplina; exige, principalmente, reflexão. Talvez por isso ela ande um pouco esquecida pelas novas gerações, nesses novos “tempos líquidos”, onde tudo parece descartável. Tempos em que se buscam respostas rápidas, prontas, geralmente superficiais, frequentemente erradas ou inadequadas. Mesmo com todos os avanços na psiquiatria nas últimas décadas, da neurobiologia à genética, das novas formas de psicoterapia às modernas terapêuticas farmacológicas e de neuromodulação, que, lembremos, não existiam ao tempo que Jaspers escreveu o seu “Tratado”, a Psicopatologia ainda é fundamental, mas, exige-se agora algo mais que o nosso autor faz com maestria e leveza, a interlocução com as neurociências e a psicoterapia. Em terceiro lugar, trata-se, como dissemos da Sétima(!) Edição, completamente revista e ampliada. Nosso querido autor, Elie Cheniaux, revisou todo o texto e ainda nos brinda com novos seis apêndices. Por todas essas razões, e muitas outras que nosso curto espaço não permite elencar, o Manual De Psicopatologia, esse “pequeno” mas grande livro do Elie Cheniaux, é indispensável a todos os médicos e psicólogos que se interessam pela sublime “ciência-arte” de compreender o ser humano.',
+        ),
+        'prefacio2' => array(
+            'nome' => 'Antonio Egidio Nardi',
+            'cargo' => 'Professor Titular de Psiquiatria – Universidade Federal do Rio de Janeiro',
+            'extra' => 'Membro Titular da Academia Nacional de Medicina',
+            'texto' => 'É um grande prazer ser convidado para prefaciar o clássico Manual de Psicopatologia, de Elie Cheniaux, em sua 6a. Edição. Um sucesso literário brasileiro. Este completo manual de psicopatologia fenomenológica é leitura obrigatória para todos os profissionais e estudantes de psiquiatria e ciências afins que lidam com diagnóstico psiquiátrico e suas nuances. Sou admirador e entusiasta da psicopatologia descritiva, ciência que tanto cultuo e que é a base de minha vida profissional. Atualmente, a rapidez nos atendimentos médicos e as opções terapêuticas com baixa especificidade fazem com que as novas gerações sejam influenciadas pela psiquiatria de critérios diagnósticos pobres e com que não se aprofundem no estudo da psicopatologia fenomenológica. O resultado são dúvidas eternas e diagnósticos imprecisos. Neste cenário, o Manual de Psicopatologia ilumina a escuridão dos critérios diagnósticos superficiais. A importância deste trabalho reside principalmente na evidência de que o pilar da psicopatologia descritiva é único e insubstituível, mesmo neste século XXI, onde a Medicina está cada vez mais debruçada em inúmeros, exagerados e, muitas vezes, desnecessários exames complementares. O exame do estado mental baseado em um sólido conhecimento psicopatológico é o pilar do diagnóstico e da clínica psiquiátrica. O termo "psicopatologia" foi usado pela primeira vez na psiquiatria em 1878, como sinônimo de “psiquiatria”, por Hermann Emminghaus, o antecessor de Emil Kraepelin no Departamento de Psiquiatria da Universidade de Tartu, hoje na Estônia. O termo reapareceu em 1904 no título de Psicopatologia da Vida Cotidiana, de Sigmund Freud, antes de ser adotado por Karl Jaspers em sua obra seminal Allgemeine Psychopathologie, publicada em 1913. Baseia-se na descrição dos fenômenos psíquicos conforme sejam observados ou relatados. O papel da psicopatologia fenomenológica é limitar, distinguir e descrever fenômenos patológicos efetivamente experimentados pelos pacientes. Portanto, o importante é descrever o que é vivido diretamente pelo indivíduo, a fim de podermos reconhecer o que há de idêntico dentro da multiplicidade de variações do comportamento humano patológico. Apesar de extensa literatura abordando os sintomas psicopatológicos pelo método fenomenológico, Jaspers utiliza a empatia para elucidar os sintomas observados; logo, os pacientes são os melhores professores. A principal ferramenta da psicopatologia fenomenológica é a descrição do próprio paciente, a qual pode ser observada, estimulada ou testada através da entrevista e do exame psicopatológico. Outro ponto fundamental para o exame psicopatológico é que este nunca será perfeito se o examinador não possuir clara visão do meio cultural em que vive o paciente, em especial sua família e ambiente social. Para Jaspers, "a psiquiatria é uma prática clínica", enquanto que "a psicopatologia é uma ciência" que tem como propósito explícito gerar novos conhecimentos e "reconhecer, descrever e analisar os princípios gerais em vez de indivíduos". É a tarefa do "psicopatologista", do "cientista", desembaraçar, se necessário até mesmo pela redução ou restrição desse material complexo, dividi-lo em distintos conceitos claramente definidos, ou seja, sinais e sintomas, que podem ser comunicados e utilizados na formulação de "leis e princípios", relevantes para "realidades psíquicas patológicas" e na demonstração de relações entre "doença mental" e "sintomas psicopatológicos". Todos estes princípios de Jaspers são valorizados por Elie Cheniaux, complementados pelos apêndices práticos e interessantes, por exemplo, onde discute o delírio de Bentinho em Dom Casmurro de Machado de Assis. O Manual de Psicopatologia é de leitura agradável, onde temos a satisfação de encontrar em uma só obra o que há de melhor e clássico na descrição dos sintomas em psicopatologia. Associado a uma atualização brilhante, nos faz rever conceitos e nos instiga cada vez mais aos exames de nossos pacientes. O livro prima pela clareza e didática, tornando-se uma recomendação para todos que querem conhecer ou capacitar-se nos princípios básicos de psicopatologia descritiva. Tenho certeza de que todos os leitores terão o prazer do aprendizado e da revisão de conceitos. Publicar a 6a. Edição é a comprovação de seu sucesso e de sua qualidade. Parabéns, Elie Cheniaux, e obrigado por manter acessa a chama da psicopatologia fenomenológica.',
+        ),
+        'prefacio3' => array(
+            'nome' => 'Miguel Chalub',
+            'cargo' => 'Professor-associado da Faculdade de Medicina da Universidade Federal do Rio de Janeiro (FM/UFRJ)',
+            'extra' => 'Professor adjunto da Faculdade de Ciências Médicas da Universidade do Estado do Rio de Janeiro (FCM/UERJ)',
+            'texto' => 'Infelizmente livros científicos brasileiros, ainda que de qualidade, têm pouco tempo de vida. Ou a primeira edição fica sempre disponível pois não tem a necessária saída por falta de mercado adquirinte ou nunca mais são reeditados eis que não há interesse dos publicadores pelas mesmas razões. "Dormem" para sempre nas bibliotecas e nos "sebos". Mas, por sorte nossa, há exceções. Uma delas é o "Manual de Psicopatologia" de Elie Cheniaux Jr. que chega à - pasmem! - 5a. edição. Uma das razões para que fato tão inusitado aconteça, é sua importante originalidade além de ser uma excelente compêndio deste saber médico-psicológico. A Psicopatologia, particularmente a fenomenológica, andava meio esquecida e, o que é pior, deconsiderada pelas novas gerações de psiquiatras, psicólogos e outros profissionais de saúde mental. A ideia errônea é que se tratava de um conhecimento ultrapassado e que teria interesse apenas histórico mas não utilidade para a prática psiquiátrica, mormente aquela subsidiária da Psiquiatria Social e Comunitária. Mas não é assim. As doenças mentais, o sofrimento psíquico só podem ser entendidos a partir do estudo das funções mentais e de seus transtornos. Sem este conhecimento prévio e introdutório, as ações sobre a prevenção e recuperação da saúde mental bem como o tratamento de suas anomalias, passa a ser mero fazer assistencial muitas vezes eivado de desvios ideológicos e políticos. Falta a fundamentação psicopatológica para uma verdadeira e científica ação médico-psicológica. O Manual de Psicopatologia em comento é um pequeno mas completo tratado de Fenomenologia Psiquiátrica, saber médico indispensável para aqueles que querem fazer o diagnóstico seguro das doenças mentais e de suas variadas formas clínicas e expressões sintomáticas. Mas vai mais além e aí começa sua vibrante originalidade. Há uma correlação entre os atuais achados das neurociências e as doenças mentais, aproximação que é cada vez mais fecunda e que possivelmente provocará uma grande revolução no tratamento dos transtornos mentais. A neurobiologia se encontra com a Psicopatologia, fato inteiramente novo! Mas, como psicanalista, o autor nos dá mais. A fenomenologia "clássica" - e o adjetivo aí é um grande elogio para os que estudam a Psiquiatria de uma maneira rigorosa e a praticam de modo fundamentado - é cotejada com a doutrina psicanalítica e assim ficamos com uma tríplice visão: os fenômenos mentais anormais descritos de maneira rigorosa e colocados lado a lado com o contributo das neurociências e da psicanálise. Esta riqueza não é comum nos livros estrangeiros e nacionais de Psiquiatria e Psicopatologia e é de um valor inestimável para psiquiatras, psicólogos e psicanalistas bem como para outros interessados nos problemas da saúde mental. A presente edição além de trazer os acréscimos de edições anteriores como a discussão da nomenclatura em Psicopatologia traz dois novos temas de grande interesse prático: 1) um modelo de exame psíquico e súmula psicopatológica, de enorme valor para o exercício profissional pois procura uniformizar a transposição da teoria psicopatológica para a avaliação de um caso clínico concreto; 2) a relação das alterações psicopatológicas de acordo com as funções psíquicas, ajuda inestimável para uma melhor ordenação da perquirição clínica. Por todas estas razões o livro de Elie Cheniaux Jr. tornou-se uma obra indispensável para médicos e psicólogos pois é uma obra fundamental para o conhecimento e o exercício rigoroso da prática clínica médico-psiquiátrica e psicológica.',
+        ),
+        'resenha_texto' => 'Um livro sobre Psicopatologia escrito por autor brasileiro chega à terceira edição! Este “fenômeno editorial” na área da Psiquiatria merece reflexão. Realmente, a obra de Elie Cheniaux é muito original, por diversas razões. Em primeiro lugar é excelente compêndio de Psicopatologia Fenomenológica. Este ramo da Psicopatologia andava meio posto de lado e, o que é pior, desconsiderado pelas novas gerações de psiquiatras, psicólogos e demais profissionais de saúde mental. Passou-se a idéia que se tratava de conhecimento ultrapassado, que não teria mais utilidade nas novas correntes da Psiquiatria. Ledo e falaz engano! Não se pode conhecer a ciência psiquiátrica e praticá-la de modo científico se não se tiver bom conhecimento de Psicopatologia. Não importa se a linha adotada é a biológica, a social ou a psicanalítica: o desconhecimento de Psicopatologia leva à teoria sem fundamentação técnico-científica precisa e prática completamente divorciada da realidade médico-psicológica. Mas o livro em questão não trata apenas deste aspecto da Psicopatologia. De maneira inteiramente original – o que o torna imprescindível para psiquiatras, psicólogos de orientação neurobiológica e psicanalistas –, a obra aborda a correlação entre Neurociências e Psicopatologia, bem como aproxima a fenomenologia do psiquismo anormal da Psicanálise. Não conhecemos trabalho nacional que o faça de maneira tão percuciente. Assim, estudantes de medicina, residentes e pós-graduandos em Psiquiatra, médicos, psicólogos e profissionais de saúde mental em geral não podem deixar de ter este livro em sua biblioteca, ressaltando-se que terceira edição de livro médico no Brasil já é, por si, uma recomendação. Em relação às edições anteriores, além de algumas correções de texto, o trabalho traz notável achega, pois aborda a questão da nomenclatura em Psicopatologia. Espanto dos estudantes de Medicina, tão afeitos ao rigor da terminologia médica, e confusão para os que estão se especializando na patologia mental, Elie Cheniaux faz excelente revisão do tema, que prestará auxílio para minimizar os mal-entendidos e para, quem sabe, chegar-se algum dia à uniformidade útil para os iniciantes.',
+        'resenha_autores' => array(
+            array('Miguel Chalub', 'Professor-associado da Faculdade de Medicina da Universidade Federal do Rio de Janeiro (FM/UFRJ). Professor adjunto da Faculdade de Ciências Médicas da Universidade do Estado do Rio de Janeiro (FCM/UERJ).'),
         ),
         'buy_cards' => array(
             array(
@@ -672,24 +650,6 @@ function dec_seed_livros() {
                 'btn_text' => 'Comprar na Amazon →',
                 'btn_bg' => '#ff9900',
                 'icon_bg' => '#ff9900',
-            ),
-            array(
-                'href' => 'https://www.grupogen.com.br/catalogsearch/result/?q=cheniaux',
-                'tag' => '',
-                'name' => 'G',
-                'desc' => 'Livraria online',
-                'btn_text' => 'Ver no Grupo Gen →',
-                'btn_bg' => '#e53e3e',
-                'icon_bg' => '#e53e3e',
-            ),
-            array(
-                'href' => 'https://www.livrariacultura.com.br',
-                'tag' => '',
-                'name' => 'C',
-                'desc' => 'Livraria online',
-                'btn_text' => 'Ver na Cultura →',
-                'btn_bg' => '#6b21a8',
-                'icon_bg' => '#6b21a8',
             ),
             array(
                 'href' => 'https://www.grupogen.com.br/catalogsearch/result/?q=cheniaux',
@@ -722,12 +682,13 @@ function dec_seed_livros() {
     array(
         'slug' => 'livro-sindrome-pre-menstrual-v2',
         'title' => 'Síndrome Pré-Menstrual',
+        'subtitulo' => 'Um ponto de encontro entre a psiquiatria e a ginecologia',
         'author' => 'Elie Cheniaux',
-        'tagline' => 'Um ponto de encontro entre a psiquiatria e a ginecologia',
         'badges' => array(
             'Medicina / Saúde da Mulher',
         ),
-        'cover_img' => 'Livro SÍNDROME PRÉ-MENSTRUAL.jpg',
+        'cover_img' => 'Livro SÍNDROME PRÉ-MENSTRUAL-2.jpg',
+        'capa_home' => 'Livro SÍNDROME PRÉ-MENSTRUAL.jpg',
         'endorsement' => '',
         'stats' => array(
             array(
@@ -761,7 +722,7 @@ function dec_seed_livros() {
             'nome' => 'Miguel Chalub',
             'cargo' => 'Miguel Chalub professor na Universidade do Estado do Rio de Janeiro e médico no Hospital de Custódia e Tratamento Psiquiátrico do Estado do Rio de Janeiro.',
             'extra' => '',
-            'texto' => 'Aqui está o texto extraído do documento: Parece claro que certas doenças comprometem apenas a matéria, enquanto outras afetam somente o espírito. Porém, a noção de doença psicossomática deixa supor que não há doença puramente física, uma vez que a mente reage a qualquer alteração material; já uma enfermidade exclusivamente psíquica não seria apenas doença da alma, visto que não há atividade mental sem um corpo que a suporte. O conceito não escapa à dualidade doenças do corpo versus doenças da mente, pois prova apenas que há moléstias predominantemente físicas ou psíquicas e psicossomáticas propriamente ditas. Existem afecções difíceis de determinar se são físicas ou mentais. É o caso da síndrome pré-menstrual. Durante o fluxo menstrual ou dias antes, muitas mulheres reclamam de sinais e sintomas classificáveis, a um só tempo, como psíquicos e físicos. Alguns são ginecológicos de fato como edema regional, mas se observa também irritabilidade. Os estados afetivos polarizados podem ser tão intensos que já se cogitou de isentar as mulheres de responsabilidade penal, caso cometessem delitos durante a síndrome. Ora, o problema é ginecológico ou psiquiátrico? Baseado na tese de doutoramento do autor, este livro é uma importante contribuição ao tema. Elie Cheniaux Jr., Professor da Faculdade de Ciências Médicas da UERJ, estuda os problemas psiquiátricos envolvidos na SPM, que, a princípio apresenta-se como ginecológica. Psiquiatras, ginecologistas e psicólogos encontrarão nesta obra manancial excelente para lidarem com este verdadeiro desafio. .',
+            'texto' => 'Parece claro que certas doenças comprometem apenas a matéria, enquanto outras afetam somente o espírito. Porém, a noção de doença psicossomática deixa supor que não há doença puramente física, uma vez que a mente reage a qualquer alteração material; já uma enfermidade exclusivamente psíquica não seria apenas doença da alma, visto que não há atividade mental sem um corpo que a suporte. O conceito não escapa à dualidade doenças do corpo versus doenças da mente, pois prova apenas que há moléstias predominantemente físicas ou psíquicas e psicossomáticas propriamente ditas. Existem afecções difíceis de determinar se são físicas ou mentais. É o caso da síndrome pré-menstrual. Durante o fluxo menstrual ou dias antes, muitas mulheres reclamam de sinais e sintomas classificáveis, a um só tempo, como psíquicos e físicos. Alguns são ginecológicos de fato como edema regional, mas se observa também irritabilidade. Os estados afetivos polarizados podem ser tão intensos que já se cogitou de isentar as mulheres de responsabilidade penal, caso cometessem delitos durante a síndrome. Ora, o problema é ginecológico ou psiquiátrico? Baseado na tese de doutoramento do autor, este livro é uma importante contribuição ao tema. Elie Cheniaux Jr., Professor da Faculdade de Ciências Médicas da UERJ, estuda os problemas psiquiátricos envolvidos na SPM, que, a princípio apresenta-se como ginecológica. Psiquiatras, ginecologistas e psicólogos encontrarão nesta obra manancial excelente para lidarem com este verdadeiro desafio.',
         ),
         'buy_cards' => array(
             array(
@@ -837,13 +798,14 @@ function dec_seed_livros() {
         'badges' => array(
             'Ensaio / Cinema / Psicologia',
         ),
-        'cover_img' => 'Livro WOODY ALLEN.jpg',
+        'cover_img' => 'Livro WOODY ALLEN-2.jpg',
+        'capa_home' => 'Livro WOODY ALLEN.jpg',
         'endorsement' => '',
         'stats' => array(
             array(
                 'icon' => '',
                 'label' => 'Ano',
-                'value' => '2021',
+                'value' => '2019',
             ),
             array(
                 'icon' => '',
@@ -871,6 +833,12 @@ function dec_seed_livros() {
             'cargo' => 'Presidente da Associação de Críticos de Cinema do Rio de Janeiro (ACC-RJ); crítica de cinema (Jornal do Brasil)',
             'extra' => '',
             'texto' => 'No artigo O percurso sombrio, de Woody Allen, publicado originalmente no The New York Times, em 1988, e que introduz a autobiografia de Ingmar Bergman, Lanterna mágica, o diretor americano cita as experiências familiares traumáticas da infância do mestre sueco, incluindo o viés de culpa imposto pela educação religiosa e a ausência de sentido da vida. Allen conclui, com seu humor peculiar, que, com uma história dessas, o sujeito só poderia virar um gênio. Bergman, o diretor que mais inspirou Woody, fez das experiências pessoais material valioso para a sua obra de viagem profunda na existência. Em Woody Allen – Seus filmes são mesmo autobiográficos?, Elie Cheniaux penetra numa das maiores questões que envolvem a obra do realizador que melhor traduziu o comportamento social ocidental através do cinema desde o final dos anos 1960. É a partir de experiências pessoais que o criador desenvolve sua arte. Mas é necessariamente a encarnação do próprio autor que determina um personagem? Com Woody Allen há uma frequente comparação da vida real do ator, diretor e roteirista com o papel que interpreta ou que é interpretado por atores que replicam seus gestos e maneira de falar. Até mesmo mulheres como a Jasmine, de Cate Blanchett, reproduzem o gaguejar típico das criações de Woody. Encontramos nas mulheres retratadas, um dos principais elementos de sua cinematografia, sinais da família do diretor, de relacionamentos e do próprio Allen. Mas até que ponto essas vivências estão nos filmes dele? Neste livro, cada caso é exposto e analisado, e o caráter comparativo proporciona uma leitura curiosa e instigante. Na arte, há um fascínio em conhecer quem é e como pensa o indivíduo que criou aquele mundo. O que passa pela cabeça do criador? Quando a obra é tão rica e contínua como a de Woody Allen, que atua em muitos dos seus filmes, a provocação é ainda maior. Só para citar no cinema, sobre criadores como Charles Chaplin, Orson Welles, Ingmar Bergman, Federico Fellini ou Stanley Kubrick, atores ou somente diretores, surgem sempre perguntas. O que eles pensavam quando criaram aquelas cenas? Onde estavam? Qual era o estado de espírito? Quais experiências eles viveram e quais pessoas podem ter estimulado a criação daquelas cenas? Por meio deste livro, de texto leve e bem fundamentado, vamos passear pela obra de Woody Allen e por aspectos da vida pessoal do artista para entender o neurótico ou apenas o cara simples que curte um jogo de basquete e gosta de tocar jazz com seu clarinete. Teorias para decifrar o homem por trás da obra ou a obra por trás do homem vão fluindo. Muito do que disse Woody em entrevistas ou está em seus filmes é colocado em espelhamento. Culpa e castigo, baixa autoestima e narcisismo, drama e comédia, família e Nova York. O sexo visto com algo separado do amor. Por outro lado, o romantismo que passeia por suas obras como Manhattan, Todos dizem eu te amo e Meia-noite em Paris. Allen pensa no amor como algo lúdico que nos distrai das verdadeiras questões existenciais. Talvez seja o medo da morte? O livro observa essa obsessão pelo destino na obra do cineasta e na própria maneira com que Woody reflete isso em suas entrevistas. Ele sempre encontra o caminho do humor para explicar o que é inevitável. O fim. E a maneira como vive, filmando com orçamento baixo e grandes estrelas, um filme por ano, mostra como Woody pensa. Sempre em processo criativo e de renovação. Há sempre uma história para contar. Uma intenção de assegurar que está vivo? É necessário alimentar nossa alma, e Woody Allen cuida disso fazendo filmes e, assim, driblando a morte. Como seu mestre Bergman pensou em O sétimo selo e o ruivo referenciou em A última noite de Boris Grushenko. Woody Allen – Seus filmes são mesmo autobiográficos? reúne os elementos que envolvem essa questão e proporciona ao leitor a oportunidade de pensar sobre processos criativos, experiências e existência. A obra de Allen reflete homens e mulheres do mundo contemporâneo. O diretor que, a partir do final dos anos 1960, capturou, num contexto psicanalítico, o mundo que estava em transformação comportamental. Detalhes destacados no livro nos levam aos filmes. Revisitá-los ou descobri-los é a oportunidade de uma experiência muito especial.',
+        ),
+        'prefacio2' => array(
+            'nome' => 'Marcelo Janot',
+            'cargo' => 'Professor e crítico de cinema',
+            'extra' => '',
+            'texto' => 'Woody Allen tem total consciência de que parte do fascínio que seus filmes exercem vem da identificação entre ele e a persona que criou desde a época em que fazia stand up cômicos: neurótico, hipocondríaco, intelectual verborrágico, agnóstico, atrapalhado no amor, etc. Personagens que andam como ele, se vestem como ele, só não são ele. Ou seriam? Tão apaixonado por Woody Allen quanto por seu suposto alter ego das telas, Elie Cheniaux se debruça de forma minuciosa sobre a vida e obra do ator, diretor e roteirista para investigar até que ponto vão as semelhanças e diferenças. A decupagem criteriosa de seus 50 longas-metragens resultou em um trabalho revelador por parte do autor. A divisão por temas recorrentes na filmografia de Allen dão uma perfeita noção de como ele os revisita ao longo da carreira e de que maneira refletem aspectos de sua vida pessoal. Ao relembrar, através da descrição de cenas, as diversas neuroses que acometem os personagens allenianos, Cheniaux ao mesmo tempo reconecta o leitor com os filmes de Allen e desperta o desejo de uma revisão, fazendo com que se possa entender melhor a construção dramática dos personagens. A hilária cena do elevador de Misterioso Assassinato em Manhattan, por exemplo, é uma síntese do humor de Allen porque, com apenas 3 planos em 3 minutos, rimos ao reconhecê-lo no discurso sobre claustrofobia, quando demonstra sua fragilidade física, ou quando se vê numa situação imprevisível. Se na maioria das vezes a leitura nos faz rir só por nos lembrar de cenas antológicas, Cheniaux também não se furta a tratar de temas espinhosos, como por exemplo, a nunca comprovada acusação de assédio sexual que Allen sofreu por parte de sua filha adotiva Dylan, e de que forma a paternidade e a moral são tratadas em seus filmes. Antes que o leitor chegue ao seu próprio veredito sobre a pergunta enunciada no título do livro, é bom lembrar que, na condição de psiquiatra, Elie Cheniaux está mais apto a decifrar a psique alleniana dentro e fora das telas, e vai mostrar que o Allen que vemos ou desejamos ver pode ser também uma maneira de nos projetarmos na persona que tanto admiramos. Da minha parte, só posso dizer do alívio que sinto pelo fato de que o cineasta ou escritor travado, em crise criativa, presente em tantos filmes, não tem absolutamente nada a ver com esse genial autor inesgotável que há cinco décadas nos presenteia com uma obra por ano.',
         ),
         'buy_cards' => array(
             array(
@@ -950,6 +918,9 @@ function dec_seed_livros() {
         update_post_meta($post_id, 'livro_tagline', $l['tagline']);
         update_post_meta($post_id, 'livro_genero', implode(', ', $l['badges']));
         update_post_meta($post_id, 'livro_endorsement', $l['endorsement']);
+        if (!empty($l['capa_home'])) {
+            update_post_meta($post_id, 'livro_capa_home', $l['capa_home']);
+        }
 
         foreach ($l['stats'] as $stat) {
             if ($stat['label'] === 'Ano') update_post_meta($post_id, 'livro_ano', $stat['value']);
@@ -980,6 +951,18 @@ function dec_seed_livros() {
             update_post_meta($post_id, 'livro_prefacio_cargo', $l['prefacio']['cargo']);
             update_post_meta($post_id, 'livro_prefacio_extra', $l['prefacio']['extra']);
             update_post_meta($post_id, 'livro_prefacio_texto', $l['prefacio']['texto']);
+        }
+        if (!empty($l['prefacio2'])) {
+            update_post_meta($post_id, 'livro_prefacio2_nome', $l['prefacio2']['nome']);
+            update_post_meta($post_id, 'livro_prefacio2_cargo', $l['prefacio2']['cargo']);
+            update_post_meta($post_id, 'livro_prefacio2_extra', $l['prefacio2']['extra']);
+            update_post_meta($post_id, 'livro_prefacio2_texto', $l['prefacio2']['texto']);
+        }
+        if (!empty($l['prefacio3'])) {
+            update_post_meta($post_id, 'livro_prefacio3_nome', $l['prefacio3']['nome']);
+            update_post_meta($post_id, 'livro_prefacio3_cargo', $l['prefacio3']['cargo']);
+            update_post_meta($post_id, 'livro_prefacio3_extra', $l['prefacio3']['extra']);
+            update_post_meta($post_id, 'livro_prefacio3_texto', $l['prefacio3']['texto']);
         }
 
         if (!empty($l['resenha_texto'])) {
@@ -1113,7 +1096,7 @@ function dec_seed_artigos() {
         'pdf' => 'artigo - tr esquizoafetivo.pdf',
     ),
 );
-    $placeholder = dec_import_theme_image('carreira-16.jpg', 'Artigo - imagem padrão');
+    $placeholder = dec_import_theme_image('15344.jpg', 'Artigo - imagem padrão');
 
     foreach ($artigos as $a) {
         $post_id = wp_insert_post(array(
@@ -1140,44 +1123,28 @@ function dec_seed_entrevistas() {
     'jornais' => array(
         'cards' => array(
             array(
-                'title' => '"Entrevista com Elie Cheniaux sobre seu livro"',
+                'title' => 'Cinema e Loucura',
                 'desc' => 'Elie Cheniaux fala sobre livro que aborda transtornos mentais nos filmes.',
                 'tag' => 'Jornal do Commércio de Pernambuco',
-                'cat' => '2024',
+                'cat' => '2012',
                 'img' => '',
-                'href' => '#',
+                'href' => 'https://jc.uol.com.br/canal/suplementos/arrecifes/noticia/2012/09/16/elie-cheniaux-fala-sobre-livro-que-aborda-transtornos-mentais-nos-filmes-56377.php',
             ),
             array(
-                'title' => '"LOUCURA NAS TELAS"',
-                'desc' => 'Com personagens muito doidos, filmes ampliam compreensão sobre doenças mentais; cineterapia é a nova moda em tratamento psicológico.',
+                'title' => 'Cinema e Psicologia: o filme "Coringa"',
+                'desc' => 'Reflexão sobre cinema e saúde mental a partir do filme "Coringa".',
                 'tag' => 'Folha de S.Paulo',
-                'cat' => '2024',
+                'cat' => '2020',
                 'img' => '',
-                'href' => '#',
+                'href' => 'https://saudemental.blogfolha.uol.com.br/2020/02/08/cinema-e-psicologia/?pwgt=4lgc1vpdquqt9buynd2hmq4q2pszzts3ul7iqwo1t6q&utm_source=whatsapp&utm_medium=social&utm_campaign=compwagift&fbclid=IwAR2Kbet8JUs2k7QRLgFAhJeAhKhk0kq_9MVi_zfkxOpK9iqglv8_avf4wAs',
             ),
             array(
-                'title' => '"Seu mau-humor está durando muito tempo?"',
-                'desc' => 'Faça o teste e descubra se isso é normal.',
-                'tag' => 'UOL - Notícias',
-                'cat' => '2023',
-                'img' => '',
-                'href' => '#',
-            ),
-            array(
-                'title' => '"Especialistas dizem que é impossível passar um dia sem mentir, mas há casos normais e doentios"',
+                'title' => 'Seu mau-humor é normal ou patológico? Faça o teste e descubra',
                 'desc' => '',
-                'tag' => 'UOL - Universa',
-                'cat' => '2023',
+                'tag' => 'UOL Notícias',
+                'cat' => '2012',
                 'img' => '',
-                'href' => '#',
-            ),
-            array(
-                'title' => '"Saúde Mental"',
-                'desc' => '',
-                'tag' => 'Folha de S.Paulo',
-                'cat' => '2022',
-                'img' => '',
-                'href' => '#',
+                'href' => 'https://noticias.uol.com.br/saude/ultimas-noticias/redacao/2012/08/10/seu-mau-humor-e-normal-ou-patologico-faca-o-teste-e-descubra.htm',
             ),
         ),
         'filters' => array(
@@ -1189,114 +1156,154 @@ function dec_seed_entrevistas() {
                 'title' => '"Entrevista no Programa do Jô"',
                 'desc' => 'Dr. Elie Cheniaux é um dos autores do livro “Cinema e Loucura”.',
                 'tag' => 'TV Globo',
-                'cat' => 'aberta',
+                'cat' => '',
                 'img' => 'entrevista-jo.avif',
                 'href' => 'https://globoplay.globo.com/v/2112130/',
             ),
-            array(
-                'title' => '"Debate sobre Educação"',
-                'desc' => 'Discussão sobre o papel da educação humanística no século XXI.',
-                'tag' => 'Record News',
-                'cat' => 'aberta',
-                'img' => '',
-                'href' => '#',
-            ),
-            array(
-                'title' => '"Série Pensadores Brasileiros"',
-                'desc' => 'Episódio da série dedicada a intelectuais e pensadores do Brasil contemporâneo.',
-                'tag' => 'Canal Futura',
-                'cat' => 'fechada',
-                'img' => '',
-                'href' => '#',
-            ),
-            array(
-                'title' => '"Entrevista Canal Cultural"',
-                'desc' => 'Conversa longa e aprofundada sobre trajetória literária e acadêmica.',
-                'tag' => 'YouTube',
-                'cat' => 'web',
-                'img' => '',
-                'href' => '#',
-            ),
-            array(
-                'title' => '"Lançamento da Obra"',
-                'desc' => 'Entrevista sobre o mais recente livro publicado e sua recepção pelo público.',
-                'tag' => 'TV Brasil',
-                'cat' => 'aberta',
-                'img' => '',
-                'href' => '#',
-            ),
-            array(
-                'title' => '"Mesa de Debates Online"',
-                'desc' => 'Participação em painel virtual sobre literatura contemporânea brasileira.',
-                'tag' => 'Vimeo',
-                'cat' => 'web',
-                'img' => '',
-                'href' => '#',
-            ),
         ),
         'filters' => array(
-            'Todos',
-            'TV Aberta',
-            'TV a Cabo',
-            'Web TV',
         ),
     ),
     'podcast' => array(
         'cards' => array(
             array(
-                'title' => 'Podcast Letras & Vozes',
-                'desc' => '"Literatura e Memória no Brasil Contemporâneo" — Conversa sobre os temas centrais da obra mais recente.',
-                'tag' => 'Cultura',
-                'cat' => 'cultura',
+                'title' => 'RENATO SILVA – As incríveis histórias de bipolares famosos',
+                'desc' => '',
+                'tag' => 'Podcast Voo Bipolar',
+                'cat' => '',
                 'img' => '',
-                'href' => '#',
+                'href' => 'https://www.listennotes.com/pt/podcasts/voo-bipolar/as-incr%C3%ADveis-hist%C3%B3rias-de-B6gOkDnIQ2K/?srsltid=AfmBOoqli6scXVYOWTd8wjJU6Qoin6En55poeHzUdiujeUauqhBCoi9H',
             ),
             array(
-                'title' => 'Ciência em Pauta',
-                'desc' => '"Pesquisa Humanística e Futuro das Ciências Humanas" — Debate sobre o futuro da pesquisa no Brasil.',
-                'tag' => 'Academia',
-                'cat' => 'academia',
+                'title' => 'Canal Médico – Trajetória profissional',
+                'desc' => '',
+                'tag' => 'Canal Médico',
+                'cat' => '',
                 'img' => '',
-                'href' => '#',
+                'href' => 'https://www.youtube.com/watch?v=jQ662c1mUXM&t=281s',
             ),
             array(
-                'title' => 'Passado Presente',
-                'desc' => '"A Marinha e a História do Brasil" — Análise histórica sobre o papel da Marinha na formação nacional.',
-                'tag' => 'História',
-                'cat' => 'historia',
+                'title' => 'Ligado em Saúde – Depressão pós-parto',
+                'desc' => '',
+                'tag' => 'Ligado em Saúde',
+                'cat' => '',
                 'img' => '',
-                'href' => '#',
+                'href' => 'https://www.youtube.com/watch?v=T2BAwg6N8Ps&t=7s',
             ),
             array(
-                'title' => 'Leituras do Sul',
-                'desc' => '"Escritores Brasileiros Hoje" — Reflexões sobre o mercado editorial e o ofício do escritor no Brasil.',
-                'tag' => 'Cultura',
-                'cat' => 'cultura',
+                'title' => 'Ligado em Saúde – Transtorno Bipolar',
+                'desc' => '',
+                'tag' => 'Ligado em Saúde',
+                'cat' => '',
                 'img' => '',
-                'href' => '#',
+                'href' => 'https://www.youtube.com/watch?v=R2-Y69nTvVY',
             ),
             array(
-                'title' => 'Vozes Acadêmicas',
-                'desc' => '"Memória, Identidade e Pesquisa" — Conversa com pesquisadores sobre os caminhos da produção científica.',
-                'tag' => 'Academia',
-                'cat' => 'academia',
+                'title' => '"dois pontos" – Loucura e Cinema',
+                'desc' => '',
+                'tag' => 'dois pontos',
+                'cat' => '',
                 'img' => '',
-                'href' => '#',
+                'href' => 'https://vimeo.com/14976026?fl=pl&fe=vl',
             ),
             array(
-                'title' => 'História do Brasil',
-                'desc' => '"Documentos e Memória Nacional" — Debate sobre arquivos históricos e preservação da memória.',
-                'tag' => 'História',
-                'cat' => 'historia',
+                'title' => 'ABP TV: A psiquiatria no cinema',
+                'desc' => '',
+                'tag' => 'ABP TV',
+                'cat' => '',
                 'img' => '',
-                'href' => '#',
+                'href' => 'https://www.youtube.com/watch?v=PQrAznDDDxM&t=8s',
+            ),
+            array(
+                'title' => 'Fuga de Ideias Cast',
+                'desc' => '',
+                'tag' => 'Fuga de Ideias Cast',
+                'cat' => '',
+                'img' => '',
+                'href' => 'https://www.youtube.com/watch?v=R-Zwx0yKIvY',
+            ),
+            array(
+                'title' => 'Ana Paula Alves Psicoterapeuta',
+                'desc' => '',
+                'tag' => 'Ana Paula Alves Psicoterapeuta',
+                'cat' => '',
+                'img' => '',
+                'href' => 'https://www.youtube.com/watch?v=vEKo8eq6pZg',
+            ),
+            array(
+                'title' => 'Série Saúde Mental – Dr. Ervin Cotrik',
+                'desc' => '',
+                'tag' => 'Série Saúde Mental',
+                'cat' => '',
+                'img' => '',
+                'href' => 'https://www.youtube.com/watch?v=JF3fcYlhAnY',
+            ),
+            array(
+                'title' => 'Apes em Foco',
+                'desc' => '',
+                'tag' => 'Apes em Foco',
+                'cat' => '',
+                'img' => '',
+                'href' => 'https://www.youtube.com/watch?v=uC2_bWx7ITY',
+            ),
+            array(
+                'title' => 'Canal Márcio Astrachan',
+                'desc' => '',
+                'tag' => 'Canal Márcio Astrachan',
+                'cat' => '',
+                'img' => '',
+                'href' => 'https://www.youtube.com/watch?v=xFCMf1oIKHY',
+            ),
+            array(
+                'title' => 'Transtornos de Humor e Personagens Históricos',
+                'desc' => '',
+                'tag' => 'EscutaCast',
+                'cat' => '',
+                'img' => '',
+                'href' => 'https://www.youtube.com/watch?v=mgrnEWNJUNo',
+            ),
+            array(
+                'title' => 'Tr. Bipolar',
+                'desc' => '',
+                'tag' => 'Canal Médico',
+                'cat' => '',
+                'img' => '',
+                'href' => 'https://www.youtube.com/watch?v=gBJYRKR0DkA&t=63s',
+            ),
+            array(
+                'title' => 'Bipolaridade e criatividade',
+                'desc' => '',
+                'tag' => 'CCM Group',
+                'cat' => '',
+                'img' => '',
+                'href' => 'https://www.youtube.com/watch?v=KIoXOdtWtmo&t=85s',
+            ),
+            array(
+                'title' => 'Tr. Borderline ou Tr. Bipolar: como diferenciar?',
+                'desc' => '',
+                'tag' => 'ABRP',
+                'cat' => '',
+                'img' => '',
+                'href' => 'https://www.youtube.com/watch?v=QgN2r8PJglc',
+            ),
+            array(
+                'title' => 'Comorbidade tr. bipolar e TOC',
+                'desc' => '',
+                'tag' => 'ABP TV',
+                'cat' => '',
+                'img' => '',
+                'href' => 'https://www.youtube.com/watch?v=4FNTVT3EI88',
+            ),
+            array(
+                'title' => 'Psiquiatria e Cinema',
+                'desc' => '',
+                'tag' => 'Pré-Jornada Mineira de Psiquiatria 2021',
+                'cat' => '',
+                'img' => '',
+                'href' => 'https://www.youtube.com/watch?v=iVlW0TWFZX8',
             ),
         ),
         'filters' => array(
-            'Todos',
-            'Cultura',
-            'Academia',
-            'História',
         ),
     ),
 );
@@ -1335,40 +1342,37 @@ function dec_seed_palestras() {
     if (get_posts(array('post_type' => 'palestra', 'posts_per_page' => 1, 'post_status' => 'any'))) {
         return;
     }
-    $palestras = array(
-    array(
-        'title' => 'Rio 2C',
-        'desc' => 'Rio 2C.',
-        'img' => 'PalestraRio2c.jpg',
-    ),
-    array(
-        'title' => 'TV',
-        'desc' => '',
-        'img' => 'IMG_20230326_073823_581.jpg',
-    ),
-    array(
-        'title' => 'Palestra Humanidades',
-        'desc' => 'Palestra Humanidades.',
-        'img' => 'PalestraHumanidades.jpg',
-    ),
-);
+    $palestras_video = array(
+        array('title' => 'Canal Médico – Bipolaridade e criatividade', 'link' => 'https://www.youtube.com/watch?v=1x17ug9IedA&t=22s'),
+        array('title' => 'Canal Médico – Alfred Hitchcock', 'link' => 'https://www.youtube.com/watch?v=CPtjvIDec20'),
+        array('title' => 'CE-IPUB: C. Lattes, genialidade, criatividade e bipolaridade', 'link' => 'https://www.youtube.com/watch?v=-QlQL-sJmQI'),
+        array('title' => 'Academia Nacional de Medicina – Depressão na Clínica e no Cinema', 'link' => 'https://www.youtube.com/watch?v=-ao-oNVVO5g&t=13s'),
+        array('title' => 'Academia Nacional de Medicina – Tr. Bipolar', 'link' => 'https://www.youtube.com/watch?v=CZOHHdEwa4I&t=3s'),
+        array('title' => 'O DSM-5 e as Psicopatologias', 'link' => 'https://www.youtube.com/watch?v=FBXeXqCHtnE'),
+        array('title' => 'Psicanálise e Neurociência', 'link' => 'https://www.youtube.com/watch?v=Uooz4ubitQw'),
+        array('title' => 'Alfred Hitchcock: XXXIX COMAS', 'link' => 'https://www.youtube.com/watch?v=Q5FMD825CuM'),
+        array('title' => 'IPUB-UFRJ: Santos-Dumont', 'link' => 'https://www.youtube.com/watch?v=gALFy3aV4uk'),
+        array('title' => 'Van Gogh – Lapsiq-GV', 'link' => 'https://www.youtube.com/watch?v=DD9vBY5ARMs'),
+        array('title' => 'Dom Casmurro – LASAM', 'link' => 'https://www.youtube.com/watch?v=-SoIl3Y_l4c'),
+        array('title' => 'LAPSO-UFSJ: Um Corpo que Cai', 'link' => 'https://www.youtube.com/watch?v=-gFI3LpuxNE'),
+        array('title' => 'Atenção, Sensopercepção e Consciência – LAPSAM', 'link' => 'https://www.youtube.com/watch?v=q4Rm0sIrF-k'),
+        array('title' => 'Canal Médico: "Dom Casmurro"', 'link' => 'https://www.youtube.com/watch?v=fqQQYMvWq_c'),
+        array('title' => 'Academia de Medicina do Rio de Janeiro | AMRJ', 'link' => 'https://www.youtube.com/watch?v=Dpw33ZDnEvY&t=42s'),
+        array('title' => 'Humanidades na Saúde – Projeto Ricardo Cruz: A Saúde do Curador', 'link' => 'https://www.youtube.com/watch?v=Jbit8POJgFY&t=6s'),
+        array('title' => 'Hospital Universitário Pedro Ernesto – "Manual de Psicopatologia"', 'link' => 'https://www.youtube.com/watch?v=iBpOMiteTzs&t=29s'),
+        array('title' => 'IPUB – Woody Allen', 'link' => 'https://www.youtube.com/watch?v=BoXSkdzanO4'),
+    );
 
-    foreach ($palestras as $p) {
+    foreach ($palestras_video as $p) {
         $post_id = wp_insert_post(array(
             'post_title' => $p['title'],
-            'post_excerpt' => $p['desc'],
             'post_type' => 'palestra',
             'post_status' => 'publish',
         ));
         if (!$post_id) {
             continue;
         }
-        if ($p['img']) {
-            $thumb_id = dec_import_theme_image($p['img'], $p['title']);
-            if ($thumb_id) {
-                set_post_thumbnail($post_id, $thumb_id);
-            }
-        }
+        update_post_meta($post_id, 'palestra_link', $p['link']);
     }
 }
 

@@ -19,6 +19,9 @@
     </div>
 
     <div class="hidden lg:flex items-center flex-wrap justify-end">
+      <?php if (!is_front_page()) : ?>
+        <div class="nav-item"><a href="<?php echo esc_url(home_url('/')); ?>" class="nav-link">Início</a></div>
+      <?php endif; ?>
       <?php foreach ($dec_nav as $item) : ?>
         <div class="nav-item">
           <a href="<?php echo esc_url($item['href']); ?>" class="nav-link" <?php echo !empty($item['external']) ? 'target="_blank" rel="noopener"' : ''; ?>>
@@ -50,6 +53,9 @@
 <!-- ══════════════════ MOBILE MENU ══════════════════ -->
 <div id="mobile-menu">
   <button id="close-menu" class="absolute top-5 right-6 text-3xl text-gray-600" aria-label="Fechar menu">&times;</button>
+  <?php if (!is_front_page()) : ?>
+    <div class="mob-section"><a class="mob-link" href="<?php echo esc_url(home_url('/')); ?>">Início</a></div>
+  <?php endif; ?>
   <?php foreach ($dec_nav as $key => $item) : ?>
     <div class="mob-section">
       <?php if (!empty($item['children'])) : ?>

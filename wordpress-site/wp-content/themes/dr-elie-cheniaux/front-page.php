@@ -10,7 +10,7 @@
       <p class="hero-subtitle mb-8">Psiquiatra · professor universitário · escritor</p>
       <div class="flex flex-wrap gap-4">
         <a href="#livros" class="btn-primary">Conheça meus livros</a>
-        <a href="#contato" class="btn-outline">Contato</a>
+        <a href="#contato" class="btn-outline">Contato ou agendamento de consulta</a>
       </div>
     </div>
     <div class="flex justify-center">
@@ -34,7 +34,7 @@
           array('biografia', 'Biografia', 'dr-elie.jpg', 'Foto de Elie Cheniaux', 'Trajetória de vida, formação e experiências marcantes', 'Ler mais →', 'object-fit:cover;object-position:top center;'),
           array('bipolab', 'BiPoLaB', 'logo do BiPoLaB.jpg', 'logo do BiPoLaB', 'Laboratório de pesquisa sobre o transtorno bipolar', 'Ler mais →', 'object-fit:cover;'),
           array('curriculo', 'Currículo Lattes', 'Plataforma Lattes.jpg', 'Plataforma Lattes', 'Produção científica', 'Acessar →', 'object-fit:cover;'),
-          array('discurso', 'Discurso de Posse na AMRJ', 'Discursando.jpg', 'Discurso de Posse na AMRJ', 'Ingresso na Academia de Medicina do Rio de Janeiro', 'Ler →', 'object-fit:contain;'),
+          array('discurso', 'Discurso de Posse na AMRJ', 'selo-amrj.jpg', 'Selo da Academia de Medicina do Rio de Janeiro', 'Ingresso na Academia de Medicina do Rio de Janeiro', 'Ler →', 'object-fit:contain;'),
           array('memorial', 'Memorial', 'carreira-16.jpg', 'Memorial', 'Reflexões, memórias e relatos que compõem minha trajetória intelectual e pessoal ao longo dos anos', 'Ler →', 'object-fit:cover;'),
       );
       foreach ($quem_sou_eu as $qse) :
@@ -66,9 +66,14 @@
       $livros = get_posts(array('post_type' => 'livro', 'posts_per_page' => -1, 'orderby' => 'menu_order title', 'order' => 'ASC'));
       foreach ($livros as $livro) :
       ?>
+        <?php $capa_home = get_post_meta($livro->ID, 'livro_capa_home', true); ?>
         <a href="<?php echo esc_url(get_permalink($livro)); ?>" class="card group overflow-hidden">
           <div style="padding:20px 0; display:flex; align-items:center; justify-content:center; background:#f5f0e8;">
-            <?php echo get_the_post_thumbnail($livro, 'medium', array('class' => 'h-auto mx-auto', 'style' => 'max-width:60%;')); ?>
+            <?php if ($capa_home) : ?>
+              <img src="<?php echo esc_url(get_template_directory_uri() . '/img/' . $capa_home); ?>" alt="<?php echo esc_attr(get_the_title($livro)); ?>" class="h-auto mx-auto" style="max-width:60%;">
+            <?php else : ?>
+              <?php echo get_the_post_thumbnail($livro, 'medium', array('class' => 'h-auto mx-auto', 'style' => 'max-width:60%;')); ?>
+            <?php endif; ?>
           </div>
           <div class="px-5 py-3">
             <h3 class="font-bold text-base mb-1" style="color:var(--navy)"><?php echo esc_html(get_the_title($livro)); ?></h3>
@@ -144,18 +149,17 @@
       <h2 class="section-heading text-4xl font-bold">Palestras</h2>
       <div class="section-line mx-auto"></div>
     </div>
-    <div class="grid md:grid-cols-3 gap-6 reveal">
+    <div class="space-y-4 reveal">
       <?php
-      $palestras = get_posts(array('post_type' => 'palestra', 'posts_per_page' => 3));
+      $palestras = get_posts(array('post_type' => 'palestra', 'posts_per_page' => 3, 'orderby' => 'menu_order date', 'order' => 'ASC'));
       foreach ($palestras as $palestra) :
+          $link = get_post_meta($palestra->ID, 'palestra_link', true);
       ?>
-        <div class="card overflow-hidden">
-          <div class="p-6">
-            <?php if (has_post_thumbnail($palestra)) : ?>
-              <div class="mb-4" style="border-radius:4px; overflow:hidden;"><?php echo get_the_post_thumbnail($palestra, 'medium', array('class' => 'w-full h-auto')); ?></div>
-            <?php endif; ?>
-            <h3 class="font-bold text-lg mb-2" style="color:var(--navy)"><?php echo esc_html(get_the_title($palestra)); ?></h3>
-            <p class="text-gray-400 text-sm leading-relaxed"><?php echo esc_html(get_the_excerpt($palestra)); ?></p>
+        <div class="card p-6 flex gap-6 items-start">
+          <div class="text-3xl">🎤</div>
+          <div class="flex-1">
+            <h3 class="font-bold text-lg mb-1" style="color:var(--navy)"><?php echo esc_html(get_the_title($palestra)); ?></h3>
+            <?php if ($link) : ?><a href="<?php echo esc_url($link); ?>" target="_blank" rel="noopener" class="inline-block mt-3 text-xs font-bold uppercase tracking-wider" style="color:var(--gold)">Assistir →</a><?php endif; ?>
           </div>
         </div>
       <?php endforeach; ?>
@@ -172,7 +176,7 @@
     <div class="text-center mb-14 reveal">
       <h2 class="section-heading text-4xl font-bold">Encontros Especiais</h2>
       <div class="section-line mx-auto"></div>
-      <p class="text-gray-400 mt-4">Momentos e registros de encontros memoráveis</p>
+      <p class="text-gray-400 mt-4">Momentos e registros com pessoas incríveis</p>
     </div>
     <div id="fotos-encontros" class="grid grid-cols-2 md:grid-cols-4 gap-4 reveal">
       <?php
@@ -225,7 +229,7 @@
 <section id="blog" style="background: linear-gradient(135deg,#f0f9ff,#fff);" class="py-20">
   <div class="max-w-screen-lg mx-auto px-6">
     <div class="text-center mb-14 reveal">
-      <h2 class="section-heading text-4xl font-bold">Blog &amp; Textos</h2>
+      <h2 class="section-heading text-4xl font-bold">Blog</h2>
       <div class="section-line mx-auto"></div>
     </div>
     <div class="grid md:grid-cols-2 gap-6 reveal">
@@ -236,16 +240,35 @@
         <p class="text-gray-400 text-sm leading-relaxed mb-4">"Desde que começamos a sair juntos, nunca mais usei salto alto", disse-me ela, na expectativa de que eu, em seguida, expressasse profunda gratidão.</p>
         <span class="text-xs font-bold uppercase tracking-wider" style="color:var(--gold)">Ler post →</span>
       </a>
-      <a id="outros-textos" href="https://criticos.com.br/?p=12181&cat=4" target="_blank" rel="noopener" class="card p-7 group">
+      <a href="https://eliecheniaux.blogspot.com/2021/12/dialogo-entre-dois-amigos-em-um-cafe-em.html" target="_blank" rel="noopener" class="card p-7 group">
+        <div class="text-3xl mb-4">✍️</div>
+        <div class="text-xs font-bold uppercase tracking-widest mb-2" style="color:var(--gold)">Blog · 29 Dez 2021</div>
+        <h3 class="section-heading text-xl font-bold mb-3" style="color:var(--navy)">Diálogo Entre Dois Amigos em um Café em Copacabana</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">"— Em relação a esse ciúme que sinto da minha namorada, o que devo fazer? — Tome um antipsicótico..."</p>
+        <span class="text-xs font-bold uppercase tracking-wider" style="color:var(--gold)">Ler post →</span>
+      </a>
+    </div>
+    <div class="text-center mt-8 reveal">
+      <a href="https://eliecheniaux.blogspot.com/" target="_blank" rel="noopener" class="btn-outline" style="display:inline-block">Ver todos os textos →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ OUTROS TEXTOS ══════════════════ -->
+<section id="outros-textos" class="py-20 bg-white">
+  <div class="max-w-screen-lg mx-auto px-6">
+    <div class="text-center mb-14 reveal">
+      <h2 class="section-heading text-4xl font-bold">Outros Textos</h2>
+      <div class="section-line mx-auto"></div>
+    </div>
+    <div class="grid gap-6 reveal max-w-lg mx-auto">
+      <a id="outros-textos-post" href="https://criticos.com.br/?p=12181&cat=4" target="_blank" rel="noopener" class="card p-7 group">
         <div class="text-3xl mb-4">📝</div>
         <div class="text-xs font-bold uppercase tracking-widest mb-2" style="color:var(--gold)">Outros textos · 28 Jan 2020</div>
         <h3 class="section-heading text-xl font-bold mb-3" style="color:var(--navy)">Um Dia de Chuva em Nova York</h3>
         <p class="text-gray-400 text-sm leading-relaxed mb-4">Domingos Oliveira certa vez fez o seguinte comentário: "Um dos maiores prazeres da minha vida é quando os jornais anunciam um novo filme de Woody Allen..."</p>
         <span class="text-xs font-bold uppercase tracking-wider" style="color:var(--gold)">Ler texto →</span>
       </a>
-    </div>
-    <div class="text-center mt-8 reveal">
-      <a href="https://eliecheniaux.blogspot.com/" target="_blank" rel="noopener" class="btn-outline" style="display:inline-block">Ver todos os textos →</a>
     </div>
   </div>
 </section>

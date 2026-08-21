@@ -37,11 +37,23 @@ function dec_configure_smtp($phpmailer) {
     $phpmailer->SMTPAuth = true;
     $phpmailer->Username = defined('DEC_SMTP_USER') ? DEC_SMTP_USER : '';
     $phpmailer->Password = defined('DEC_SMTP_PASS') ? DEC_SMTP_PASS : '';
-    if (defined('DEC_SMTP_FROM') && DEC_SMTP_FROM) {
-        $phpmailer->setFrom(DEC_SMTP_FROM, defined('DEC_SMTP_FROM_NAME') ? DEC_SMTP_FROM_NAME : get_bloginfo('name'));
-    }
 }
 add_action('phpmailer_init', 'dec_configure_smtp');
+
+// wp_mail() builds a default "From" address from the site's hostname (e.g.
+// wordpress@localhost on local dev) and sets it *before* phpmailer_init
+// fires. PHPMailer's address validator rejects a domain with no dot, which
+// throws and aborts the send before our SMTP config ever runs — so the
+// override has to happen at this earlier filter stage instead.
+function dec_mail_from($original) {
+    return (defined('DEC_SMTP_FROM') && DEC_SMTP_FROM) ? DEC_SMTP_FROM : $original;
+}
+add_filter('wp_mail_from', 'dec_mail_from');
+
+function dec_mail_from_name($original) {
+    return (defined('DEC_SMTP_FROM_NAME') && DEC_SMTP_FROM_NAME) ? DEC_SMTP_FROM_NAME : $original;
+}
+add_filter('wp_mail_from_name', 'dec_mail_from_name');
 
 function dec_handle_contact_form() {
     $redirect = wp_get_referer() ?: home_url('/');

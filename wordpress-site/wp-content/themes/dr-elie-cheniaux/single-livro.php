@@ -15,6 +15,8 @@ while (have_posts()) : the_post();
     $accent_light = get_post_meta($id, 'livro_accent_light', true) ?: '#e8d5a0';
     $accent_dark = get_post_meta($id, 'livro_accent_dark', true) ?: '#123018';
     $capa_alt = get_post_meta($id, 'livro_capa_alt', true);
+    $capa_home = get_post_meta($id, 'livro_capa_home', true);
+    $capa_hero = get_post_meta($id, 'livro_capa_hero', true) ?: $capa_home;
     $endorsement = get_post_meta($id, 'livro_endorsement', true);
     $tema_titulo = get_post_meta($id, 'livro_tema_titulo', true);
     $tema_lista = dec_csv_to_array(get_post_meta($id, 'livro_tema_lista', true));
@@ -24,12 +26,21 @@ while (have_posts()) : the_post();
     $pref_cargo = get_post_meta($id, 'livro_prefacio_cargo', true);
     $pref_extra = get_post_meta($id, 'livro_prefacio_extra', true);
     $pref_texto = get_post_meta($id, 'livro_prefacio_texto', true);
+    $pref2_nome = get_post_meta($id, 'livro_prefacio2_nome', true);
+    $pref2_cargo = get_post_meta($id, 'livro_prefacio2_cargo', true);
+    $pref2_extra = get_post_meta($id, 'livro_prefacio2_extra', true);
+    $pref2_texto = get_post_meta($id, 'livro_prefacio2_texto', true);
+    $pref3_nome = get_post_meta($id, 'livro_prefacio3_nome', true);
+    $pref3_cargo = get_post_meta($id, 'livro_prefacio3_cargo', true);
+    $pref3_extra = get_post_meta($id, 'livro_prefacio3_extra', true);
+    $pref3_texto = get_post_meta($id, 'livro_prefacio3_texto', true);
     $resenha_texto = get_post_meta($id, 'livro_resenha_texto', true);
     $resenha_autores = dec_parse_pipe_rows(get_post_meta($id, 'livro_resenha_autores', true));
     $compradores = dec_parse_pipe_rows(get_post_meta($id, 'livro_compradores', true));
     $ctas = dec_parse_pipe_rows(get_post_meta($id, 'livro_ctas', true));
     $generos = dec_csv_to_array($genero);
     $tem_prefacio = !empty($pref_texto);
+    $prefacio_label = !empty($pref2_texto) ? 'Prefácios' : 'Prefácio';
     $tem_resenha = !empty($resenha_texto);
     $tem_comprar = !empty($compradores);
 
@@ -55,7 +66,11 @@ while (have_posts()) : the_post();
         <div class="grid lg:grid-cols-2 gap-16 items-center">
           <div class="flex justify-center lg:justify-end order-2 lg:order-1">
             <div class="book-cover-wrap">
-              <?php the_post_thumbnail('large', array('alt' => 'Capa do livro ' . get_the_title())); ?>
+              <?php if ($capa_hero) : ?>
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/img/' . $capa_hero); ?>" alt="Capa do livro <?php the_title(); ?>">
+              <?php else : ?>
+                <?php the_post_thumbnail('large', array('alt' => 'Capa do livro ' . get_the_title())); ?>
+              <?php endif; ?>
             </div>
           </div>
           <div class="order-1 lg:order-2">
@@ -64,13 +79,13 @@ while (have_posts()) : the_post();
             <?php endforeach; ?>
             <h1 class="hero-title text-5xl lg:text-6xl xl:text-7xl font-bold mb-3"><?php the_title(); ?></h1>
             <?php if ($subtitulo) : ?><p class="text-lg text-gray-500 mb-2" style="font-family:'Playfair Display',serif;"><?php echo esc_html($subtitulo); ?></p><?php endif; ?>
+            <?php if ($tagline) : ?><p class="hero-tagline mb-2"><?php echo esc_html($tagline); ?></p><?php endif; ?>
             <?php if ($autor) : ?><p class="hero-author mb-2"><?php echo esc_html($autor); ?></p><?php endif; ?>
             <div class="hero-divider"></div>
-            <?php if ($tagline) : ?><p class="hero-tagline mb-10"><?php echo esc_html($tagline); ?></p><?php endif; ?>
             <div class="flex flex-wrap gap-4 mb-10">
               <?php if ($tem_comprar) : ?><a href="#comprar" class="btn-primary">Comprar agora</a><?php endif; ?>
-              <a href="#sinopse" class="btn-outline">Ler sinopse</a>
-              <?php if ($tem_prefacio) : ?><a href="#prefacio" class="btn-outline">Prefácio</a><?php endif; ?>
+              <a href="#sinopse" class="btn-outline">Sinopse</a>
+              <?php if ($tem_prefacio) : ?><a href="#prefacio" class="btn-outline"><?php echo esc_html($prefacio_label); ?></a><?php endif; ?>
               <?php if ($tem_resenha) : ?><a href="#resenha" class="btn-outline">Resenha</a><?php endif; ?>
             </div>
             <?php if ($endorsement) : ?>
@@ -107,7 +122,7 @@ while (have_posts()) : the_post();
     <div class="inner-tab-bar">
       <div class="max-w-screen-lg mx-auto px-4 flex overflow-x-auto">
         <a href="#sinopse" class="inner-tab">Sinopse</a>
-        <?php if ($tem_prefacio) : ?><a href="#prefacio" class="inner-tab">Prefácio</a><?php endif; ?>
+        <?php if ($tem_prefacio) : ?><a href="#prefacio" class="inner-tab"><?php echo esc_html($prefacio_label); ?></a><?php endif; ?>
         <?php if ($tem_resenha) : ?><a href="#resenha" class="inner-tab">Resenha</a><?php endif; ?>
         <?php if ($tem_comprar) : ?><a href="#comprar" class="inner-tab">Onde Comprar</a><?php endif; ?>
         <?php if ($outros_livros) : ?><a href="#outros-livros" class="inner-tab">Outros Livros</a><?php endif; ?>
@@ -176,7 +191,7 @@ while (have_posts()) : the_post();
       <div class="max-w-screen-lg mx-auto px-6">
         <div class="mb-14 reveal">
           <span class="section-label">Apresentação</span>
-          <h2 class="section-heading text-4xl font-bold mb-5">Prefácio</h2>
+          <h2 class="section-heading text-4xl font-bold mb-5"><?php echo esc_html($prefacio_label); ?></h2>
           <div class="section-line"></div>
         </div>
         <div class="prefacio-card flex flex-col md:flex-row reveal">
@@ -197,6 +212,42 @@ while (have_posts()) : the_post();
               <p class="excerpt-text"><?php echo esc_html($pref_texto); ?></p>
             </div>
           </div>
+          <?php if ($pref2_texto) : ?>
+          <div class="flex-1 p-8 lg:p-12">
+            <?php if ($pref2_nome) : ?>
+              <div class="flex items-center gap-4 mb-8 pb-6 border-b border-gray-100">
+                <div class="prefacist-avatar"><span style="font-size:1.4rem;">✍️</span></div>
+                <div>
+                  <div class="font-bold text-lg" style="color:var(--navy)"><?php echo esc_html($pref2_nome); ?></div>
+                  <?php if ($pref2_cargo) : ?><div class="text-sm text-gray-400"><?php echo esc_html($pref2_cargo); ?></div><?php endif; ?>
+                  <?php if ($pref2_extra) : ?><div class="text-xs mt-1" style="color:var(--accent)"><?php echo esc_html($pref2_extra); ?></div><?php endif; ?>
+                </div>
+              </div>
+            <?php endif; ?>
+            <div class="mb-8 overflow-hidden">
+              <span class="open-quote">"</span>
+              <p class="excerpt-text"><?php echo esc_html($pref2_texto); ?></p>
+            </div>
+          </div>
+          <?php endif; ?>
+          <?php if ($pref3_texto) : ?>
+          <div class="flex-1 p-8 lg:p-12">
+            <?php if ($pref3_nome) : ?>
+              <div class="flex items-center gap-4 mb-8 pb-6 border-b border-gray-100">
+                <div class="prefacist-avatar"><span style="font-size:1.4rem;">✍️</span></div>
+                <div>
+                  <div class="font-bold text-lg" style="color:var(--navy)"><?php echo esc_html($pref3_nome); ?></div>
+                  <?php if ($pref3_cargo) : ?><div class="text-sm text-gray-400"><?php echo esc_html($pref3_cargo); ?></div><?php endif; ?>
+                  <?php if ($pref3_extra) : ?><div class="text-xs mt-1" style="color:var(--accent)"><?php echo esc_html($pref3_extra); ?></div><?php endif; ?>
+                </div>
+              </div>
+            <?php endif; ?>
+            <div class="mb-8 overflow-hidden">
+              <span class="open-quote">"</span>
+              <p class="excerpt-text"><?php echo esc_html($pref3_texto); ?></p>
+            </div>
+          </div>
+          <?php endif; ?>
         </div>
       </div>
     </section>
@@ -262,9 +313,15 @@ while (have_posts()) : the_post();
           <div class="section-line mx-auto"></div>
         </div>
         <div class="books-scroll reveal">
-          <?php foreach ($outros_livros as $ol) : ?>
+          <?php foreach ($outros_livros as $ol) :
+              $ol_capa_home = get_post_meta($ol->ID, 'livro_capa_home', true);
+          ?>
             <a href="<?php echo esc_url(get_permalink($ol)); ?>" class="book-thumb">
-              <?php echo get_the_post_thumbnail($ol, 'medium'); ?>
+              <?php if ($ol_capa_home) : ?>
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/img/' . $ol_capa_home); ?>" alt="<?php echo esc_attr(get_the_title($ol)); ?>">
+              <?php else : ?>
+                <?php echo get_the_post_thumbnail($ol, 'medium'); ?>
+              <?php endif; ?>
               <div class="book-thumb-title"><?php echo esc_html(get_the_title($ol)); ?></div>
             </a>
           <?php endforeach; ?>

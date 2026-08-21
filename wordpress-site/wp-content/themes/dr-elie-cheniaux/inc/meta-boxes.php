@@ -27,6 +27,7 @@ function dec_meta_fields($post_type) {
             'livro_accent_light'   => array('Cor de destaque (clara)', 'color'),
             'livro_accent_dark'    => array('Cor de destaque (escura)', 'color'),
             'livro_capa_alt'       => array('Capa alternativa (URL da imagem)', 'url'),
+            'livro_capa_home'      => array('Capa na lista da página inicial (opcional, nome do arquivo em /img/ do tema — se vazio, usa a capa principal)', 'text'),
             'livro_endorsement'    => array('Selo/endosso curto (ex: "Prefácio de Fulano")', 'text'),
             'livro_tema_titulo'    => array('Título da lista de temas/filmes (opcional)', 'text'),
             'livro_tema_lista'     => array('Temas/filmes (separado por vírgula)', 'textarea'),
@@ -36,6 +37,14 @@ function dec_meta_fields($post_type) {
             'livro_prefacio_cargo' => array('Prefácio — cargo/ocupação', 'text'),
             'livro_prefacio_extra' => array('Prefácio — linha extra (obras, etc.)', 'text'),
             'livro_prefacio_texto' => array('Prefácio — texto completo', 'textarea'),
+            'livro_prefacio2_nome'  => array('Segundo Prefácio (opcional) — nome do prefaciador', 'text'),
+            'livro_prefacio2_cargo' => array('Segundo Prefácio — cargo/ocupação', 'text'),
+            'livro_prefacio2_extra' => array('Segundo Prefácio — linha extra (obras, etc.)', 'text'),
+            'livro_prefacio2_texto' => array('Segundo Prefácio — texto completo', 'textarea'),
+            'livro_prefacio3_nome'  => array('Terceiro Prefácio (opcional) — nome do prefaciador', 'text'),
+            'livro_prefacio3_cargo' => array('Terceiro Prefácio — cargo/ocupação', 'text'),
+            'livro_prefacio3_extra' => array('Terceiro Prefácio — linha extra (obras, etc.)', 'text'),
+            'livro_prefacio3_texto' => array('Terceiro Prefácio — texto completo', 'textarea'),
             'livro_resenha_texto'   => array('Resenha — texto completo', 'textarea'),
             'livro_resenha_autores' => array('Resenha — autores da resenha, um por linha: Nome | Bio', 'textarea'),
             'livro_compradores'    => array('Onde comprar — uma loja por linha: Nome | URL | Cor (#hex) | Selo | Descrição', 'textarea'),
@@ -49,6 +58,9 @@ function dec_meta_fields($post_type) {
             'entrevista_link'    => array('Link externo', 'url'),
             'entrevista_data'    => array('Data/Ano', 'text'),
         ),
+        'palestra' => array(
+            'palestra_link' => array('Link do vídeo (YouTube, Vimeo, etc. — deixe em branco para exibir como foto no topo da página)', 'url'),
+        ),
     );
     return isset($fields[$post_type]) ? $fields[$post_type] : array();
 }
@@ -58,6 +70,7 @@ function dec_add_meta_boxes() {
         'livro' => 'Detalhes do Livro',
         'artigo' => 'Arquivo do Artigo',
         'entrevista' => 'Detalhes da Entrevista',
+        'palestra' => 'Detalhes da Palestra',
     );
     foreach ($titles as $post_type => $title) {
         add_meta_box('dec_' . $post_type . '_meta', $title, 'dec_render_meta_box', $post_type, 'normal', 'high');

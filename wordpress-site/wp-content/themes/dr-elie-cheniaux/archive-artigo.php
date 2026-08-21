@@ -5,7 +5,10 @@
     <div class="breadcrumb text-sm mb-6 flex items-center gap-2">
       <a href="<?php echo esc_url(home_url('/')); ?>">Início</a><span class="text-gray-400">›</span><span style="color:var(--navy);font-weight:700">Artigos Científicos</span>
     </div>
-    <h1 class="text-4xl lg:text-5xl font-bold" style="color:var(--navy)">Artigos Científicos</h1>
+    <div class="flex items-center gap-5">
+      <img src="<?php echo esc_url(content_url('/uploads/2026/08/artigo-imagem-padrao-2.jpg')); ?>" alt="Artigos Científicos" class="w-32 h-32 border-4 object-cover flex-shrink-0" style="border-color:var(--gold);">
+      <h1 class="text-4xl lg:text-5xl font-bold" style="color:var(--navy)">Artigos Científicos</h1>
+    </div>
   </div>
 </section>
 

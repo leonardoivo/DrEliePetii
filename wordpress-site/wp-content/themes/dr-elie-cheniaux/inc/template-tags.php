@@ -64,6 +64,35 @@ function dec_page_url($slug) {
 }
 
 /**
+ * Returns the items of a WP admin-editable menu (Aparência → Menus) assigned
+ * to $location, in the { label, href, external } shape used by dec_get_nav_items().
+ * Falls back to $default when no menu has been assigned to that location yet.
+ */
+function dec_get_menu_children($location, $default = array()) {
+    $locations = get_nav_menu_locations();
+    if (empty($locations[$location])) {
+        return $default;
+    }
+    $menu = wp_get_nav_menu_object($locations[$location]);
+    if (!$menu) {
+        return $default;
+    }
+    $items = wp_get_nav_menu_items($menu->term_id);
+    if (!$items) {
+        return $default;
+    }
+    $children = array();
+    foreach ($items as $item) {
+        $children[] = array(
+            'label' => $item->title,
+            'href' => $item->url,
+            'external' => strpos($item->url, home_url()) !== 0,
+        );
+    }
+    return $children;
+}
+
+/**
  * Main site navigation, shared by header.php (desktop) and the mobile menu.
  */
 function dec_get_nav_items() {
@@ -137,9 +166,10 @@ function dec_get_nav_items() {
         ),
         'outros_textos' => array(
             'label' => 'Outros textos',
-            'href' => 'https://criticos.com.br/?p=12181&cat=4',
-            'external' => true,
-            'children' => array(),
+            'href' => '#',
+            'children' => dec_get_menu_children('outros_textos', array(
+                array('label' => 'críticos.com', 'href' => 'https://criticos.com.br/?p=12181&cat=4', 'external' => true),
+            )),
         ),
     );
 }

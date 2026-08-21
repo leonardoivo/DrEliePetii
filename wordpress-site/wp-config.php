@@ -92,6 +92,14 @@ if ( ! defined( 'WP_DEBUG' ) ) {
 }
 
 /* That's all, stop editing! Happy publishing. */
+define('DEC_SMTP_HOST', 'smtp.titan.email');
+define('DEC_SMTP_PORT', 465);
+define('DEC_SMTP_SECURE', 'ssl');
+define('DEC_SMTP_USER', 'contato@eliecheniaux.com');
+define('DEC_SMTP_PASS', 'ElieCheniaux2026!');
+define('DEC_SMTP_FROM', 'contato@eliecheniaux.com');
+define('DEC_SMTP_FROM_NAME', 'Site Elie Cheniaux');
+
 
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {

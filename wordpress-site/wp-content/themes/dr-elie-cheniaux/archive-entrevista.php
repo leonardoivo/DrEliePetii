@@ -19,13 +19,7 @@ $entrevistas = get_posts(array(
     ),
 ));
 
-$filtros = array();
-foreach ($entrevistas as $e) {
-    $terms = wp_get_post_terms($e->ID, 'entrevista_filtro');
-    foreach ($terms as $t) {
-        $filtros[$t->slug] = $t->name;
-    }
-}
+$ctas = array('jornais' => 'Acessar →', 'tv' => 'Acessar →', 'podcast' => 'Assistir →');
 ?>
 
 <section class="page-hero py-14">
@@ -58,46 +52,21 @@ foreach ($entrevistas as $e) {
 
 <main class="max-w-screen-lg mx-auto px-6 py-14">
 
-  <?php if ($filtros) : ?>
-    <div class="flex flex-wrap gap-2 mb-8">
-      <button class="filter-btn active" onclick="filterCat(this,'todos')" style="background:var(--navy);color:white;">Todos</button>
-      <?php foreach ($filtros as $slug => $name) : ?>
-        <button class="filter-btn" onclick="filterCat(this,'<?php echo esc_attr($slug); ?>')"><?php echo esc_html($name); ?></button>
-      <?php endforeach; ?>
-    </div>
-  <?php endif; ?>
-
-  <div id="cards-grid" class="grid sm:grid-cols-2 <?php echo $tipo_atual === 'jornais' ? '' : 'lg:grid-cols-3'; ?> gap-6">
+  <div class="space-y-4">
     <?php foreach ($entrevistas as $e) :
-        $terms = wp_get_post_terms($e->ID, 'entrevista_filtro', array('fields' => 'slugs'));
-        $cat = !is_wp_error($terms) && !empty($terms) ? $terms[0] : '';
         $veiculo = get_post_meta($e->ID, 'entrevista_veiculo', true);
         $link = get_post_meta($e->ID, 'entrevista_link', true);
         $data = get_post_meta($e->ID, 'entrevista_data', true);
     ?>
-      <?php if ($tipo_atual === 'podcast') : ?>
-        <article class="pod-card reveal" data-cat="<?php echo esc_attr($cat); ?>">
-          <div class="pod-cover" style="background:linear-gradient(135deg,var(--navy),var(--gold));">🎙️</div>
-          <div class="p-5">
-            <?php if ($veiculo) : ?><span class="tag" style="background:#f3f0e8;color:var(--navy);"><?php echo esc_html($veiculo); ?></span><?php endif; ?>
-            <h3 class="font-bold text-base mt-2 mb-1" style="color:var(--navy)"><?php echo esc_html(get_the_title($e)); ?></h3>
-            <p class="text-gray-400 text-xs leading-relaxed mb-4"><?php echo esc_html(get_the_excerpt($e)); ?></p>
-            <?php if ($link) : ?><a href="<?php echo esc_url($link); ?>" target="_blank" rel="noopener" class="stream-btn" style="background:var(--navy);color:white;">▶ Ouvir</a><?php endif; ?>
-          </div>
-        </article>
-      <?php else : ?>
-        <article class="card reveal" data-cat="<?php echo esc_attr($cat); ?>">
-          <?php if (has_post_thumbnail($e)) : ?>
-            <div class="thumb"><?php echo get_the_post_thumbnail($e, 'medium', array('class' => 'w-full h-auto')); ?></div>
-          <?php endif; ?>
-          <div class="p-6">
-            <?php if ($veiculo) : ?><span class="tag" style="background:#f3f0e8;color:var(--navy);"><?php echo esc_html($veiculo); ?><?php echo $data ? ' · ' . esc_html($data) : ''; ?></span><?php endif; ?>
-            <h3 class="font-bold text-lg mt-2 mb-1" style="color:var(--navy)"><?php echo esc_html(get_the_title($e)); ?></h3>
-            <p class="text-gray-400 text-sm"><?php echo esc_html(get_the_excerpt($e)); ?></p>
-            <?php if ($link) : ?><a href="<?php echo esc_url($link); ?>" target="_blank" rel="noopener" class="inline-block mt-3 text-xs font-bold uppercase tracking-wider" style="color:var(--gold)">Acessar →</a><?php endif; ?>
-          </div>
-        </article>
-      <?php endif; ?>
+      <article class="card p-6 flex gap-6 items-start reveal">
+        <div class="text-3xl"><?php echo $tipo_info['emoji']; ?></div>
+        <div class="flex-1">
+          <?php if ($veiculo) : ?><span class="tag" style="background:#f3f0e8;color:var(--navy);"><?php echo esc_html($veiculo); ?><?php echo $data ? ' · ' . esc_html($data) : ''; ?></span><?php endif; ?>
+          <h2 class="font-bold text-lg mt-2 mb-1" style="color:var(--navy)"><?php echo esc_html(get_the_title($e)); ?></h2>
+          <?php if (get_the_excerpt($e)) : ?><p class="text-gray-400 text-sm leading-relaxed"><?php echo esc_html(get_the_excerpt($e)); ?></p><?php endif; ?>
+          <?php if ($link) : ?><a href="<?php echo esc_url($link); ?>" target="_blank" rel="noopener" class="inline-block mt-3 text-xs font-bold uppercase tracking-wider" style="color:var(--gold)"><?php echo esc_html($ctas[$tipo_atual]); ?></a><?php endif; ?>
+        </div>
+      </article>
     <?php endforeach; ?>
   </div>
 

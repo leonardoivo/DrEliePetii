@@ -1,2 +1,68 @@
 Banco de dados: dreliepetii_wp / usuário dreliepetii_wp / senha CheniauxWp_2026!qz
 Login do wp-admin: usuário elieadmin / senha ElieCheniaux_2026!
+
+email site: login:contato, senha: ElieCheniaux2026!
+
+ns462.hostgator.com.br
+
+eliech16_dreliepetii_wp
+
+CheniauxWp_2026!qz
+
+https://www.eliecheniaux.com/
+
+
+Para apontar o seu domínio eliecheniaux.com hospedado no Wix para a sua hospedagem aqui na HostGator, você pode configurar os registros DNS diretamente no painel onde seu domínio é gerenciado (ou apontar os nameservers).
+
+Informações de Apontamento (Registros DNS):
+
+
+Registro A (para a raiz / domínio principal): Apontar para o IP 216.172.172.70
+
+Registro CNAME (para o subdomínio www): Apontar para br462.hostgator.com.br (ou para o IP 216.172.172.70)
+
+Nameservers (Alternativa recomendada):
+
+Se preferir gerenciar o DNS diretamente na HostGator, você pode alterar os nameservers no seu registrador para:
+
+dig TXT _acme-challenge.eliecheniaux.com
+ns462.hostgator.com.br
+
+ns463.hostgator.com.br
+935.488.937-91
+Ficou alguma dúvida sobre como realizar essa configuração?
+
+-------------backup--wix----------
+A (Host)
+Nome do host
+Valor
+TTL
+.eliecheniaux.com
+185.230.63.171
+1 hora
+eliecheniaux.com	185.230.63.186	1 hora	
+
+eliecheniaux.com	185.230.63.107	1 hora	
+
+Registro CNAME (Aliases)
+Nome do host
+Valor
+TTL
+m.eliecheniaux.com	ns462.hostgator.com.br	30 minutos	
+
+www.eliecheniaux.com	ns463.hostgator.com.br	30 minutos	
+
+TXT (Texto)
+SRV
+MX (Mail Exchange)
+Você pode 
+ que comprou em outro lugar ou 
+ conosco.
+NS (Servidores de Nome)
+Registros NS não podem ser editados.
+Nome do host
+Valor
+TTL
+eliecheniaux.com	ns15.wixdns.net	1 dia	
+eliecheniaux.com	ns14.wixdns.net	1 dia	
+

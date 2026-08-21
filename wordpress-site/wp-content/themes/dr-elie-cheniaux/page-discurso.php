@@ -24,6 +24,7 @@ while (have_posts()) : the_post();
 <div class="bg-white border-b border-gray-100 sticky top-[62px] z-40 shadow-sm">
   <div class="max-w-screen-lg mx-auto px-6 flex overflow-x-auto">
     <a href="<?php echo esc_url(dec_page_url('biografia')); ?>" class="tab-link">👤 Biografia</a>
+    <a href="<?php echo esc_url(dec_page_url('bipolab')); ?>" class="tab-link">🧠 BiPoLaB</a>
     <a href="<?php echo esc_url(dec_page_url('curriculo')); ?>" class="tab-link">🎓 Currículo Lattes</a>
     <a href="<?php echo esc_url(dec_page_url('discurso')); ?>" class="tab-link active">🏛️ Discurso AMRJ</a>
     <a href="<?php echo esc_url(dec_page_url('memorial')); ?>" class="tab-link">📜 Memorial</a>

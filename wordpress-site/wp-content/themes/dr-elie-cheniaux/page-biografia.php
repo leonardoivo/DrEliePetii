@@ -27,6 +27,7 @@ while (have_posts()) : the_post();
 <div class="bg-white border-b border-gray-100 sticky top-[62px] z-40 shadow-sm">
   <div class="max-w-screen-lg mx-auto px-6 flex overflow-x-auto">
     <a href="<?php echo esc_url(dec_page_url('biografia')); ?>" class="tab-link active">👤 Biografia</a>
+    <a href="<?php echo esc_url(dec_page_url('bipolab')); ?>" class="tab-link">🧠 BiPoLaB</a>
     <a href="<?php echo esc_url(dec_page_url('curriculo')); ?>" class="tab-link">🎓 Currículo Lattes</a>
     <a href="<?php echo esc_url(dec_page_url('discurso')); ?>" class="tab-link">🏛️ Discurso AMRJ</a>
     <a href="<?php echo esc_url(dec_page_url('memorial')); ?>" class="tab-link">📜 Memorial</a>
@@ -34,7 +35,48 @@ while (have_posts()) : the_post();
 </div>
 
 <main class="max-w-screen-lg mx-auto px-6 py-14">
-  <div class="reveal"><?php the_content(); ?></div>
+  <div class="reveal">
+    <div class="grid lg:grid-cols-3 gap-12">
+      <div class="lg:col-span-2 space-y-10">
+        <?php the_content(); ?>
+      </div>
+      <aside class="space-y-6">
+        <div class="reveal">
+          <h3 class="font-bold text-xs uppercase tracking-widest text-gray-400 mb-3">Continuar lendo</h3>
+          <div class="space-y-3">
+            <a class="flex items-center gap-3 bg-white rounded shadow p-4 hover:shadow-md transition-shadow" href="<?php echo esc_url(dec_page_url('bipolab')); ?>">
+              <span class="text-2xl">🧠</span>
+              <div>
+                <div class="font-bold text-sm" style="color:var(--navy)">BiPoLaB</div>
+                <div class="text-xs text-gray-400">Laboratório de pesquisa em transtorno bipolar</div>
+              </div>
+            </a>
+            <a class="flex items-center gap-3 bg-white rounded shadow p-4 hover:shadow-md transition-shadow" href="<?php echo esc_url(dec_page_url('curriculo')); ?>">
+              <span class="text-2xl">🎓</span>
+              <div>
+                <div class="font-bold text-sm" style="color:var(--navy)">Currículo Lattes</div>
+                <div class="text-xs text-gray-400">Produção acadêmica completa</div>
+              </div>
+            </a>
+            <a class="flex items-center gap-3 bg-white rounded shadow p-4 hover:shadow-md transition-shadow" href="<?php echo esc_url(dec_page_url('discurso')); ?>">
+              <span class="text-2xl">🏛️</span>
+              <div>
+                <div class="font-bold text-sm" style="color:var(--navy)">Discurso na AMRJ</div>
+                <div class="text-xs text-gray-400">Leia o discurso de posse</div>
+              </div>
+            </a>
+            <a class="flex items-center gap-3 bg-white rounded shadow p-4 hover:shadow-md transition-shadow" href="<?php echo esc_url(dec_page_url('memorial')); ?>">
+              <span class="text-2xl">📜</span>
+              <div>
+                <div class="font-bold text-sm" style="color:var(--navy)">Memorial</div>
+                <div class="text-xs text-gray-400">Reflexões e memórias</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
 </main>
 
 <?php endwhile; get_footer(); ?>
