@@ -10,6 +10,8 @@ if (!defined('ABSPATH')) {
 define('DEC_VERSION', '1.0.0');
 
 require_once get_template_directory() . '/inc/post-types.php';
+require_once get_template_directory() . '/inc/media-picker.php';
+require_once get_template_directory() . '/inc/theme-options.php';
 require_once get_template_directory() . '/inc/meta-boxes.php';
 require_once get_template_directory() . '/inc/template-tags.php';
 require_once get_template_directory() . '/inc/seed-content.php';
@@ -77,9 +79,14 @@ function dec_enqueue_assets() {
 add_action('wp_enqueue_scripts', 'dec_enqueue_assets');
 
 /**
- * Site icon fallback (favicon) using the existing logo asset.
+ * Favicon: when the editor has set a Site Icon (Personalizar → Identidade do
+ * site), WordPress already prints it — do nothing. Otherwise fall back to the
+ * bundled logo asset.
  */
 function dec_favicon() {
+    if (has_site_icon()) {
+        return;
+    }
     $ico = get_template_directory_uri() . '/img/DrElieLogo.ico';
     echo '<link rel="shortcut icon" href="' . esc_url($ico) . '" />' . "\n";
 }
